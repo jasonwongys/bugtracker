@@ -3,17 +3,26 @@ const Schema = mongoose.Schema;
 
 let Bug = new Schema({
     description: {
-        type: String
+        type: String,
+        required: true
     },
     assignee: {
-        type: String
+        type: String,
+        required: true
     },
     priority: {
-        type: String
+        type: String,
+        required: true
     },
     completed: {
         type: Boolean
+    },
+    date: {
+        type: Date,
+        required: true
     }
+}, {
+    timestamps: true,
 });
 
 module.exports = mongoose.model('Bug',Bug);

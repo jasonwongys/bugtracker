@@ -46,6 +46,7 @@ bugRoutes.route('/update/:id').post(function(req,res) {
             res.status(404).send('Data not found');
         } else {
             bug.description = req.body.description;
+            bug.date = Date.parse(req.body.date);
             bug.assignee = req.body.assignee;
             bug.priority = req.body.priority;
             bug.completed = req.body.completed;
@@ -66,6 +67,21 @@ bugRoutes.route('/:id').get(function(req,res) {
         res.json(bug);
     })
 })
+
+bugRoutes.route('/search').get(function(req,res) {
+    const result = Bug.filter(found => 
+        new RegExp(`^${req.query.q}`).test(found)
+);
+    res.json(result);
+});
+
+bugRoutes.route('/:id').delete((req,res)=> {
+    Bug.findByIdAndDelete(req.params.id)
+        .then(()=> res.json('Bug deleted'))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
 
 app.use('/bugs',bugRoutes);
 

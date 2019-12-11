@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default class EditBug extends Component {
     constructor(props) {
@@ -10,13 +11,15 @@ export default class EditBug extends Component {
             description: '',
             assignee: '',
             priority: '',
-            completed: false
+            completed: false,
+            date: new Date()
         }
 
         this.onChangeDesc = this.onChangeDesc.bind(this);
         this.onChangeAssignee = this.onChangeAssignee.bind(this);
         this.onChangePriority = this.onChangePriority.bind(this);
         this.onChangeCompleted = this.onChangeCompleted.bind(this);
+        this.onChangeDate = this.onChangeDate.bind(this);        
         this.onSubmit = this.onSubmit.bind(this);
 
     }
@@ -28,7 +31,8 @@ export default class EditBug extends Component {
                     description: res.data.description,
                     assignee: res.data.assignee,
                     priority: res.data.priority,
-                    completed: res.data.completed
+                    completed: res.data.completed,
+                    date: new Date(res.data.date)
                 })
 
             })
@@ -61,6 +65,12 @@ export default class EditBug extends Component {
         })
     }
 
+    onChangeDate(date) {
+        this.setState({
+            date: date
+        });
+    }
+
     onSubmit(e){
         e.preventDefault();
 
@@ -68,7 +78,8 @@ export default class EditBug extends Component {
             description: this.state.description,
             assignee: this.state.assignee,
             priority: this.state.priority,
-            completed: this.state.completed
+            completed: this.state.completed,
+            date: this.state.date
         };
 
         axios.post('http://localhost:4000/bugs/update/'+this.props.match.params.id, updatedBug)
@@ -76,8 +87,10 @@ export default class EditBug extends Component {
 
         
         this.props.history.push('/');
-        window.location ='/';
+        
     }
+
+
 
     render() {
         return (
@@ -92,6 +105,16 @@ export default class EditBug extends Component {
                                     onChange={this.onChangeDesc} />
                     </div>
 
+                    <div className="form-group">
+                            <label>Deadline: </label>
+                                <div>
+                                    <DatePicker
+                                        selected={this.state.date}
+                                        onChange={this.onChangeDate}
+                                    />
+                                </div>
+                        </div>
+
 
                     <div className="form-group">
                         <div class="form-check form-check-inline">
@@ -99,7 +122,7 @@ export default class EditBug extends Component {
                             <input class="form-check-input" 
                                     type="radio" 
                                     value="High" 
-                                    checked={this.state.priority=='High'}
+                                    checked={this.state.priority==='High'}
                                     onChange={this.onChangePriority}
                                     id="high"
                                     />
@@ -152,7 +175,7 @@ export default class EditBug extends Component {
                         </div>
 
                         <div className="form-group">
-                            <input type="submit" value="UPdate todo" className="btn btn-primary" />
+                            <input type="submit" value="Save" className="btn btn-primary" />
                         </div>
                 </form>
             </div>
