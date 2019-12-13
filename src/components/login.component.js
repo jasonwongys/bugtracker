@@ -64,19 +64,19 @@ onTextboxChangeSignInEmail(event) {
 
 onTextboxChangeSignInPassword(event) {
     this.setState({
-        signInEmail: event.target.value
+        signInPassword: event.target.value
     });
 }
 
 onTextboxChangeSignUpEmail(event) {
     this.setState({
-        signInEmail: event.target.value
+        signUpEmail: event.target.value
     });
 }
 
 onTextboxChangeSignUpPassword(event) {
     this.setState({
-        signInPassword: event.target.value
+        signUpPassword: event.target.value
     });
 }
 
