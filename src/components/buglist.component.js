@@ -3,11 +3,10 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 
-
 const Bug = props => (
     <tr>
         <td className={props.bug.completed ? 'completed' : ''}>{props.bug.description}</td>
-        <td className={props.bug.completed ? 'completed' : ''}>{props.bug.date}</td>
+        <td className={props.bug.completed ? 'completed' : ''}>{props.date}</td>
         <td className={props.bug.completed ? 'completed' : ''}>{props.bug.assignee}</td>
         <td className={props.bug.completed ? 'completed' : ''}>{props.bug.priority}</td>
         
@@ -71,13 +70,17 @@ export default class BugList extends Component {
 
     bugList() {
         return this.state.bugs.map((currentBug) =>{
+
             return <Bug bug={currentBug}
                         deleteBug={this.deleteBug}
-                        key={currentBug._id} />;
+                        key={currentBug._id}
+                        date={currentBug.date.substring(0,10)} />;
         });
     }
     
     render() {
+
+
         return (
             <div>
                 <h1> Bugs list</h1>

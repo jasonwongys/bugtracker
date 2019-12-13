@@ -46,6 +46,7 @@ export default class CreateBug extends Component {
     }
 
     onChangeDate(date) {
+
         this.setState({
             date: date
         });
@@ -63,7 +64,7 @@ export default class CreateBug extends Component {
 
         const newBug = {
             description: this.state.description,
-            date: this.state.date,
+            date: this.state.date.toString(),
             assignee: this.state.assignee,
             completed: this.state.completed,
             priority: this.state.priority
@@ -145,10 +146,6 @@ export default class CreateBug extends Component {
                             <label class="form-check-label" for="Low">Low</label>
                         </div>
 
-
-
-                        
-                        
                         <div className="form-group">
                             <label>Assignee: </label>
                             <input type="text"
