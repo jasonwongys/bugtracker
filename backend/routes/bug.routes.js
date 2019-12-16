@@ -1,6 +1,7 @@
 
-const bugRoutes = express.Router();
-let Bug = require('./bug.model');
+
+const bugRoutes = require('express').Router();
+let Bug = require('../models/bug.model');
 
 
 bugRoutes.route('/').get(function(req,res) {
@@ -65,7 +66,6 @@ bugRoutes.route('/:id').delete((req,res)=> {
         .then(()=> res.json('Bug deleted'))
         .catch(err => res.status(400).json('Error: ' + err));
 });
-
 
 
 module.exports = bugRoutes;

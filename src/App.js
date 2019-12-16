@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import CreateBug from "./components/createbug.component";
 import BugList from "./components/buglist.component";
 import EditBug from "./components/editbug.component";
-import Login from "./components/login.component";
+
 
 export default class App extends Component {
   render() {
@@ -22,9 +22,7 @@ export default class App extends Component {
                 <li className="navbar-item">
                   <Link to="/create" className="nav-link">Create Bugs</Link>
                 </li>
-                <li className="navbar-item">
-                  <Link to="/login" className="nav-link">Login</Link>
-                </li>
+
             </ul>
           
         </nav>
@@ -33,7 +31,6 @@ export default class App extends Component {
         <Route path="/" exact component={BugList}/>
         <Route path="/edit/:id" component={EditBug} />
         <Route path="/create/" component={CreateBug} />
-        <Route path='/login' component={Login} />
 
         </div>
 
