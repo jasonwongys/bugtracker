@@ -1,17 +1,21 @@
 import React, { Component } from 'react'
-import "bootstrap/dist/css/bootstrap.min.css";
+//import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import CreateBug from "./components/createbug.component";
 import BugList from "./components/buglist.component";
 import EditBug from "./components/editbug.component";
-
-
+import Navbar from "./components/layout/Navbar";
+import Landing from "./components/layout/Landing";
+import Register from "./components/auth/Register";
+import Login from "./components/auth/Login";
 export default class App extends Component {
   render() {
     return (
       <Router>
-      <div className="container">
+
+      {/* <div className="container">
       <div className="nav-collapse">
+      
         <nav className = "navbar navbar-expand-lg navbar-dark bg-dark">
           <Link to="/" className="navbar-brand">Bug Tracker</Link>
           
@@ -26,13 +30,19 @@ export default class App extends Component {
             </ul>
           
         </nav>
-        </div>
+        </div> */}
         
-        <Route path="/" exact component={BugList}/>
+        {/* <Route path="/" exact component={BugList}/>
         <Route path="/edit/:id" component={EditBug} />
-        <Route path="/create/" component={CreateBug} />
+        <Route path="/create/" component={CreateBug} /> 
+        
+        </div>*/}
+        <Navbar/>
+        <Route exact path="/" component={Landing} />
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/login" component={Login} />
 
-        </div>
+        
 
       </Router>
       
