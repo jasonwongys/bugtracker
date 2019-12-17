@@ -14,6 +14,12 @@ const users = require("./routes/api/users");
 
 app.use(express.json());
 app.use(cors());
+
+app.use(
+    bodyParser.urlencoded({
+        extended: false
+    })
+);
 app.use(bodyParser.json());
 
 mongoose.connect('mongodb://127.0.0.1:27017/bugs',{ useNewUrlParser: true})
@@ -41,7 +47,7 @@ app.use(passport.initialize());
 
 require("../backend/config/passport")(passport);
 
-app.use('/api/users', users);
+app.use('/api/users/', users);
 app.use('/bugs', bugRouter);
 
 //const port = process.env.PORT || 5000
