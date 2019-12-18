@@ -8,22 +8,21 @@ class Landing extends Component {
             <div className="row">
             <div className="col s12 center-align">
                 <h4>
-                <b>Build</b> a login/auth app with the{" "}
-                <span style={{ fontFamily: "monospace" }}>MERN</span> stack from
-                scratch
+                <b>Welcome</b> to 
+                <span style={{ fontFamily: "monospace" }}>Bug Tracker App</span> 
                 </h4>
-                <p className="flow-text grey-text text-darken-1">
+                {/* <p className="flow-text grey-text text-darken-1">
                 Create a (minimal) full-stack app with user authentication via
                 passport and JWTs
-                </p>
+                </p> */}
                 <br />
                 <div className="col s6">
                 <Link
                     to="/register"
-                    style={{
-                    width: "140px",
-                    borderRadius: "3px",
-                    letterSpacing: "1.5px"
+                        style={{
+                        width: "140px",
+                        borderRadius: "3px",
+                        letterSpacing: "1.5px"
                     }}
                     className="btn btn-large waves-effect waves-light hoverable blue accent-3"
                 >
@@ -34,11 +33,11 @@ class Landing extends Component {
                 <Link
                     to="/login"
                     style={{
-                    width: "140px",
-                    borderRadius: "3px",
-                    letterSpacing: "1.5px"
+                        width: "140px",
+                        borderRadius: "3px",
+                        letterSpacing: "1.5px"
                     }}
-                    className="btn btn-large btn-flat waves-effect white black-text"
+                    className="btn btn-large waves-effect waves-light hoverable blue accent-3"
                 >
                     Log In
                 </Link>

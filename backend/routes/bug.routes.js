@@ -3,8 +3,8 @@
 const bugRoutes = require('express').Router();
 let Bug = require('../models/bug.model');
 
-
-bugRoutes.route('/').get(function(req,res) {
+// Display all bugs
+bugRoutes.route('/buglist').get(function(req,res) {
     Bug.find(function(err, bugs) {
         if (err) {
             console.log(err);
@@ -15,7 +15,8 @@ bugRoutes.route('/').get(function(req,res) {
     })
 })
 
-bugRoutes.route('/create').post(function(req,res) {
+//Create a bug
+bugRoutes.route('/bugs/create').post(function(req,res) {
     let bug = new Bug(req.body);
     bug.save()
         .then(bug => {

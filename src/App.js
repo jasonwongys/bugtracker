@@ -9,9 +9,6 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 import { Provider } from "react-redux";
 import store from "./store";
 
-// import CreateBug from "./components/createbug.component";
-// import BugList from "./components/buglist.component";
-// import EditBug from "./components/editbug.component";
 import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
@@ -44,30 +41,7 @@ export default class App extends Component {
       <Provider store={store}>
       <Router>
       <div className="App">
-      {/* <div className="container">
-      <div className="nav-collapse">
       
-        <nav className = "navbar navbar-expand-lg navbar-dark bg-dark">
-          <Link to="/" className="navbar-brand">Bug Tracker</Link>
-          
-            <ul className="navbar-nav mr-auto">
-                <li className="navbar-item">
-                <Link to="/" className="nav-link">Show Bugs</Link>
-                </li>
-                <li className="navbar-item">
-                  <Link to="/create" className="nav-link">Create Bugs</Link>
-                </li>
-
-            </ul>
-          
-        </nav>
-        </div> */}
-        
-        {/* <Route path="/" exact component={BugList}/>
-        <Route path="/edit/:id" component={EditBug} />
-        <Route path="/create/" component={CreateBug} /> 
-        
-        </div>*/}
         <Navbar/>
         <Route exact path="/" component={Landing} />
         <Route exact path="/register" component={Register} />

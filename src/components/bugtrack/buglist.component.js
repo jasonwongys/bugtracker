@@ -31,7 +31,7 @@ export default class BugList extends Component {
 
     }
     componentDidMount() {
-        axios.get('http://localhost:4000/bugs/')
+        axios.get('http://localhost:4000/bugs/buglist')
             .then(response => {
                 this.setState({
                     bugs: response.data});
@@ -44,7 +44,7 @@ export default class BugList extends Component {
     }
 
     componentDidUpdate() {
-        axios.get('http://localhost:4000/bugs/')
+        axios.get('http://localhost:4000/bugs/buglist')
         .then(response => {
             this.setState({
                 bugs: response.data});
@@ -79,8 +79,6 @@ export default class BugList extends Component {
     }
     
     render() {
-
-
         return (
             <div>
                 <h1> Bugs list</h1>
