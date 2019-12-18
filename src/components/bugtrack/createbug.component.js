@@ -90,7 +90,7 @@ export default class CreateBug extends Component {
     render() {
         return (
             <div>
-                <h1>Create a Bug</h1>
+                <h3>Create a Bug</h3>
                 <div style={{marginTop: 20}}>
                     <form onSubmit={this.onSubmitForm}>
                         <div className="form-group">
@@ -113,38 +113,43 @@ export default class CreateBug extends Component {
                                 </div>
                         </div>
 
-                        
+                        <br />
                         <div className="form-group">
-                        <div class="form-check form-check-inline">
-                            
-                            <input class="form-check-input" 
+
+                        <label>Prioirity: </label>
+                        <div className="form-check form-check-inline">
+                            <label className="form-check-label" for="High">
+                                <input className="form-check-input"
                                     type="radio" 
                                     value="High" 
                                     checked={this.state.priority==='High'}
                                     onChange={this.onChangePriority}
-                                    id="high"
-                                    />
-                            <label class="form-check-label" for="High">High</label>
+                                    id="High"/>
+                                <span>High</span> </label>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" 
+
+                        <div className="form-check form-check-inline">
+                            <label className="form-check-label" for="Medium">
+                                <input className="form-check-input" 
                                     type="radio" 
                                     value="Medium"
                                     checked={this.state.priority==='Medium'}
                                     onChange={this.onChangePriority}
                                     id="Medium"/>
-                            <label class="form-check-label" for="Medium">Medium</label>
+                            <span>Medium</span></label>
                         </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" 
+                        <div className="form-check form-check-inline">
+                        <label className="form-check-label" for="Low">
+                            <input className="form-check-input" 
                                     type="radio" 
                                     value="Low"
                                     checked={this.state.priority==='Low'}
                                     onChange={this.onChangePriority}
                                     id="Low"/>
-                            <label class="form-check-label" for="Low">Low</label>
+                            <span>Low</span></label>
                         </div>
+                        <br />
 
                         <div className="form-group">
                             <label>Assignee: </label>

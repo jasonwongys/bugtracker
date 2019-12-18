@@ -16,7 +16,7 @@ bugRoutes.route('/buglist').get(function(req,res) {
 })
 
 //Create a bug
-bugRoutes.route('/bugs/create').post(function(req,res) {
+bugRoutes.route('/create').post(function(req,res) {
     let bug = new Bug(req.body);
     bug.save()
         .then(bug => {

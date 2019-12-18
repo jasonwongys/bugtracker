@@ -48,9 +48,6 @@ export default class BugList extends Component {
         .then(response => {
             this.setState({
                 bugs: response.data});
-
-        
-        
         })
         .catch(function(error) {
             console.log(error)
@@ -81,7 +78,7 @@ export default class BugList extends Component {
     render() {
         return (
             <div>
-                <h1> Bugs list</h1>
+                <h3> Bugs list</h3>
                 <table className="table table-striped"
                     style={{marginTop: 20 }}>
                         <thead>
