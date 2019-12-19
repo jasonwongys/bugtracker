@@ -12,8 +12,9 @@ import { logoutUser } from "../../actions/authActions";
         };
         render() {
             return (
-            <div className="container">
+            <div className="container-lg">
                 <nav>
+                    <div className="nav-wrapper">
                     <Link to="/buglist" className="navbar-brand">Bug Tracker</Link>
                 
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
@@ -24,10 +25,16 @@ import { logoutUser } from "../../actions/authActions";
                         <Link to="/create" className="nav-link">Create Bugs</Link>
                     </li>
                     <li>
+                        <Link to="/projects" className="nav-link">Show Projects</Link>
+                    </li>
+                    <li>
+                        <Link to="/createProj" className="nav-link">Create projects</Link>
+                    </li>
+                    <li>
                         <a onClick={this.props.onLogoutClick}>Logout</a>
                     </li>
                 </ul>
-
+                </div>
                 
                 </nav>
                 <Route path="/buglist" exact component={BugList}/>

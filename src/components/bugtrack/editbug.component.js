@@ -94,7 +94,7 @@ export default class EditBug extends Component {
 
     render() {
         return (
-            <div>
+            <div className="container">
                 <h1>Update a bug </h1>
                 <form onSubmit={this.onSubmit}> 
                     <div className="form-group">
@@ -115,41 +115,43 @@ export default class EditBug extends Component {
                                 </div>
                         </div>
 
-
+                        <br />
                     <div className="form-group">
                         <div class="form-check form-check-inline">
-                            
+                        <label class="form-check-label" for="High">
                             <input class="form-check-input" 
                                     type="radio" 
                                     value="High" 
                                     checked={this.state.priority==='High'}
                                     onChange={this.onChangePriority}
-                                    id="high"
+                                    id="High"
                                     />
-                            <label class="form-check-label" for="High">High</label>
+                            <span>High</span></label>
                         </div>
                         <div class="form-check form-check-inline">
+                        <label class="form-check-label" for="Medium">
                             <input class="form-check-input" 
                                     type="radio" 
                                     value="Medium"
                                     checked={this.state.priority==='Medium'}
                                     onChange={this.onChangePriority}
                                     id="Medium"/>
-                            <label class="form-check-label" for="Medium">Medium</label>
+                            <span>Medium</span></label>
                         </div>
 
-                        <div class="form-check form-check-inline">   
+                        <div class="form-check form-check-inline">
+                        <label class="form-check-label" for="Low">  
                             <input class="form-check-input" 
                                     type="radio" 
                                     value="Low"
                                     checked={this.state.priority==='Low'}
                                     onChange={this.onChangePriority}
                                     id="Low"/>
-                            <label class="form-check-label" for="Low">Low</label>
+                            <span>Low</span></label>
                         </div>
 
                         </div>
-
+                        <br />
                         <div className="form-group">
                             <label>Assignee: </label>
                             <input type="text"
@@ -158,11 +160,9 @@ export default class EditBug extends Component {
                                     onChange={this.onChangeAssignee}
                                 />
                         </div>
-
+                        <br />
                         <div className="form-group">
                         <label className="form-check-label" htmlFor="completedCheckbox">
-                                Completed
-                            </label>
                             <input type="checkbox"
                                     className="form-check-input"
                                     id="completedCheckbox"
@@ -171,8 +171,22 @@ export default class EditBug extends Component {
                                     checked={this.state.completed}
                                     value={this.state.completed}
                                     /> 
-                            
+                            <span>Completed</span></label>
                         </div>
+
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Dropdown button
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li> <a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li> 
+                            </div>
+                        </div>
+
+                        <br />
 
                         <div className="form-group">
                             <input type="submit" value="Save" className="btn btn-primary" />

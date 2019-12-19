@@ -7,7 +7,7 @@ const PORT = 4000;
 const passport = require('passport');
 
 const users = require("./routes/api/users");
-
+const projectRouter = require('./routes/project.routes');
 
 // const bugRoutes = express.Router();
 // let Bug = require('./bug.model');
@@ -42,13 +42,16 @@ connection.once('open',function() {
 
 const bugRouter = require('./routes/bug.routes');
 
+
 app.use(passport.initialize());
 
 
 require("../backend/config/passport")(passport);
 
+app.use('/projects',projectRouter);
 app.use('/api/users/', users);
 app.use('/bugs', bugRouter);
+
 
 //const port = process.env.PORT || 5000
 

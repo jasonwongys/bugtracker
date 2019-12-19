@@ -89,7 +89,7 @@ export default class CreateBug extends Component {
 
     render() {
         return (
-            <div>
+            <div className="container">
                 <h3>Create a Bug</h3>
                 <div style={{marginTop: 20}}>
                     <form onSubmit={this.onSubmitForm}>

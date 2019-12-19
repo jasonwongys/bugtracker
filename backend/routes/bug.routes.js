@@ -1,5 +1,3 @@
-
-
 const bugRoutes = require('express').Router();
 let Bug = require('../models/bug.model');
 

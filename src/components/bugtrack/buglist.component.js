@@ -77,7 +77,7 @@ export default class BugList extends Component {
     
     render() {
         return (
-            <div>
+            <div className="container">
                 <h3> Bugs list</h3>
                 <table className="table table-striped"
                     style={{marginTop: 20 }}>
