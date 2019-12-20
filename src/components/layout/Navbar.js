@@ -3,8 +3,11 @@ import { Link, Route } from "react-router-dom";
 import CreateBug from "../bugtrack/createbug.component";
 import BugList from "../bugtrack/buglist.component";
 import EditBug from "../bugtrack/editbug.component";
+import Projects from "../projects/projectlist";
+import CreateProject from "../projects/createproject";
+
 import { logoutUser } from "../../actions/authActions";
-    class Navbar extends Component {
+class Navbar extends Component {
 
         onLogoutClick = e => {
             e.preventDefault();
@@ -40,6 +43,8 @@ import { logoutUser } from "../../actions/authActions";
                 <Route path="/buglist" exact component={BugList}/>
                 <Route path="/edit/:id" component={EditBug} />
                 <Route path="/create/" component={CreateBug} />
+                <Route path="/projects" component={Projects}/>
+                <Route path="/createProj" component={CreateProject} />
             </div> 
             );
         }

@@ -2,20 +2,16 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let Project = new Schema({
+    projectName: {
+        type: String,
+        required: true
+    },
     description: {
         type: String,
         required: true
     },
     members: {
         type: String,
-        required: true
-    },
-    projectName: {
-        type: String,
-        required: true
-    },
-    completed: {
-        type: Date,
         required: true
     },
     dateCreated: {

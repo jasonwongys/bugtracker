@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+//import Navbar from "../../components/layout/Navbar";
+
 class Dashboard extends Component {
   onLogoutClick = e => {
     e.preventDefault();
@@ -10,7 +12,12 @@ class Dashboard extends Component {
   render() {
       const { user } = this.props.auth;
   return (
-      <div style={{ height: "75vh" }} className="container valign-wrapper">
+    <div>
+
+      {/*<Navbar />*/}
+    
+      <div style={{ height: "35vh" }} className="container valign-wrapper">
+      
         <div className="row">
           <div className="col s12 center-align">
             <h4>
@@ -33,7 +40,21 @@ class Dashboard extends Component {
               Logout
             </button>
           </div>
+              <button
+                style={{
+                width: "150px",
+                borderRadius: "3px",
+                letterSpacing: "1.5px",
+                marginTop: "1rem"
+              }}
+                // onClick={
+                //   <Redirect to={<>} />
+                // }
+                className="btn btn-large waves-effect waves-dark hoverable purple accent-3"
+
+              >Projects</button>
         </div>
+      </div>
       </div>
     );
   }

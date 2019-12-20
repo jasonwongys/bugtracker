@@ -2,13 +2,13 @@ const projectRoute = require('express').Router();
 let Project = require('../models/project.model');
 
 // Display all Projects
-projectRoute.route('/projects').get(function(req,res) {
+projectRoute.route('/projectsList').get(function(req,res) {
     project.find(function(err, projects) {
         if (err) {
             console.log(err);
 
         }else {
-            res.json(Projects)
+            res.json(projects)
         }
     })
 })
@@ -31,11 +31,11 @@ projectRoute.route('/update/:id').post(function(req,res) {
         if(!project) {
             res.status(404).send('Data not found');
         } else {
-            project.description = req.body.description;
             project.projectName = req.body.projectName;
+            project.description = req.body.description;
             project.members = req.body.members;
             project.dateCreated = Date.parse(req.body.dateCreated);
-            project.completed = Date.parse(req.body.completed);
+            //project.completed = Date.parse(req.body.completed);
 
             project.save().then(project => {
                 res.json('Project updated');
