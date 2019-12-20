@@ -7,13 +7,13 @@ const Project = props => (
     <td className={props.project.completed ? 'completed' : ''}>{props.project.projectName}</td>
         <td className={props.project.completed ? 'completed' : ''}>{props.project.description}</td>
         <td className={props.project.completed ? 'completed' : ''}>{props.project.members}</td>
-        <td className={props.project.completed ? 'completed' : ''}>{props.project.dateCreated}</td>
-        
+        <td className={props.project.completed ? 'completed' : ''}>{props.date}</td>
+        {/*
         <td>
-            {/*<Link to={"/edit/"+props.bug._id} >Edit </Link> | 
-                <a href="#" onClick={() => { props.deleteBug(props.bug._id) }}> delete</a> */}
-        </td>
-
+        <Link to={"/edit/"+props.project._id} >Edit </Link> | 
+                <a href="#" onClick={() => { props.deleteBug(props.project._id) }}> delete</a>
+        </td> */}
+        
         
     </tr>
 )
@@ -68,7 +68,7 @@ export default class Projects extends Component {
             return <Project project={currentProject}
                         //deleteBug={this.deleteBug}
                         key={currentProject._id}
-                        //date={currentProject.date.substring(0,10)} ;
+                        date={currentProject.dateCreated.substring(0,10)}
                         />
         });
     }
@@ -84,7 +84,6 @@ export default class Projects extends Component {
                                 <th>Project Name</th>   
                                 <th>Description</th>
                                 <th>Members</th>
-                                <th>Completed</th>
                                 <th>Date Created</th>
                             </tr>
                         </thead>
