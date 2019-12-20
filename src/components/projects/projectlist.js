@@ -6,8 +6,8 @@ const Project = props => (
     <tr>
     <td className={props.project.completed ? 'completed' : ''}>{props.project.projectName}</td>
         <td className={props.project.completed ? 'completed' : ''}>{props.project.description}</td>
-        <td className={props.project.completed ? 'completed' : ''}>{props.projects.members}</td>
-        <td className={props.project.completed ? 'completed' : ''}>{props.projects.dateCreated}</td>
+        <td className={props.project.completed ? 'completed' : ''}>{props.project.members}</td>
+        <td className={props.project.completed ? 'completed' : ''}>{props.project.dateCreated}</td>
         
         <td>
             {/*<Link to={"/edit/"+props.bug._id} >Edit </Link> | 
@@ -32,7 +32,7 @@ export default class Projects extends Component {
             .then(response => {
                 this.setState({
                     projects: response.data});
-            
+                    console.log(response.data)
             })
             .catch(function(error) {
                 console.log(error)

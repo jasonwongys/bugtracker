@@ -3,7 +3,7 @@ let Project = require('../models/project.model');
 
 // Display all Projects
 projectRoute.route('/projectsList').get(function(req,res) {
-    project.find(function(err, projects) {
+    Project.find(function(err, projects) {
         if (err) {
             console.log(err);
 
@@ -21,7 +21,7 @@ projectRoute.route('/createProj').post(function(req,res) {
             res.status(200).json({'Project' : 'Project added success'})
         })
         .catch(err => {
-            res.status(400).send('adding Project failed');
+            res.status(400).send('Adding Project failed '+ err);
         });
 })
 
@@ -50,7 +50,7 @@ projectRoute.route('/update/:id').post(function(req,res) {
 // find a project by ID
 projectRoute.route('/:id').get(function(req,res) {
     let id = req.params.id;
-    project.findById(id, function(err, project) {
+    Project.findById(id, function(err, project) {
         res.json(project);
     })
 })
@@ -65,7 +65,7 @@ projectRoute.route('/search').get(function(req,res) {
 
 //Delete a project
 projectRoute.route('/:id').delete((req,res)=> {
-    project.findByIdAndDelete(req.params.id)
+    Project.findByIdAndDelete(req.params.id)
         .then(()=> res.json('Project deleted'))
         .catch(err => res.status(400).json('Error: ' + err));
 });
