@@ -11,7 +11,7 @@ export default class CreateProject extends Component {
             projectName: '',
             description: '',
             members: '',
-            dateCreated: new Date()
+            dateCreated: new Date(),
 
         }
         
@@ -67,17 +67,24 @@ export default class CreateProject extends Component {
             
         }
 
+
+        //Create a new project
         axios.post('http://localhost:4000/projects/createProj', newProject)
-            .then(res => console.log(res.data));
+            .then(res => console.log(res.data),
+            this.props.history.push("/projects"));
 
         this.setState({
             description: '',
             dateCreated: new Date(),
             projectName: '',
-            member: ''
+            members: '',
+            memberName: ''
+            
         });
 
-        //window.location ='/';
+        
+        
+        
 
     }
 
@@ -127,6 +134,7 @@ export default class CreateProject extends Component {
                                     onChange={this.onChangeMembers}
                                 />
                         </div>
+
             
                         <div className="form-group">
                             <input type="submit" value="Create Project" className="btn btn-primary" />

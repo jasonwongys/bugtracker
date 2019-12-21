@@ -28,6 +28,7 @@ router.post("/register", (req, res) => {
             email: req.body.email,
             password: req.body.password
             });
+            
     // Hash password before saving in database
             bcrypt.genSalt(10, (err, salt) => {
             bcrypt.hash(newUser.password, salt, (err, hash) => {
@@ -46,9 +47,10 @@ router.post("/register", (req, res) => {
     // @route POST api/users/login
     // @desc Login user and return JWT token
     // @access Public
-    router.post("/login", (req, res) => {
+router.post("/login", (req, res) => {
         // Form validation
     const { errors, isValid } = validateLoginInput(req.body);
+    
     // Check validation
         if (!isValid) {
         return res.status(400).json(errors);

@@ -11,7 +11,7 @@ bugRoutes.route('/buglist').get(function(req,res) {
             res.json(bugs)
         }
     })
-})
+},verifyToken)
 
 //Create a bug
 bugRoutes.route('/create').post(function(req,res) {
@@ -65,6 +65,35 @@ bugRoutes.route('/:id').delete((req,res)=> {
         .then(()=> res.json('Bug deleted'))
         .catch(err => res.status(400).json('Error: ' + err));
 });
+
+
+
+function verifyToken(req,res,next) {
+
+    // Get auth header value
+    const bearerHeader = req.headers['authorization'];
+    // Check if bearer is undefined
+
+    if(typeof bearerHeader !== 'undefined') {
+
+        //Split at the space
+        const bearer = bearerHeader.split(' ');
+
+        // Get token from array
+        const bearerToken = bearer[1];
+
+        // Set the token
+        req.token = bearerToken;
+
+        // Nex middleware
+        next();
+    } else {
+        // Forbidden
+
+        res.sendStatus(403);
+        // can add json here
+    }
+}
 
 
 module.exports = bugRoutes;

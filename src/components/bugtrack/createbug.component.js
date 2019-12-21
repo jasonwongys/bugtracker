@@ -72,7 +72,8 @@ export default class CreateBug extends Component {
         }
 
         axios.post('http://localhost:4000/bugs/create', newBug)
-            .then(res => console.log(res.data));
+            .then(res => console.log(res.data),
+                    this.props.history.push("/buglist"));
 
         this.setState({
             description: '',
@@ -82,7 +83,7 @@ export default class CreateBug extends Component {
             
             assignee: ''
         });
-
+        
         //window.location ='/';
 
     }

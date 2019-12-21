@@ -83,11 +83,8 @@ export default class EditBug extends Component {
         };
 
         axios.post('http://localhost:4000/bugs/update/'+this.props.match.params.id, updatedBug)
-            .then(res => console.log(res.data));
-
-        
-        this.props.history.push('/');
-        
+            .then(res => console.log(res.data),
+            this.props.history.push("/buglist"));    
     }
 
 

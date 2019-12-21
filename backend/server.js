@@ -6,8 +6,6 @@ const mongoose = require('mongoose')
 const PORT = 4000;
 const passport = require('passport');
 
-const users = require("./routes/api/users");
-const projectRouter = require('./routes/project.routes');
 
 // const bugRoutes = express.Router();
 // let Bug = require('./bug.model');
@@ -41,7 +39,8 @@ connection.once('open',function() {
 })
 
 const bugRouter = require('./routes/bug.routes');
-
+const users = require("./routes/api/users");
+const projectRouter = require('./routes/project.routes');
 
 app.use(passport.initialize());
 

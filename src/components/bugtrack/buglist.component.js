@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import Search from './search.component';
 
 const Bug = props => (
     <tr>
@@ -77,6 +77,7 @@ export default class BugList extends Component {
         return (
             <div className="container">
                 <h3> Bugs list</h3>
+                <Search bugs={this.state.bugs} />
                 <table className="table table-striped"
                     style={{marginTop: 20 }}>
                         <thead>

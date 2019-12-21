@@ -18,7 +18,7 @@ class Navbar extends Component {
             <div className="container-lg">
                 <nav>
                     <div className="nav-wrapper">
-                    <Link to="/buglist" className="navbar-brand">Bug Tracker</Link>
+                    <Link to="/dashboard" className="navbar-brand">Bug Tracker</Link>
                 
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
                     <li>

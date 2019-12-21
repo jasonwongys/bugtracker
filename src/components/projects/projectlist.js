@@ -1,6 +1,6 @@
 import React, { Component, Link } from 'react'
 import axios from 'axios';
-
+//import jwt from 'jsonwebtokens'
 
 const Project = props => (
     <tr>
@@ -24,7 +24,8 @@ export default class Projects extends Component {
         //this.deleteBug = this.deleteBug.bind(this);
 
         this.state = {
-            projects: []
+            projects: [],
+            searchString: ''
         };
     }
     componentDidMount() {
@@ -52,6 +53,19 @@ export default class Projects extends Component {
         })
 
 }
+
+    onSearchInputChange = (event) => {
+        if (event.target.value) {
+            this.setState({
+                searchString: event.target.value
+            })} else {
+                this.setState({
+                    searchString: ''
+                })
+            }
+        }
+
+    
 
     // deleteBug(id) {
     //     axios.delete('http://localhost:4000/bugs/'+id) 
