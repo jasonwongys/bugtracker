@@ -23,7 +23,7 @@ export default class BugList extends Component {
             bugs: [],
             query: ''
         };
-
+        this.searchQuery = this.searchQuery.bind(this);
         this.deleteBug = this.deleteBug.bind(this);
         
 
@@ -42,6 +42,14 @@ export default class BugList extends Component {
     }
 
 
+    searchQuery(e) {
+        this.setState({
+            query: e.target.value
+            
+        })
+    }
+
+
     deleteBug(id) {
         axios.delete('http://localhost:4000/bugs/'+id) 
             .then(response => {console.log(response.data)});
@@ -51,22 +59,21 @@ export default class BugList extends Component {
         })
     }
 
-    bugList() {
-        return this.state.bugs.map((currentBug) =>{
+    // bugList() {
+    //     return this.state.bugs.map((currentBug) =>{
 
-            return <Bug bug={currentBug}
-                        deleteBug={this.deleteBug}
-                        key={currentBug._id}
-                        date={currentBug.date.substring(0,10)} />;
-        });
-    }
+    //         return <Bug bug={currentBug}
+    //                     deleteBug={this.deleteBug}
+    //                     key={currentBug._id}
+    //                     date={currentBug.date.substring(0,10)} />;
+    //     });
+    // }
     
     render() {
-
-        // const findQuery = this.state.bugs.filter(
-        //     i => i.description.includes(this.state.query)
-        // )
-
+        let findQuery = this.state.bugs.filter(
+            i => {
+                return i.description.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1}
+        );
         
 
         console.log("Query: " + this.state.query);
@@ -76,10 +83,11 @@ export default class BugList extends Component {
         return (
             <div className="container">
                 <h3> Bugs list</h3>
-                
-                <Search data={this.state.bugs} />
-        
-
+                <input
+                    onChange={this.searchQuery}
+                    type="text"
+                    placeholder="Search..."
+                />
                 <table className="table table-striped"
                     style={{marginTop: 20 }}>
                         <thead>
@@ -92,7 +100,12 @@ export default class BugList extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.bugList()}
+                    {findQuery.map((currentBug) =>{
+                            return <Bug bug={currentBug}
+                                deleteBug={this.deleteBug}
+                                key={currentBug._id}
+                                date={currentBug.date.substring(0,10)} />;
+            })}
                 
                         </tbody>
 

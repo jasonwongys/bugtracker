@@ -26,9 +26,6 @@ export default class Search extends Component {
                 return i.description.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1}
         );
 
-        
-        
-
         console.log("The data return @ Search " + JSON.stringify(this.props.data));
         console.log("The found return " + JSON.stringify(findQuery));
     
