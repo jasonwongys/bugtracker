@@ -19,12 +19,12 @@ export default class BugList extends Component {
     constructor(props) {
         super(props);
 
-        this.deleteBug = this.deleteBug.bind(this);
-
         this.state = {
-            bugs: []
+            bugs: [],
+            query: ''
         };
 
+        this.deleteBug = this.deleteBug.bind(this);
         
 
     }
@@ -41,18 +41,6 @@ export default class BugList extends Component {
 
     }
 
-    componentDidUpdate() {
-        axios.get('http://localhost:4000/bugs/buglist')
-        .then(response => {
-            this.setState({
-                bugs: response.data});
-        })
-        .catch(function(error) {
-            console.log(error)
-
-        })
-
-}
 
     deleteBug(id) {
         axios.delete('http://localhost:4000/bugs/'+id) 
@@ -74,10 +62,24 @@ export default class BugList extends Component {
     }
     
     render() {
+
+        // const findQuery = this.state.bugs.filter(
+        //     i => i.description.includes(this.state.query)
+        // )
+
+        
+
+        console.log("Query: " + this.state.query);
+        console.log("Bugs: " + JSON.stringify(this.state.bugs));
+        //console.log("Found query " + JSON.stringify(findQuery));
+        
         return (
             <div className="container">
                 <h3> Bugs list</h3>
-                <Search bugs={this.state.bugs} />
+                
+                <Search data={this.state.bugs} />
+        
+
                 <table className="table table-striped"
                     style={{marginTop: 20 }}>
                         <thead>
@@ -91,10 +93,13 @@ export default class BugList extends Component {
                         </thead>
                         <tbody>
                             {this.bugList()}
+                
                         </tbody>
+
 
                     </table>
             </div>
         )
     }
 }
+// 

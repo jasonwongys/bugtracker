@@ -33,7 +33,7 @@ export default class Projects extends Component {
             .then(response => {
                 this.setState({
                     projects: response.data});
-                    console.log(response.data)
+                    console.log("Did Mount here" + response.data)
             })
             .catch(function(error) {
                 console.log(error)
@@ -41,18 +41,20 @@ export default class Projects extends Component {
 
     }
 
-    componentDidUpdate() {
-        axios.get('http://localhost:4000/projects/projectsList')
-        .then(response => {
-            this.setState({
-                projects: response.data});
-        })
-        .catch(function(error) {
-            console.log(error)
+//     componentDidUpdate() {
+//         axios.get('http://localhost:4000/projects/projectsList')
+//         .then(response => {
+//             this.setState({
+//                 projects: response.data});
+//                 //console.log("Did Update done" + response.data)
+                
+//         })
+//         .catch(function(error) {
+//             console.log(error)
 
-        })
+//         })
 
-}
+// }
 
     onSearchInputChange = (event) => {
         if (event.target.value) {
