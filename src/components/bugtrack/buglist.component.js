@@ -41,6 +41,8 @@ export default class BugList extends Component {
 
     }
 
+    
+
 
     searchQuery(e) {
         this.setState({
@@ -86,7 +88,7 @@ export default class BugList extends Component {
                 <input
                     onChange={this.searchQuery}
                     type="text"
-                    placeholder="Search..."
+                    placeholder="Search descriptions..."
                 />
                 <table className="table table-striped"
                     style={{marginTop: 20 }}>

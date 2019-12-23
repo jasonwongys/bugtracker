@@ -21,12 +21,13 @@ export default class Projects extends Component {
     constructor(props) {
         super(props);
 
-        //this.deleteBug = this.deleteBug.bind(this);
-
         this.state = {
             projects: [],
-            searchString: ''
+            query: ''
         };
+
+        this.searchQuery = this.searchQuery.bind(this);
+        //this.deleteBug = this.deleteBug.bind(this);
     }
     componentDidMount() {
         axios.get('http://localhost:4000/projects/projectsList')
@@ -56,18 +57,11 @@ export default class Projects extends Component {
 
 // }
 
-    onSearchInputChange = (event) => {
-        if (event.target.value) {
-            this.setState({
-                searchString: event.target.value
-            })} else {
-                this.setState({
-                    searchString: ''
-                })
-            }
-        }
-
-    
+    searchQuery(e) {
+        this.setState({
+            query: e.target.value
+        })
+    }
 
     // deleteBug(id) {
     //     axios.delete('http://localhost:4000/bugs/'+id) 
@@ -90,9 +84,17 @@ export default class Projects extends Component {
     }
     
     render() {
+
+        let findQuery = this.state.projects.filter(i => i.description.toLowerCase().indexOf(this.state.query) !== -1);
+
         return (
             <div className="container">
                 <h3> Projects </h3>
+                <input
+                    onChange={this.searchQuery}
+                    type="text"
+                    placeholder="Search projects..."
+                />
                 <table className="table table-striped"
                     style={{marginTop: 20 }}>
                         <thead>
@@ -104,7 +106,13 @@ export default class Projects extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.projectList()}
+                            {findQuery.map((currentProject) =>{
+                                return <Project project={currentProject}
+                                            //deleteBug={this.deleteBug}
+                                            key={currentProject._id}
+                                            date={currentProject.dateCreated.substring(0,10)}
+                            />
+                })}
                         </tbody>
 
                     </table>
