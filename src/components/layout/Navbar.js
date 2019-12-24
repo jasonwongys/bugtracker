@@ -6,6 +6,9 @@ import EditBug from "../bugtrack/editbug.component";
 import Projects from "../projects/projectlist";
 import CreateProject from "../projects/createproject";
 import EditProject from "../projects/editproject.component";
+import UsersList from "../usersProfile/userList.component";
+import EditUsers from "../usersProfile/editUsers.component";
+
 import { logoutUser } from "../../actions/authActions";
 class Navbar extends Component {
 
@@ -34,6 +37,9 @@ class Navbar extends Component {
                         <Link to="/createProj" className="nav-link">Create projects</Link>
                     </li>
                     <li>
+                        <Link to="/usersList" className="nav-link">Show users</Link>
+                    </li>
+                    <li>
                         <a onClick={this.props.onLogoutClick}>Logout</a>
                     </li>
                 </ul>
@@ -46,6 +52,8 @@ class Navbar extends Component {
                 <Route path="/projects" component={Projects}/>
                 <Route path="/editProj/:id" component={EditProject} />
                 <Route path="/createProj" component={CreateProject} />
+                <Route path="/usersList" component={UsersList} />
+                <Route path="/editUsers/" component={EditUsers} />
             </div> 
             );
         }

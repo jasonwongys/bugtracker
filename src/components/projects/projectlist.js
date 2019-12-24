@@ -14,7 +14,6 @@ const Project = props => (
         <Link to={"/editProj/"+props.project._id} >Edit </Link> | <a href="#" onClick={() => { props.deleteProject(props.project._id) }}> delete</a>
         </td>
         
-        
     </tr>
 )
 export default class Projects extends Component {
@@ -23,11 +22,13 @@ export default class Projects extends Component {
 
         this.state = {
             projects: [],
-            query: ''
+            query: '',
+            sortType: 'asc'
         };
 
         this.searchQuery = this.searchQuery.bind(this);
         this.deleteProject = this.deleteProject.bind(this);
+        this.onSort = this.onSort.bind(this);
     }
     componentDidMount() {
         axios.get('http://localhost:4000/projects/projectsList')
@@ -72,6 +73,19 @@ export default class Projects extends Component {
         })
     }
 
+    onSort = (sortType) => {
+        this.setState({
+            sortType: 'desc'
+        })
+    }
+
+    // onSort = (sortType) => {
+    //     this.state.projects.sort((a,b) => {
+    //         const isRev = (this.state.sortType === 'asc') ? 1 : -1;
+    //         return isRev * a.projectName.localeCompare(b.projectName)
+    //     })
+    // } 
+
     // projectList() {
     //     return this.state.projects.map((currentProject) =>{
 
@@ -85,9 +99,18 @@ export default class Projects extends Component {
     
     render() {
 
-        let findQuery = this.state.projects.filter(
-                i => i.description.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1);
+        const sorted = this.state.projects.sort((a,b) => {
 
+            const isReversed = (this.state.sortType === 'asc') ? 1 : -1;
+
+            return isReversed * a.projectName.localeCompare(b.projectName)
+        });
+
+        let findQuery = sorted.filter(
+                i => i.description.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1);
+                
+        
+        
         return (
             <div className="container">
                 <h3> Projects </h3>
@@ -100,10 +123,11 @@ export default class Projects extends Component {
                     style={{marginTop: 20 }}>
                         <thead>
                             <tr>
-                                <th>Project Name</th>   
+                                <th onClick={()=>this.onSort('desc')}>Project Name</th>   
                                 <th>Description</th>
                                 <th>Members</th>
                                 <th>Date Created</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>

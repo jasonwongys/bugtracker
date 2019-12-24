@@ -95,4 +95,45 @@ router.post("/login", (req, res) => {
         });
     });
 
+router.route('/usersList').get(function(req,res) {
+        User.find(function(err, users) {
+            if (err) {
+                console.log(err);
+    
+            }else {
+                res.json(users)
+            }
+        })
+    })
+
+router.route('/editUsers/:id').post(function(req,res) {
+        User.findById(req.params.id, function(err, users) {
+            if(!project) {
+                res.status(404).send('Data not found');
+            } else {
+                users.name = req.body.name;
+                users.email = req.body.email;
+                users.role = req.body.role;
+                users.date = Date.parse(req.body.date);
+                //project.completed = Date.parse(req.body.completed);
+    
+                project.save().then(project => {
+                    res.json('User updated');
+                })
+                .catch(err=> {
+                    res.status(400).send("Update not possible");
+                })
+            }
+        });
+    })
+    
+    // find a project by ID
+router.route('/:id').get(function(req,res) {
+        let id = req.params.id;
+        User.findById(id, function(err, users) {
+            res.json(users);
+        })
+    })
+    
+
 module.exports = router;
