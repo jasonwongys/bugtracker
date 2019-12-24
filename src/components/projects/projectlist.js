@@ -1,19 +1,18 @@
-import React, { Component, Link } from 'react'
-import EditProject from './editproject.component'
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 //import jwt from 'jsonwebtokens'
 
 const Project = props => (
     <tr>
-    <td className={props.project.completed ? 'completed' : ''}>{props.project.projectName}</td>
-        <td className={props.project.completed ? 'completed' : ''}>{props.project.description}</td>
-        <td className={props.project.completed ? 'completed' : ''}>{props.project.members}</td>
-        <td className={props.project.completed ? 'completed' : ''}>{props.date}</td>
+    <td>{props.project.projectName}</td>
+        <td >{props.project.description}</td>
+        <td >{props.project.members}</td>
+        <td >{props.date}</td>
         
-        {/* <td>
-        <Link to={"/editProj/"+props.project._id} >Edit </Link> | 
-                <a href="#" onClick={() => { props.deleteProject(props.project._id) }}> delete</a>
-        </td> */}
+        <td>
+        <Link to={"/editProj/"+props.project._id} >Edit </Link> | <a href="#" onClick={() => { props.deleteProject(props.project._id) }}> delete</a>
+        </td>
         
         
     </tr>
@@ -38,7 +37,7 @@ export default class Projects extends Component {
                     console.log("Did Mount here" + response.data)
             })
             .catch(function(error) {
-                console.log(error)
+                console.log("error " + error)
             })
 
     }

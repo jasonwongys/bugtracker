@@ -56,12 +56,6 @@ projectRoute.route('/:id').get(function(req,res) {
 })
 
 //Search a project
-projectRoute.route('/search').get(function(req,res) {
-    const result = Project.filter(found => 
-        new RegExp(`^${req.query.q}`).test(found)
-);
-    res.json(result);
-});
 
 //Delete a project
 projectRoute.route('/:id').delete((req,res)=> {

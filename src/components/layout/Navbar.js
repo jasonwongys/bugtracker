@@ -5,7 +5,7 @@ import BugList from "../bugtrack/buglist.component";
 import EditBug from "../bugtrack/editbug.component";
 import Projects from "../projects/projectlist";
 import CreateProject from "../projects/createproject";
-
+import EditProject from "../projects/editproject.component";
 import { logoutUser } from "../../actions/authActions";
 class Navbar extends Component {
 
@@ -44,6 +44,7 @@ class Navbar extends Component {
                 <Route path="/edit/:id" component={EditBug} />
                 <Route path="/create/" component={CreateBug} />
                 <Route path="/projects" component={Projects}/>
+                <Route path="/editProj/:id" component={EditProject} />
                 <Route path="/createProj" component={CreateProject} />
             </div> 
             );

@@ -82,22 +82,11 @@ bugRoutes.route('/:id').get(function(req,res) {
     })
 })
 
-bugRoutes.route('/search').get(function(req,res) {
-    const result = Bug.filter(found => 
-        new RegExp(`^${req.query.q}`).test(found)
-);
-    res.json(result);
-});
 
 bugRoutes.route('/:id').delete((req,res)=> {
     Bug.findByIdAndDelete(req.params.id)
         .then(()=> res.json('Bug deleted'))
         .catch(err => res.status(400).json('Error: ' + err));
 });
-
-
-
-
-
 
 module.exports = bugRoutes;

@@ -24,6 +24,7 @@ export default class EditBug extends Component {
 
     }
 
+    //GEt a single bug record
     componentDidMount() {
         axios.get('http://localhost:4000/bugs/'+this.props.match.params.id)
             .then(res => {
@@ -84,7 +85,9 @@ export default class EditBug extends Component {
 
         axios.post('http://localhost:4000/bugs/edit/'+this.props.match.params.id, updatedBug)
             .then(res => console.log(res.data),
-            this.props.history.push("/buglist"));    
+            this.props.history.push("/buglist"));
+            
+    
     }
 
 

@@ -11,7 +11,7 @@ export default class EditProject extends Component {
             projectName: '',
             description: '',
             members: '',
-            dateCreated: new Date(),
+            dateCreated: new Date()
 
         }
         
@@ -22,6 +22,23 @@ export default class EditProject extends Component {
         
         this.onSubmitForm = this.onSubmitForm.bind(this);
         
+    }
+// Get a single project record
+    componentDidMount() {
+
+        axios.get('http://localhost:4000/projects/'+this.props.match.params.id)
+            .then(res => {
+                this.setState({
+                    projectName: res.data.projectName,
+                    description: res.data.description,
+                    members: res.data.members,
+                    dateCreated: new Date(res.data.dateCreated)
+                })
+                console.log("retrieved info: " +res.data)
+            })
+            .catch(function(error) {
+                console.log("Error " + error)
+            })
     }
 
     onChangeDescription(e) {
@@ -60,26 +77,22 @@ export default class EditProject extends Component {
         console.log(`assignee: ${this.state.members}`);
 
         const updatedProject = {
+            projectName: this.state.projectName,
             description: this.state.description,
-            dateCreated: this.state.dateCreated.toString(),
             members: this.state.members,
-            projectName: this.state.projectName
+            dateCreated: this.state.dateCreated
+            
+            
             
         }
 
 
-        //Create a new project
-        axios.post('http://localhost:4000/projects/editProj/',+this.props.match.params.id,updatedProject)
+        //Update a new project
+        axios.post('http://localhost:4000/projects/editProj/'+this.props.match.params.id,updatedProject)
             .then(res => console.log(res.data),
             this.props.history.push("/projects"));
-
-        this.setState({
-            description: '',
-            dateCreated: new Date(),
-            projectName: '',
-            members: ''
             
-        });
+    
 
     }
 
