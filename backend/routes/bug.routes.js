@@ -1,6 +1,35 @@
 const bugRoutes = require('express').Router();
 let Bug = require('../models/bug.model');
 
+
+function verifyToken(req,res,next) {
+
+    // Get auth header value
+    const bearerHeader = req.headers['authorization'];
+    // Check if bearer is undefined
+
+    if(typeof bearerHeader !== 'undefined') {
+
+        //Split at the space
+        const bearer = bearerHeader.split(' ');
+
+        // Get token from array
+        const bearerToken = bearer[1];
+
+        // Set the token
+        req.token = bearerToken;
+
+        // Nex middleware
+        next();
+    } else {
+        // Forbidden
+
+        res.sendStatus(403);
+        // can add json here
+    }
+}
+
+
 // Display all bugs
 bugRoutes.route('/buglist').get(function(req,res) {
     Bug.find(function(err, bugs) {
@@ -25,7 +54,7 @@ bugRoutes.route('/create').post(function(req,res) {
         });
 })
 
-bugRoutes.route('/update/:id').post(function(req,res) {
+bugRoutes.route('/edit/:id').post(function(req,res) {
     Bug.findById(req.params.id, function(err, bug) {
         if(!bug) {
             res.status(404).send('Data not found');
@@ -68,32 +97,7 @@ bugRoutes.route('/:id').delete((req,res)=> {
 
 
 
-function verifyToken(req,res,next) {
 
-    // Get auth header value
-    const bearerHeader = req.headers['authorization'];
-    // Check if bearer is undefined
-
-    if(typeof bearerHeader !== 'undefined') {
-
-        //Split at the space
-        const bearer = bearerHeader.split(' ');
-
-        // Get token from array
-        const bearerToken = bearer[1];
-
-        // Set the token
-        req.token = bearerToken;
-
-        // Nex middleware
-        next();
-    } else {
-        // Forbidden
-
-        res.sendStatus(403);
-        // can add json here
-    }
-}
 
 
 module.exports = bugRoutes;

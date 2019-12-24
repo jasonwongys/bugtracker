@@ -26,7 +26,7 @@ projectRoute.route('/createProj').post(function(req,res) {
 })
 
 // Edit a project by ID
-projectRoute.route('/update/:id').post(function(req,res) {
+projectRoute.route('/editProj/:id').post(function(req,res) {
     Project.findById(req.params.id, function(err, project) {
         if(!project) {
             res.status(404).send('Data not found');

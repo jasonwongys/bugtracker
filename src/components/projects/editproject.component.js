@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
 
-export default class CreateProject extends Component {
+export default class EditProject extends Component {
     constructor(props) {
         super(props);
 
@@ -59,7 +59,7 @@ export default class CreateProject extends Component {
         console.log(`Priority: ${this.state.description}`);
         console.log(`assignee: ${this.state.members}`);
 
-        const newProject = {
+        const updatedProject = {
             description: this.state.description,
             dateCreated: this.state.dateCreated.toString(),
             members: this.state.members,
@@ -69,27 +69,24 @@ export default class CreateProject extends Component {
 
 
         //Create a new project
-        axios.post('http://localhost:4000/projects/createProj', newProject)
+        axios.post('http://localhost:4000/projects/editProj/',+this.props.match.params.id,updatedProject)
             .then(res => console.log(res.data),
-            this.props.history.push("/projectsList"));
+            this.props.history.push("/projects"));
 
         this.setState({
             description: '',
             dateCreated: new Date(),
             projectName: '',
             members: ''
+            
         });
-
-        
-        
-        
 
     }
 
     render() {
         return (
             <div className="container">
-                <h3>Create a Project</h3>
+                <h3>Update a Project</h3>
                 <div style={{marginTop: 20}}>
                     <form onSubmit={this.onSubmitForm}>
                         <div className="form-group">
@@ -135,7 +132,7 @@ export default class CreateProject extends Component {
 
             
                         <div className="form-group">
-                            <input type="submit" value="Create Project" className="btn btn-primary" />
+                            <input type="submit" value="Update Project" className="btn btn-primary" />
                         </div>
                         
                     </form>

@@ -1,4 +1,5 @@
 import React, { Component, Link } from 'react'
+import EditProject from './editproject.component'
 import axios from 'axios';
 //import jwt from 'jsonwebtokens'
 
@@ -8,10 +9,10 @@ const Project = props => (
         <td className={props.project.completed ? 'completed' : ''}>{props.project.description}</td>
         <td className={props.project.completed ? 'completed' : ''}>{props.project.members}</td>
         <td className={props.project.completed ? 'completed' : ''}>{props.date}</td>
-        {/*
-        <td>
-        <Link to={"/edit/"+props.project._id} >Edit </Link> | 
-                <a href="#" onClick={() => { props.deleteBug(props.project._id) }}> delete</a>
+        
+        {/* <td>
+        <Link to={"/editProj/"+props.project._id} >Edit </Link> | 
+                <a href="#" onClick={() => { props.deleteProject(props.project._id) }}> delete</a>
         </td> */}
         
         
@@ -27,7 +28,7 @@ export default class Projects extends Component {
         };
 
         this.searchQuery = this.searchQuery.bind(this);
-        //this.deleteBug = this.deleteBug.bind(this);
+        this.deleteProject = this.deleteProject.bind(this);
     }
     componentDidMount() {
         axios.get('http://localhost:4000/projects/projectsList')
@@ -63,29 +64,30 @@ export default class Projects extends Component {
         })
     }
 
-    // deleteBug(id) {
-    //     axios.delete('http://localhost:4000/bugs/'+id) 
-    //         .then(response => {console.log(response.data)});
+    deleteProject(id) {
+        axios.delete('http://localhost:4000/projects/'+id) 
+            .then(response => {console.log(response.data)});
 
-    //     this.setState({
-    //         bugs: this.state.bugs.filter(el => el._id !== id)
-    //     })
-    // }
-
-    projectList() {
-        return this.state.projects.map((currentProject) =>{
-
-            return <Project project={currentProject}
-                        //deleteBug={this.deleteBug}
-                        key={currentProject._id}
-                        date={currentProject.dateCreated.substring(0,10)}
-                        />
-        });
+        this.setState({
+            projects: this.state.projects.filter(el => el._id !== id)
+        })
     }
+
+    // projectList() {
+    //     return this.state.projects.map((currentProject) =>{
+
+    //         return <Project project={currentProject}
+    //                     //deleteBug={this.deleteBug}
+    //                     key={currentProject._id}
+    //                     date={currentProject.dateCreated.substring(0,10)}
+    //                     />
+    //     });
+    // }
     
     render() {
 
-        let findQuery = this.state.projects.filter(i => i.description.toLowerCase().indexOf(this.state.query) !== -1);
+        let findQuery = this.state.projects.filter(
+                i => i.description.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1);
 
         return (
             <div className="container">
@@ -108,7 +110,7 @@ export default class Projects extends Component {
                         <tbody>
                             {findQuery.map((currentProject) =>{
                                 return <Project project={currentProject}
-                                            //deleteBug={this.deleteBug}
+                                            deleteProject={this.deleleProject}
                                             key={currentProject._id}
                                             date={currentProject.dateCreated.substring(0,10)}
                             />

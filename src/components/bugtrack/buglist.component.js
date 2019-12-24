@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import Search from './search.component';
+
 
 const Bug = props => (
     <tr>
@@ -41,7 +41,20 @@ export default class BugList extends Component {
 
     }
 
-    
+//         componentDidUpdate() {
+//         axios.get('http://localhost:4000/bugs/buglist')
+//         .then(response => {
+//             this.setState({
+//                 projects: response.data});
+//                 //console.log("Did Update done" + response.data)
+                
+//         })
+//         .catch(function(error) {
+//             console.log(error)
+
+//         })
+
+// }
 
 
     searchQuery(e) {
