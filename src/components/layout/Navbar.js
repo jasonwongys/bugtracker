@@ -8,7 +8,7 @@ import CreateProject from "../projects/createproject";
 import EditProject from "../projects/editproject.component";
 import UsersList from "../usersProfile/userList.component";
 import EditUsers from "../usersProfile/editUsers.component";
-
+import "../layout/navbar.css";
 import { logoutUser } from "../../actions/authActions";
 class Navbar extends Component {
 
