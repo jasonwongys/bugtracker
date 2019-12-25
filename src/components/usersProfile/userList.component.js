@@ -7,10 +7,10 @@ const Users = props => (
     <td>{props.user.name}</td>
         <td >{props.user.email}</td>
         <td >{props.user.role}</td>
-        <td >{props.date}</td>
+        <td >{props.user.date}</td>
         
         <td>
-        <Link to={"/editUsers/"+props.user._id} >Edit </Link> | <a href="#" onClick={() => { props.deleteUser(props.user._id) }}> Delete</a>
+        <Link to={"/api/users/"+props.user._id} >Edit </Link> | <a href="#" onClick={() => { props.deleteUser(props.user._id) }}> Delete</a>
         </td>
         
     </tr>

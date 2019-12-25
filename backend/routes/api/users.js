@@ -108,7 +108,7 @@ router.route('/usersList').get(function(req,res) {
 
 router.route('/editUsers/:id').post(function(req,res) {
         User.findById(req.params.id, function(err, users) {
-            if(!project) {
+            if(!users) {
                 res.status(404).send('Data not found');
             } else {
                 users.name = req.body.name;
@@ -117,7 +117,7 @@ router.route('/editUsers/:id').post(function(req,res) {
                 users.date = Date.parse(req.body.date);
                 //project.completed = Date.parse(req.body.completed);
     
-                project.save().then(project => {
+                users.save().then(users => {
                     res.json('User updated');
                 })
                 .catch(err=> {

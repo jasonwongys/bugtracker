@@ -53,7 +53,7 @@ class Navbar extends Component {
                 <Route path="/editProj/:id" component={EditProject} />
                 <Route path="/createProj" component={CreateProject} />
                 <Route path="/usersList" component={UsersList} />
-                <Route path="/editUsers/" component={EditUsers} />
+                <Route path="/api/users/:id" component={EditUsers} />
             </div> 
             );
         }

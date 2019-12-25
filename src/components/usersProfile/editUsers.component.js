@@ -88,7 +88,7 @@ export default class EditUsers extends Component {
         //Update a new project
         axios.post('http://localhost:4000/api/users/editUsers/'+this.props.match.params.id,updatedUser)
             .then(res => console.log(res.data),
-            this.props.history.push("/api/users/usersList"));
+            this.props.history.push("/usersList"));
             
     
 
@@ -109,16 +109,6 @@ export default class EditUsers extends Component {
                                 />
                         </div>
 
-                        <div className="form-group">
-                            <label>Date Created: </label>
-                                <div>
-                                    <DatePicker
-                                        selected={this.state.date}
-                                        
-                                        onChange={this.onChangeDate}
-                                    />
-                                </div>
-                        </div>
 
                         <br />
                         <div className="form-group">
