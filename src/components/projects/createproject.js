@@ -12,6 +12,7 @@ export default class CreateProject extends Component {
             description: '',
             members: '',
             dateCreated: new Date(),
+            users: []
 
         }
         
@@ -23,6 +24,21 @@ export default class CreateProject extends Component {
         this.onSubmitForm = this.onSubmitForm.bind(this);
         
     }
+
+
+    componentDidMount() {
+        axios.get('http://localhost:4000/api/users/usersList')
+            .then(response => {
+                this.setState({
+                    users: response.data.map(user => user.name)});
+                    console.log("Did Mount here" + JSON.stringify(response.data))
+            })
+            .catch(function(error) {
+                console.log("error " + error)
+            })
+
+    }
+
 
     onChangeDescription(e) {
         this.setState({
@@ -79,18 +95,13 @@ export default class CreateProject extends Component {
             projectName: '',
             members: ''
         });
-
-        
-        
-        
-
     }
 
     render() {
         return (
             <div className="container">
                 <h3>Create a Project</h3>
-                <div style={{marginTop: 20}}>
+                <div style={{paddingLeft: 200}}>
                     <form onSubmit={this.onSubmitForm}>
                         <div className="form-group">
                             <label>Description: </label>
@@ -132,6 +143,22 @@ export default class CreateProject extends Component {
                                     onChange={this.onChangeMembers}
                                 />
                         </div>
+
+                        <div className="form-group">
+                        <label>Assign Project to: </label>
+                        <select ref="userInput"
+                            required
+                            className="form-control"
+                            value={this.state.member}
+                            onChange={this.onChangeMembers}>
+                                {this.state.users.map(function(user) {
+                                    return <option
+                                        key={user}
+                                        value={user}>{user}
+                                    </option>;
+                                })}
+                            </select>
+                    </div>
 
             
                         <div className="form-group">
