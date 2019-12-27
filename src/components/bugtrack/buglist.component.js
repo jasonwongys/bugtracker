@@ -103,10 +103,11 @@ export default class BugList extends Component {
                     type="text"
                     placeholder="Search descriptions..."
                 />
-                <table className="table table-striped"
+                <table className="table"
                     style={{marginTop: 20 }}>
                         <thead>
                             <tr>
+                                <th>Project Name</th>   
                                 <th>Description</th>
                                 <th>Deadline</th>
                                 <th>Assignee</th>

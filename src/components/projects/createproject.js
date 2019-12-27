@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 export default class CreateProject extends Component {
     constructor(props) {
         super(props);
@@ -73,7 +73,7 @@ export default class CreateProject extends Component {
         console.log(`description: ${this.state.projectName}`);
         console.log(`date: ${this.state.dateCreated}`);
         console.log(`Priority: ${this.state.description}`);
-        console.log(`assignee: ${this.state.members}`);
+        console.log(`Users: ${this.state.members}`);
 
         const newProject = {
             description: this.state.description,
@@ -87,7 +87,7 @@ export default class CreateProject extends Component {
         //Create a new project
         axios.post('http://localhost:4000/projects/createProj', newProject)
             .then(res => console.log(res.data),
-            this.props.history.push("/projectsList"));
+            this.props.history.push("/projects"));
 
         this.setState({
             description: '',
@@ -98,10 +98,11 @@ export default class CreateProject extends Component {
     }
 
     render() {
+
         return (
             <div className="container">
                 <h3>Create a Project</h3>
-                <div style={{paddingLeft: 200}}>
+                <div style={{margin: 100}}>
                     <form onSubmit={this.onSubmitForm}>
                         <div className="form-group">
                             <label>Description: </label>
@@ -136,31 +137,20 @@ export default class CreateProject extends Component {
                         <br />
 
                         <div className="form-group">
-                            <label>Member: </label>
-                            <input type="text"
-                                    className="form-control"
-                                    value={this.state.members}
-                                    onChange={this.onChangeMembers}
-                                />
-                        </div>
-
-                        <div className="form-group">
-                        <label>Assign Project to: </label>
+                        <label>Assign Member: </label>
                         <select ref="userInput"
                             required
                             className="form-control"
-                            value={this.state.member}
+                            
                             onChange={this.onChangeMembers}>
+                            <option value="" selected disabled hidden>Choose here</option>
                                 {this.state.users.map(function(user) {
-                                    return <option
-                                        key={user}
-                                        value={user}>{user}
-                                    </option>;
+                                    return <option key={user}
+                                        value={user}>{user}</option>;
+                                        
                                 })}
                             </select>
                     </div>
-
-            
                         <div className="form-group">
                             <input type="submit" value="Create Project" className="btn btn-primary" />
                         </div>

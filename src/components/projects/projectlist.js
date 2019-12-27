@@ -119,7 +119,7 @@ export default class Projects extends Component {
                     type="text"
                     placeholder="Search projects..."
                 />
-                <table className="table table-striped"
+                <table className="table"
                     style={{marginTop: 20 }}>
                         <thead>
                             <tr>

@@ -10,6 +10,8 @@ import UsersList from "../usersProfile/userList.component";
 import EditUsers from "../usersProfile/editUsers.component";
 import "../layout/navbar.css";
 import { logoutUser } from "../../actions/authActions";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 class Navbar extends Component {
 
         onLogoutClick = e => {
@@ -22,7 +24,8 @@ class Navbar extends Component {
                 <nav>
                     <div className="nav-wrapper">
                     <Link to="/dashboard" className="navbar-brand">Bug Tracker</Link>
-                
+                    
+
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
                     <li>
                         <Link to="/buglist" className="nav-link">Show Bugs</Link>

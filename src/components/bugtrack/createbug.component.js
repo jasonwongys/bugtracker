@@ -13,7 +13,8 @@ export default class CreateBug extends Component {
             assignee: '',
             priority: '',
             completed: false,
-            
+            projects: [],
+            users: []
             
         }
         
@@ -24,6 +25,32 @@ export default class CreateBug extends Component {
         
         this.onSubmitForm = this.onSubmitForm.bind(this);
         
+    }
+
+    componentDidMount() {
+        axios.get('http://localhost:4000/api/users/usersList')
+            .then(response => {
+                this.setState({
+                    users: response.data.map(user => user.name)});
+                    console.log("Did Mount here" + JSON.stringify(response.data))
+            })
+            .catch(function(error) {
+                console.log("error " + error)
+            })
+
+    }
+
+    componentDidMount() {
+        axios.get('http://localhost:4000/projects/projectsList')
+            .then(response => {
+                this.setState({
+                    projects: response.data.map(project => project.projectName)});
+                    console.log("Did Mount here" + JSON.stringify(response.data));
+            })
+            .catch(function(error) {
+                console.log("error " + error)
+            })
+
     }
 
     onChangeDescription(e) {
@@ -67,7 +94,8 @@ export default class CreateBug extends Component {
             date: this.state.date.toString(),
             assignee: this.state.assignee,
             completed: this.state.completed,
-            priority: this.state.priority
+            priority: this.state.priority,
+            projects: this.state.projects
             
         }
 
@@ -80,11 +108,12 @@ export default class CreateBug extends Component {
             date: new Date(),
             completed: false,
             priority: '',
-            
+            projects: [],
+            users: [],
             assignee: ''
         });
         
-        //window.location ='/';
+        
 
     }
 
@@ -153,13 +182,37 @@ export default class CreateBug extends Component {
                         <br />
 
                         <div className="form-group">
-                            <label>Assignee: </label>
-                            <input type="text"
-                                    className="form-control"
-                                    value={this.state.assignee}
-                                    onChange={this.onChangeAssignee}
-                                />
-                        </div>
+                        <label>Assign Member: </label>
+                        <select ref="userInput"
+                            required
+                            className="form-control"
+                            
+                            onChange={this.onChangeAssignee}>
+                            <option value="" selected disabled hidden>Choose here</option>
+                                {this.state.users.map(function(user) {
+                                    return <option key={user}
+                                        value={user}>{user}</option>;
+                                        
+                                })}
+                            </select>
+                    </div>
+
+
+                    <div className="form-group">
+                        <label>Project Name </label>
+                        <select ref="userInput"
+                            required
+                            className="form-control"
+                            
+                            onChange={this.onChangeAssignee}>
+                            <option value="" selected disabled hidden>Choose here</option>
+                                {this.state.users.map(function(user) {
+                                    return <option key={user}
+                                        value={user}>{user}</option>;
+                                        
+                                })}
+                            </select>
+                    </div>
 
                         <div className="form-group">
                             <input type="submit" value="Create Bug" className="btn btn-primary" />

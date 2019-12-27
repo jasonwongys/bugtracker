@@ -20,6 +20,10 @@ let Bug = new Schema({
     date: {
         type: Date,
         required: true
+    },
+    projects: {
+        type: String,
+        required: true
     }
 }, {
     timestamps: true,
