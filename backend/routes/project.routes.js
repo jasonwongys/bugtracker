@@ -1,29 +1,36 @@
 const projectRoute = require('express').Router();
 let Project = require('../models/project.model');
 
-// Display all Projects
-projectRoute.route('/projectsList').get(function(req,res) {
-    Project.find(function(err, projects) {
-        if (err) {
-            console.log(err);
+let ProjectsController = require('../controllers/projects.controller');
 
-        }else {
-            res.json(projects)
-        }
-    })
-})
+projectRoute.route('/')
+    .get(ProjectsController.index)
+    .post(ProjectsController.newProject);
+
+
+// Display all Projects
+// projectRoute.route('/projectsList').get(function(req,res) {
+//     Project.find(function(err, projects) {
+//         if (err) {
+//             console.log(err);
+
+//         }else {
+//             res.json(projects)
+//         }
+//     })
+// })
 
 //Create a Project
-projectRoute.route('/createProj').post(function(req,res) {
-    let project = new Project(req.body);
-    project.save()
-        .then(project => {
-            res.status(200).json({'Project' : 'Project added success'})
-        })
-        .catch(err => {
-            res.status(400).send('Adding Project failed '+ err);
-        });
-})
+// projectRoute.route('/createProj').post(function(req,res) {
+//     let project = new Project(req.body);
+//     project.save()
+//         .then(project => {
+//             res.status(200).json({'Project' : 'Project added success'})
+//         })
+//         .catch(err => {
+//             res.status(400).send('Adding Project failed '+ err);
+//         });
+// })
 
 // Edit a project by ID
 projectRoute.route('/editProj/:id').post(function(req,res) {
@@ -55,7 +62,7 @@ projectRoute.route('/:id').get(function(req,res) {
     })
 })
 
-//Search a project
+
 
 //Delete a project
 projectRoute.route('/:id').delete((req,res)=> {

@@ -8,7 +8,7 @@ import CreateProject from "../projects/createproject";
 import EditProject from "../projects/editproject.component";
 import UsersList from "../usersProfile/userList.component";
 import EditUsers from "../usersProfile/editUsers.component";
-import "../layout/navbar.css";
+// import "../layout/navbar.scss";
 import { logoutUser } from "../../actions/authActions";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
