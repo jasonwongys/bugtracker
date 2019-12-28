@@ -11,6 +11,7 @@ class Dashboard extends Component {
   };
   render() {
       const { user } = this.props.auth;
+      console.log("Auth here" + JSON.stringify(user));
   return (
     <div>
 

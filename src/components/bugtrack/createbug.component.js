@@ -13,7 +13,7 @@ export default class CreateBug extends Component {
             assignee: '',
             priority: '',
             completed: false,
-            projects: [],
+            projects_id: '',
             users: []
             
         }

@@ -20,34 +20,37 @@ class Navbar extends Component {
         };
         render() {
             return (
-            <div className="container-lg">
-                <nav>
-                    <div className="nav-wrapper">
-                    <Link to="/dashboard" className="navbar-brand">Bug Tracker</Link>
+                <div className="container-fluid">
+                    <nav className="navbar navbar-expand-lg navbar-dark bg-dark navbar justify-content-end">
                     
+                    <Link to="/dashboard" className="navbar-brand">Bug Tracker</Link>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                <ul id="nav-mobile" className="right hide-on-med-and-down">
-                    <li>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    
+                    <ul className="navbar-nav mr-auto" id="nav-mobile" >
+                    <li className="nav-item active">
                         <Link to="/buglist" className="nav-link">Show Bugs</Link>
                     </li>
-                    <li>
+                    <li className="nav-item active">
                         <Link to="/create" className="nav-link">Create Bugs</Link>
                     </li>
-                    <li>
+                    <li className="nav-item active">
                         <Link to="/projects" className="nav-link">Show Projects</Link>
                     </li>
-                    <li>
+                    <li className="nav-item active">
                         <Link to="/createProj" className="nav-link">Create projects</Link>
                     </li>
-                    <li>
+                    <li className="nav-item active">
                         <Link to="/usersList" className="nav-link">Show users</Link>
                     </li>
-                    <li>
+                    <li className="nav-item active">
                         <a onClick={this.props.onLogoutClick}>Logout</a>
                     </li>
                 </ul>
-                </div>
-                
+            </div>
                 </nav>
                 <Route path="/buglist" exact component={BugList}/>
                 <Route path="/edit/:id" component={EditBug} />
@@ -57,7 +60,8 @@ class Navbar extends Component {
                 <Route path="/createProj" component={CreateProject} />
                 <Route path="/usersList" component={UsersList} />
                 <Route path="/api/users/:id" component={EditUsers} />
-            </div> 
+            
+            </div>
             );
         }
         }

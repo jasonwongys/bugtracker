@@ -40,7 +40,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
       <Router>
-      <div className="App">
+      <div className="container-fluid">
       
       <Navbar/>
         <Route exact path="/" component={Landing} />

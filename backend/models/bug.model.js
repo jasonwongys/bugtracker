@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Users = require('../models/user.model');
+const Projects = require('../models/project.model');
 
 let Bug = new Schema({
     description: {
@@ -21,10 +23,15 @@ let Bug = new Schema({
         type: Date,
         required: true
     },
-    projects: {
-        type: String,
-        required: true
-    }
+    users: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: Users
+    }],
+
+    projects: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: Projects
+    }]
 }, {
     timestamps: true,
 });

@@ -16,7 +16,15 @@ let Project = new Schema({
     },
     dateCreated: {
         type: Date
-    }
+    },
+    bugs: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Bug'
+    }],
+    users: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Users'
+    }],
 }, {
     timestamps: true,
 });

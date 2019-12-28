@@ -24,7 +24,16 @@ const UserSchema = new Schema({
 
     role: {
         type: String
-    }
+    },
+    projects: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Projects'
+    }],
+
+    bugs: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Bug'
+    }],
 
 });
 

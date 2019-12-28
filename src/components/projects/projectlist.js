@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 //import jwt from 'jsonwebtokens'
 
 const Project = props => (
@@ -85,19 +87,11 @@ export default class Projects extends Component {
     //         return isRev * a.projectName.localeCompare(b.projectName)
     //     })
     // } 
-
-    // projectList() {
-    //     return this.state.projects.map((currentProject) =>{
-
-    //         return <Project project={currentProject}
-    //                     //deleteBug={this.deleteBug}
-    //                     key={currentProject._id}
-    //                     date={currentProject.dateCreated.substring(0,10)}
-    //                     />
-    //     });
-    // }
     
     render() {
+
+        // const { user } = this.props.auth;
+        // console.log("Auth here" + JSON.stringify(user));
 
         const sorted = this.state.projects.sort((a,b) => {
 
@@ -146,3 +140,14 @@ export default class Projects extends Component {
     }
 }
 
+// Projects.propTypes = {
+//     logoutUser: PropTypes.func.isRequired,
+//     auth: PropTypes.object.isRequired
+//   };
+//   const mapStateToProps = state => ({
+//     auth: state.auth
+//   });
+// //   export default connect(
+// //     mapStateToProps,
+// //     { logoutUser }
+// //   )(Projects);

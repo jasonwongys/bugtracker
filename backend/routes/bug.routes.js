@@ -1,6 +1,7 @@
 const bugRoutes = require('express').Router();
 let Bug = require('../models/bug.model');
-
+const Users = require('../models/user.model');
+const Projects = require('../models/project.model');
 
 function verifyToken(req,res,next) {
 
@@ -29,6 +30,7 @@ function verifyToken(req,res,next) {
     }
 }
 
+//=========================
 
 // Display all bugs
 bugRoutes.route('/buglist').get(function(req,res) {

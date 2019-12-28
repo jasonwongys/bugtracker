@@ -12,7 +12,7 @@ const Bug = props => (
         
         <td>
             <Link to={"/edit/"+props.bug._id} >Edit </Link> | <a href="#" onClick={() => { props.deleteBug(props.bug._id) }}> delete</a> 
-        </td>        
+        </td>
     </tr>
 )
 export default class BugList extends Component {
@@ -107,7 +107,7 @@ export default class BugList extends Component {
                     style={{marginTop: 20 }}>
                         <thead>
                             <tr>
-                                <th>Project Name</th>   
+                        
                                 <th>Description</th>
                                 <th>Deadline</th>
                                 <th>Assignee</th>
