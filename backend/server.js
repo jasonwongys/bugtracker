@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 const PORT = 4000;
 const passport = require('passport');
 
-
+mongoose.Promise = global.Promise;
 // const bugRoutes = express.Router();
 // let Bug = require('./bug.model');
 

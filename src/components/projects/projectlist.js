@@ -33,7 +33,7 @@ export default class Projects extends Component {
         this.onSort = this.onSort.bind(this);
     }
     componentDidMount() {
-        axios.get('http://localhost:4000/projects/projectsList')
+        axios.get('http://localhost:4000/projects')
             .then(response => {
                 this.setState({
                     projects: response.data});
@@ -100,11 +100,11 @@ export default class Projects extends Component {
             return isReversed * a.projectName.localeCompare(b.projectName)
         });
 
+
+        //Search query for project list items
         let findQuery = sorted.filter(
                 i => i.description.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1);
                 
-        
-        
         return (
             <div className="container">
                 <h3> Projects </h3>

@@ -85,10 +85,11 @@ export default class BugList extends Component {
     // }
     
     render() {
+
+        console.log("Bugs" + JSON.stringify(this.state.bugs));
         let findQuery = this.state.bugs.filter(
-            i => {
-                return i.description.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1}
-        );
+            i => i.description.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1);
+        
         
 
         console.log("Query: " + this.state.query);
@@ -105,7 +106,7 @@ export default class BugList extends Component {
                 />
                 <table className="table"
                     style={{marginTop: 20 }}>
-                        <thead>
+                        <thead>buglist
                             <tr>
                         
                                 <th>Description</th>

@@ -1,39 +1,23 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const Users = require('../models/user.model');
-const Projects = require('../models/project.model');
+// const Projects = require('../models/project.model');
 
-let Bug = new Schema({
-    description: {
-        type: String,
-        required: true
-    },
-    assignee: {
-        type: String,
-        required: true
-    },
-    priority: {
-        type: String,
-        required: true
-    },
-    completed: {
-        type: Boolean
-    },
-    date: {
-        type: Date,
-        required: true
-    },
-    users: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: Users
-    }],
+let bugSchema = new Schema({
+    description: String,
+    assignee:String,
+    priority: String,
+    completed: Boolean,
+    date: Date,
 
-    projects: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: Projects
-    }]
+    projects: {
+        type: Schema.Types.ObjectId,
+        ref: 'project'
+    }
 }, {
     timestamps: true,
 });
 
-module.exports = mongoose.model('Bug',Bug);
+
+
+const Bug = mongoose.model('bug',bugSchema);
+module.exports = Bug;
