@@ -11,9 +11,11 @@ const Project = props => (
         <td >{props.project.description}</td>
         <td >{props.project.members}</td>
         <td >{props.date}</td>
+        <td>{console.log(props.bugsProject)}</td>
         
         <td>
-        <Link to={"/editProj/"+props.project._id} >Edit </Link> | <a href="#" onClick={() => { props.deleteProject(props.project._id) }}> delete</a>
+        <Link to={"/editProj/"+props.project._id} >Edit </Link> | <a href={"/bugs/"+props.project._id}> View Bugs</a>
+        
         </td>
         
     </tr>
@@ -29,7 +31,7 @@ export default class Projects extends Component {
         };
 
         this.searchQuery = this.searchQuery.bind(this);
-        this.deleteProject = this.deleteProject.bind(this);
+        
         this.onSort = this.onSort.bind(this);
     }
     componentDidMount() {
@@ -37,7 +39,7 @@ export default class Projects extends Component {
             .then(response => {
                 this.setState({
                     projects: response.data});
-                    console.log("Did Mount here" + response.data)
+                    console.log("Did Mount here" + JSON.stringify(response.data));
             })
             .catch(function(error) {
                 console.log("error " + error)
@@ -45,35 +47,12 @@ export default class Projects extends Component {
 
     }
 
-//     componentDidUpdate() {
-//         axios.get('http://localhost:4000/projects/projectsList')
-//         .then(response => {
-//             this.setState({
-//                 projects: response.data});
-//                 //console.log("Did Update done" + response.data)
-                
-//         })
-//         .catch(function(error) {
-//             console.log(error)
-
-//         })
-
-// }
-
     searchQuery(e) {
         this.setState({
             query: e.target.value
         })
     }
 
-    deleteProject(id) {
-        axios.delete('http://localhost:4000/projects/'+id) 
-            .then(response => {console.log(response.data)});
-
-        this.setState({
-            projects: this.state.projects.filter(el => el._id !== id)
-        })
-    }
 
     onSort = (sortType) => {
         this.setState({
@@ -92,6 +71,9 @@ export default class Projects extends Component {
 
         // const { user } = this.props.auth;
         // console.log("Auth here" + JSON.stringify(user));
+
+        // let toastMsg = document.createElement('toastMsg');
+        // toastMsg.className()
 
         const sorted = this.state.projects.sort((a,b) => {
 
@@ -127,9 +109,9 @@ export default class Projects extends Component {
                         <tbody>
                             {findQuery.map((currentProject) =>{
                                 return <Project project={currentProject}
-                                            deleteProject={this.deleleProject}
+                                            bugsProject={currentProject.bugs_id}
                                             key={currentProject._id}
-                                            date={currentProject.dateCreated.substring(0,10)}
+                                            //date={currentProject.dateCreated.substring(0,10)}
                             />
                 })}
                         </tbody>

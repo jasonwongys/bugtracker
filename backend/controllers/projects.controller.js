@@ -44,16 +44,19 @@ module.exports = {
 
     getProjectBugs: async (req,res,next) => {
         const { id } = req.params;
-        const project = await Project.findById(id).populate('bugs');
-        console.log('Projects bugs: ',project.bugs);
+        const project = await Project.findById(id).populate('Bug');
+        
+        
         console.log("Project: " + project);
-        res.status(200).json(project.bugs);
+        res.status(200).json(project);
     },
     newProjectBugs: async (req, res, next) => {
         const { id } = req.params;
 
         const newBug  = new Bug(req.body);
-        console.log("Req Params", req.body);
+        
+        
+        console.log("Req Body", req.body);
         console.log('New bug', newBug);
 
         const project = await Project.findById(id);
@@ -64,10 +67,11 @@ module.exports = {
         await newBug.save();
         // Add bug to projects array of bugs
         console.log("Bugs " + project.bugs);
+        console.log("Project bugs " + project);
         project.bugs.push(newBug);
         // Save the project
         await project.save();
-
+        console.log("After save Project bugs ",project);
         res.status(201).json(newBug);
     }
     

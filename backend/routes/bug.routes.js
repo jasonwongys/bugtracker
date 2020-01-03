@@ -1,48 +1,19 @@
-const bugRoutes = require('express').Router();
+
 let Bug = require('../models/bug.model');
-const Users = require('../models/user.model');
-const Projects = require('../models/project.model');
+// const Users = require('../models/user.model');
+// const Projects = require('../models/project.model');
 
-function verifyToken(req,res,next) {
 
-    // Get auth header value
-    const bearerHeader = req.headers['authorization'];
-    // Check if bearer is undefined
 
-    if(typeof bearerHeader !== 'undefined') {
+//let Bug = require('../models/bug.model');
+const bugRoutes = require('express-promise-router')();
 
-        //Split at the space
-        const bearer = bearerHeader.split(' ');
+let bugsController = require('../controllers/bugs.controller');
 
-        // Get token from array
-        const bearerToken = bearer[1];
 
-        // Set the token
-        req.token = bearerToken;
+bugRoutes.route('/')
+    .get(bugsController.index);
 
-        // Nex middleware
-        next();
-    } else {
-        // Forbidden
-
-        res.sendStatus(403);
-        // can add json here
-    }
-}
-
-//=========================
-
-// Display all bugs
-bugRoutes.route('/buglist').get(function(req,res) {
-    Bug.find(function(err, bugs) {
-        if (err) {
-            console.log(err);
-
-        }else {
-            res.json(bugs)
-        }
-    })
-},verifyToken)
 
 //Create a bug
 bugRoutes.route('/create').post(function(req,res) {

@@ -29,7 +29,7 @@ export default class BugList extends Component {
 
     }
     componentDidMount() {
-        axios.get('http://localhost:4000/bugs/buglist')
+        axios.get('http://localhost:4000/bugs/')
             .then(response => {
                 this.setState({
                     bugs: response.data});
@@ -38,24 +38,7 @@ export default class BugList extends Component {
             .catch(function(error) {
                 console.log(error)
             })
-
     }
-
-//         componentDidUpdate() {
-//         axios.get('http://localhost:4000/bugs/buglist')
-//         .then(response => {
-//             this.setState({
-//                 projects: response.data});
-//                 //console.log("Did Update done" + response.data)
-                
-//         })
-//         .catch(function(error) {
-//             console.log(error)
-
-//         })
-
-// }
-
 
     searchQuery(e) {
         this.setState({
@@ -121,7 +104,7 @@ export default class BugList extends Component {
                             return <Bug bug={currentBug}
                                 deleteBug={this.deleteBug}
                                 key={currentBug._id}
-                                date={currentBug.date.substring(0,10)} />;
+                                /*date={currentBug.date.substring(0,10)}*/ />;
             })}
                 
                         </tbody>

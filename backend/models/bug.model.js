@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 let bugSchema = new Schema({
     description: String,
-    assignee:String,
+    assignee: String,
     priority: String,
     completed: Boolean,
     date: Date,
@@ -13,8 +13,7 @@ let bugSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'project'
     }
-}, {
-    timestamps: true,
+
 });
 
 

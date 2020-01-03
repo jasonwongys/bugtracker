@@ -8,6 +8,7 @@ import CreateProject from "../projects/createproject";
 import EditProject from "../projects/editproject.component";
 import UsersList from "../usersProfile/userList.component";
 import EditUsers from "../usersProfile/editUsers.component";
+import ViewProjectBugs from "../projects/viewProjectBugs";
 // import "../layout/navbar.scss";
 import { logoutUser } from "../../actions/authActions";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -60,6 +61,7 @@ class Navbar extends Component {
                 <Route path="/createProj" component={CreateProject} />
                 <Route path="/usersList" component={UsersList} />
                 <Route path="/api/users/:id" component={EditUsers} />
+                <Route path="/bugs/:id" component={ViewProjectBugs} />
             
             </div>
             );

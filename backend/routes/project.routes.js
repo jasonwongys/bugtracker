@@ -14,9 +14,14 @@ projectRoute.route('/:id')
     .put(ProjectsController.replaceProject)
     .patch(ProjectsController.updateProject);
 
-projectRoute.route('/:id/bugs')
+    //get alll bugs related to the project
+projectRoute.route('/bugs/:id')
     .get(ProjectsController.getProjectBugs)
-    .post(ProjectsController.newProjectBugs)
+    .post(ProjectsController.newProjectBugs) // Add a bug to the project
+
+
+
+
 
 
 // Display all Projects
