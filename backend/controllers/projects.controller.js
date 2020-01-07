@@ -47,31 +47,33 @@ module.exports = {
         const project = await Project.findById(id).populate('Bug');
         
         
-        console.log("Project: " + project);
+        console.log("Project: " + project.bugs);
         res.status(200).json(project);
     },
+
     newProjectBugs: async (req, res, next) => {
         const { id } = req.params;
 
-        const newBug  = new Bug(req.body);
+        let newBug  = new Bug(req.body);
         
         
         console.log("Req Body", req.body);
         console.log('New bug', newBug);
 
-        const project = await Project.findById(id);
+        const project = await Project.findById(id).populate('Bug');
+        console.log("New Bug projects " + project);
         // Assign project as bug's project
-
+        console.log("Newbug projects" + newBug.projects);
         newBug.projects = project;
-        // Save the bug
+
         await newBug.save();
         // Add bug to projects array of bugs
-        console.log("Bugs " + project.bugs);
+        //console.log("Bugs " + project.bugs);
         console.log("Project bugs " + project);
         project.bugs.push(newBug);
         // Save the project
         await project.save();
-        console.log("After save Project bugs ",project);
+        //console.log("After save Project bugs ",project);
         res.status(201).json(newBug);
     }
     

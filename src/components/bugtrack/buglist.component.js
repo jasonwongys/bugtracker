@@ -69,14 +69,15 @@ export default class BugList extends Component {
     
     render() {
 
-        console.log("Bugs" + JSON.stringify(this.state.bugs));
+        console.log("Bugs component " + JSON.stringify(this.state.bugs));
+
         let findQuery = this.state.bugs.filter(
             i => i.description.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1);
         
         
 
         console.log("Query: " + this.state.query);
-        console.log("Bugs: " + JSON.stringify(this.state.bugs));
+        
         //console.log("Found query " + JSON.stringify(findQuery));
         
         return (
