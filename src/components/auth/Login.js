@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import classnames from "classnames";
+import './login.css';
 class Login extends Component {
     constructor() {
         super();
@@ -48,74 +49,82 @@ class Login extends Component {
     render() {
         const { errors } = this.state;
     return (
-        <div className="container">
-            <div style={{ marginTop: "4rem" }} className="row">
-            <div className="col s8 offset-s2">
-                <Link to="/" className="btn-flat waves-effect">
-                <i className="material-icons left">keyboard_backspace</i> Back to
-                home
-                </Link>
-                <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                <h4>
-                    <b>Login</b> below
-                </h4>
-                <p className="grey-text text-darken-1">
-                    Don't have an account? <Link to="/register">Register</Link>
-                </p>
-                </div>
+        <div className="container-fluid">
+            <div className="row no-gutter">
+                <div className="d-none d-md-flex col-md-4 col-lg-12 bg-image">
+                <div className="col-md-8 col-lg-8">
+                <div className="login d-flex align-items-center py-5">
+                    <div className="container">
+                    <div className="row">
+                        <div className="col-md-9 col-lg-8 mx-auto">
+                        <h3 className="login-heading mb-4">Welcome to Bug Tracker!</h3>
+                        <h4><b>Login</b> below</h4>
+                        
+                    
                 <form noValidate onSubmit={this.onSubmit}>
-                <div className="input-field col s12">
-                    <input
-                    onChange={this.onChange}
-                    value={this.state.email}
-                    error={errors.email}
-                    id="email"
-                    type="email"
-                    className={classnames("", {
-                        invalid: errors.email || errors.emailnotfound
-                    })}
-                    />
-                    <label htmlFor="email">Email</label>
-                    <span className="red-text">
-                    {errors.email}
-                    {errors.emailnotfound}
-                    </span>
+                    <div className="form-label-group">
+                    
+                        <input
+                            placeholder="Email"
+                            onChange={this.onChange}
+                            value={this.state.email}
+                            error={errors.email}
+                            id="email"
+                            type="email"
+                            className={classnames("", {
+                                invalid: errors.email || errors.emailnotfound
+                            })}
+                        />
+                        <label htmlFor="email">Email</label>
+                            <span className="red-text">
+                                {errors.email}
+                                {errors.emailnotfound}
+                            </span>
+                    </div>
+                    <div className="form-label-group">
+                    
+                        <input
+                            placeholder="Password "
+                            onChange={this.onChange}
+                            value={this.state.password}
+                            error={errors.password}
+                            id="password"
+                            type="password"
+                            className={classnames("", {
+                                invalid: errors.password || errors.passwordincorrect
+                            })}
+                        />
+                        <label htmlFor="password">Password</label>
+                        <span className="red-text">
+                            {errors.password}
+                            {errors.passwordincorrect}
+                        </span>
+                    </div>
+
+                    <div className="custom-control custom-checkbox mb-3">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1" />
+                        <label className="custom-control-label" for="customCheck1">Remember password</label>
+                    </div>
+                <div className="col s4" style={{ paddingLeft: "11.250px" }}>
+                    <button className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold"
+                            type="submit">Login</button>
                 </div>
-                <div className="input-field col s12">
-                    <input
-                    onChange={this.onChange}
-                    value={this.state.password}
-                    error={errors.password}
-                    id="password"
-                    type="password"
-                    className={classnames("", {
-                        invalid: errors.password || errors.passwordincorrect
-                    })}
-                    />
-                    <label htmlFor="password">Password</label>
-                    <span className="red-text">
-                    {errors.password}
-                    {errors.passwordincorrect}
-                    </span>
-                </div>
-                <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                    <button
-                    style={{
-                        width: "150px",
-                        borderRadius: "3px",
-                        letterSpacing: "1.5px",
-                        marginTop: "1rem"
-                    }}
-                    type="submit"
-                    className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                    >
-                    Login
-                    </button>
+                <div className="text-center">
+                    <a className="small" href="#">Forgot password?</a>
+                    <p className="grey-text text-darken-1">
+                        Don't have an account? <Link to="/register">Register</Link>
+                    </p>
                 </div>
                 </form>
             </div>
             </div>
+            </div>
+            </div>
+            </div>
+            </div>
         </div>
+
+            </div>
         );
     }
     }

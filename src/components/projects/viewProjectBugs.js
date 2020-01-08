@@ -22,9 +22,7 @@ export default class ViewProjectBugs extends Component {
 
         this.state = {
             bugsList: [],
-            data: [],
-
-
+            data: []
         }
     }
 
@@ -69,7 +67,7 @@ export default class ViewProjectBugs extends Component {
         console.log("Bugs array here",this.state.bugsList);
         return (
             <div>
-                <h3>{this.state.bugsList.projectName}</h3>
+                <h3>Project Name: {this.state.bugsList.projectName}</h3>
 
                 <table className="table"
                     style={{marginTop: 20 }}>

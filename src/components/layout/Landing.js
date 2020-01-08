@@ -1,49 +1,45 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-    
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Register from '../auth/Register';
+import Login from '../auth/Login'
 class Landing extends Component {
     render() {
         return (
-        <div style={{ height: "75vh" }} className="container valign-wrapper">
-            <div className="row">
+        <div className="container valign-wrapper">
+            <Router>
             <div className="col s12 center-align">
-                <h4>
-                <b>Welcome</b> to 
-                <span style={{ fontFamily: "monospace" }}>Bug Tracker App</span> 
-                </h4>
-                {/* <p className="flow-text grey-text text-darken-1">
-                Create a (minimal) full-stack app with user authentication via
-                passport and JWTs
-                </p> */}
+                <h4 style={{ fontFamily: "monospace" }}><b>Welcome to Bug Tracker App</b></h4>
+                
+                
+                <p className="flow-text grey-text text-darken-1">
+                    Your one-stop project and bug tracking management system
+                </p>
                 <br />
                 <div className="col s6">
-                <Link
-                    to="/register"
-                        style={{
-                        width: "140px",
-                        borderRadius: "3px",
-                        letterSpacing: "1.5px"
-                    }}
-                    className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                >
+                <Link to="/register" className=""
+
+    
+                />
                     Register
-                </Link>
+                
                 </div>
                 <div className="col s6">
-                <Link
-                    to="/login"
+                <Link to="/login"
                     style={{
                         width: "140px",
                         borderRadius: "3px",
                         letterSpacing: "1.5px"
                     }}
-                    className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                >
+                    className=""
+                />
                     Log In
-                </Link>
+                
                 </div>
             </div>
-            </div>
+            <Route path="/register" exact component={Register}/>
+                <Route path="/login" component={Login} />
+            </Router>
+            
         </div>
         );
     }

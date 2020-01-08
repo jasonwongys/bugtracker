@@ -1,8 +1,12 @@
 import React, { Component } from "react";
+import { Link, Route } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-//import Navbar from "../../components/layout/Navbar";
+
+import Navbar from "../layout/Navbar"
+
+import SideNav from "../layout/SideNav";
 
 class Dashboard extends Component {
   onLogoutClick = e => {
@@ -13,10 +17,12 @@ class Dashboard extends Component {
       const { user } = this.props.auth;
       console.log("Auth here" + JSON.stringify(user));
   return (
-    <div>
-
-      {/*<Navbar />*/}
     
+    <div id="page-content-wrapper">
+    <Navbar/>
+        <SideNav/>
+    
+      
       <div style={{ height: "35vh" }} className="container valign-wrapper">
       
         <div className="row">
@@ -28,7 +34,7 @@ class Dashboard extends Component {
                 <span style={{ fontFamily: "monospace" }}>Bug Tracker</span> app 👏
               </p>
             </h4>
-            <button
+            {/* <button
               style={{
                 width: "150px",
                 borderRadius: "3px",
@@ -39,22 +45,12 @@ class Dashboard extends Component {
               className="btn btn-large waves-effect waves-light hoverable blue accent-3"
             >
               Logout
-            </button>
+            </button> */}
           </div>
-              <button
-                style={{
-                width: "150px",
-                borderRadius: "3px",
-                letterSpacing: "1.5px",
-                marginTop: "1rem"
-              }}
-                // onClick={
-                //   <Redirect to={<>} />
-                // }
-                className="btn btn-large waves-effect waves-dark hoverable purple accent-3"
-
-              >Projects</button>
+              
         </div>
+        
+            
       </div>
       </div>
     );

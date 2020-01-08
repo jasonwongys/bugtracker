@@ -10,7 +10,9 @@ import UsersList from "../usersProfile/userList.component";
 import EditUsers from "../usersProfile/editUsers.component";
 import ViewProjectBugs from "../projects/viewProjectBugs";
 // import "../layout/navbar.scss";
+import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+import PropTypes from "prop-types";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Navbar extends Component {
@@ -48,7 +50,7 @@ class Navbar extends Component {
                         <Link to="/usersList" className="nav-link">Show users</Link>
                     </li>
                     <li className="nav-item active">
-                        <a onClick={this.props.onLogoutClick}>Logout</a>
+                        <button onClick={this.onLogoutClick}>Logout</button>
                     </li>
                 </ul>
             </div>
@@ -67,6 +69,18 @@ class Navbar extends Component {
             );
         }
         }
-export default Navbar;
+
+Navbar.propTypes = {
+    logoutUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
+    };
+    const mapStateToProps = state => ({
+            auth: state.auth
+    });
+    export default connect(
+    mapStateToProps,
+    { logoutUser }
+)(Navbar);
+
 
 

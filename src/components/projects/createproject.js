@@ -104,12 +104,12 @@ export default class CreateProject extends Component {
                 <h3>Create a Project</h3>
                 <div style={{margin: 100}}>
                     <form onSubmit={this.onSubmitForm}>
-                        <div className="form-group">
-                            <label>Description: </label>
+                    <div className="form-group">
+                            <label>Project Name: </label>
                             <input type="text"
                                     className="form-control"
-                                    value={this.state.description}
-                                    onChange={this.onChangeDescription}
+                                    value={this.state.projectName}
+                                    onChange={this.onChangeProjectName}
                                 />
                         </div>
 
@@ -125,12 +125,13 @@ export default class CreateProject extends Component {
                         </div>
 
                         <br />
+                        
                         <div className="form-group">
-                            <label>Project Name: </label>
+                            <label>Description: </label>
                             <input type="text"
                                     className="form-control"
-                                    value={this.state.projectName}
-                                    onChange={this.onChangeProjectName}
+                                    value={this.state.description}
+                                    onChange={this.onChangeDescription}
                                 />
                         </div>
                         
