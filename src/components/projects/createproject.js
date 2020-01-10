@@ -85,7 +85,7 @@ export default class CreateProject extends Component {
 
 
         //Create a new project
-        axios.post('http://localhost:4000/projects/createProj', newProject)
+        axios.post('http://localhost:4000/projects/', newProject)
             .then(res => console.log(res.data),
             this.props.history.push("/projects"));
 

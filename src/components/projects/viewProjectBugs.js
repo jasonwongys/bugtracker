@@ -66,7 +66,7 @@ export default class ViewProjectBugs extends Component {
 
         console.log("Bugs array here",this.state.bugsList);
         return (
-            <div>
+            <div className="container">
                 <h3>Project Name: {this.state.bugsList.projectName}</h3>
 
                 <table className="table"

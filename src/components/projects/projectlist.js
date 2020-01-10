@@ -11,10 +11,10 @@ const Project = props => (
         <td >{props.project.description}</td>
         <td >{props.project.members}</td>
         <td >{props.date}</td>
-        <td>{console.log(props.bugsProject)}</td>
+        <td>{props.bugsProject}</td>
         
         <td>
-        <Link to={"/editProj/"+props.project._id} >Edit </Link> | <a href={"/bugs/"+props.project._id}> View Bugs</a>
+        <Link to={"/editProj/"+props.project._id} >Edit </Link> | <Link to={"/create"}>Add bug </Link> | <Link to={"/bugs/"+props.project._id}> View Bugs</Link>
         
         </td>
         
@@ -39,7 +39,7 @@ export default class Projects extends Component {
             .then(response => {
                 this.setState({
                     projects: response.data});
-                    console.log("Did Mount here" + JSON.stringify(response.data));
+                    console.log("Projects Mount here" + JSON.stringify(response.data));
             })
             .catch(function(error) {
                 console.log("error " + error)
@@ -74,6 +74,8 @@ export default class Projects extends Component {
 
         // let toastMsg = document.createElement('toastMsg');
         // toastMsg.className()
+
+        
 
         const sorted = this.state.projects.sort((a,b) => {
 

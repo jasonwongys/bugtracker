@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import "../bugtrack/bugs.css"
 
 const Bug = props => (
     <tr>
@@ -81,15 +81,14 @@ export default class BugList extends Component {
         //console.log("Found query " + JSON.stringify(findQuery));
         
         return (
-            <div className="container">
+            <div className="container vw-100">
                 <h3> Bugs list</h3>
                 <input
                     onChange={this.searchQuery}
                     type="text"
                     placeholder="Search descriptions..."
                 />
-                <table className="table"
-                    style={{marginTop: 20 }}>
+                <table className="table">
                         <thead>buglist
                             <tr>
                         

@@ -10,10 +10,11 @@ export default class CreateBug extends Component {
         this.state = {
             description: '',
             date: new Date(),
-            assignee: '',
+            members: '',
             priority: '',
             completed: false,
-            projects_id: '',
+            projectName: '',
+            projects: [],
             users: []
             
         }
@@ -21,8 +22,8 @@ export default class CreateBug extends Component {
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
         this.onChangePriority = this.onChangePriority.bind(this);
-        this.onChangeAssignee = this.onChangeAssignee.bind(this);
-        
+        this.onChangeMembers = this.onChangeMembers.bind(this);
+        this.onChangeProjectName = this.onChangeProjectName.bind(this);
         this.onSubmitForm = this.onSubmitForm.bind(this);
         
     }
@@ -32,26 +33,19 @@ export default class CreateBug extends Component {
             .then(response => {
                 this.setState({
                     users: response.data.map(user => user.name)});
-                    console.log("Did Mount here" + JSON.stringify(response.data))
-            })
-            .catch(function(error) {
-                console.log("error " + error)
-            })
-
-    }
-
-    componentDidMount() {
-        axios.get('http://localhost:4000/projects/projectsList')
+                    console.log("Users Mount here" + JSON.stringify(response.data))
+            }).then(axios.get('http://localhost:4000/projects')
             .then(response => {
                 this.setState({
                     projects: response.data.map(project => project.projectName)});
-                    console.log("Did Mount here" + JSON.stringify(response.data));
-            })
+                    console.log("Projects Mount here" + JSON.stringify(response.data));
+            }))
             .catch(function(error) {
                 console.log("error " + error)
             })
 
     }
+
 
     onChangeDescription(e) {
         this.setState({
@@ -66,9 +60,15 @@ export default class CreateBug extends Component {
         });
     }
 
-    onChangeAssignee(e) {
+    onChangeProjectName(e) {
         this.setState({
-            assignee: e.target.value
+            projectName: e.target.value
+        });
+    }
+
+    onChangeMembers(e) {
+        this.setState({
+            members: e.target.value
         });
     }
 
@@ -87,21 +87,22 @@ export default class CreateBug extends Component {
         console.log(`date: ${this.state.date}`);
         console.log(`completed: ${this.state.completed}`);
         console.log(`Priority: ${this.state.priority}`);
-        console.log(`assignee: ${this.state.assignee}`);
+        console.log(`assignee: ${this.state.members}`);
+        console.log(`Project Name: ${this.state.projectName}`);
 
         const newBug = {
             description: this.state.description,
             date: this.state.date.toString(),
-            assignee: this.state.assignee,
             completed: this.state.completed,
             priority: this.state.priority,
-            projects: this.state.projects
+            projectName: this.state.projects,
+            members: this.state.members
             
         }
 
-        axios.post('http://localhost:4000/bugs/create', newBug)
+        axios.post('http://localhost:4000/projects/bugs/'+this.state.projects._id, newBug)
             .then(res => console.log(res.data),
-                    this.props.history.push("/buglist"));
+                    this.props.history.push("/"));
 
         this.setState({
             description: '',
@@ -110,7 +111,9 @@ export default class CreateBug extends Component {
             priority: '',
             projects: [],
             users: [],
-            assignee: ''
+            members: '',
+            projectName: ''
+            
         });
         
         
@@ -187,7 +190,7 @@ export default class CreateBug extends Component {
                             required
                             className="form-control"
                             
-                            onChange={this.onChangeAssignee}>
+                            onChange={this.onChangeMembers}>
                             <option value="" selected disabled hidden>Choose here</option>
                                 {this.state.users.map(function(user) {
                                     return <option key={user}
@@ -204,11 +207,11 @@ export default class CreateBug extends Component {
                             required
                             className="form-control"
                             
-                            onChange={this.onChangeAssignee}>
+                            onChange={this.onChangeProjectName}>
                             <option value="" selected disabled hidden>Choose here</option>
-                                {this.state.users.map(function(user) {
-                                    return <option key={user}
-                                        value={user}>{user}</option>;
+                                {this.state.projects.map(function(project) {
+                                    return <option key={project}
+                                        value={project}>{project}</option>;
                                         
                                 })}
                             </select>

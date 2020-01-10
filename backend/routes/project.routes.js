@@ -17,7 +17,7 @@ projectRoute.route('/:id')
     //get alll bugs related to the project
 projectRoute.route('/bugs/:id')
     .get(ProjectsController.getProjectBugs)
-    .post(ProjectsController.newProjectBugs) // Add a bug to the project
+    .post(ProjectsController.newProjectBugs); // Add a bug to the project
 
 
 

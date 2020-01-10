@@ -9,7 +9,7 @@ import EditProject from "../projects/editproject.component";
 import UsersList from "../usersProfile/userList.component";
 import EditUsers from "../usersProfile/editUsers.component";
 import ViewProjectBugs from "../projects/viewProjectBugs";
-// import "../layout/navbar.scss";
+import "../layout/navbar.css";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import PropTypes from "prop-types";
@@ -23,49 +23,18 @@ class Navbar extends Component {
         };
         render() {
             return (
-                <div className="container-fluid">
-                    <nav className="navbar navbar-expand-lg navbar-dark bg-dark navbar justify-content-end">
-                    
-                    <Link to="/dashboard" className="navbar-brand">Bug Tracker</Link>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    
-                    <ul className="navbar-nav mr-auto" id="nav-mobile" >
-                    <li className="nav-item active">
-                        <Link to="/buglist" className="nav-link">Show Bugs</Link>
-                    </li>
-                    <li className="nav-item active">
-                        <Link to="/create" className="nav-link">Create Bugs</Link>
-                    </li>
-                    <li className="nav-item active">
-                        <Link to="/projects" className="nav-link">Show Projects</Link>
-                    </li>
-                    <li className="nav-item active">
-                        <Link to="/createProj" className="nav-link">Create projects</Link>
-                    </li>
-                    <li className="nav-item active">
-                        <Link to="/usersList" className="nav-link">Show users</Link>
-                    </li>
-                    <li className="nav-item active">
-                        <button onClick={this.onLogoutClick}>Logout</button>
-                    </li>
-                </ul>
-            </div>
-                </nav>
-                <Route path="/buglist" exact component={BugList}/>
-                <Route path="/edit/:id" component={EditBug} />
-                <Route path="/create/" component={CreateBug} />
-                <Route path="/projects" component={Projects}/>
-                <Route path="/editProj/:id" component={EditProject} />
-                <Route path="/createProj" component={CreateProject} />
-                <Route path="/usersList" component={UsersList} />
-                <Route path="/api/users/:id" component={EditUsers} />
-                <Route path="/bugs/:id" component={ViewProjectBugs} />
-            
-            </div>
+                <div className="bg-dark border-right" id="sidebar-wrapper">
+                    <Link to="/mainPage" className="navbar-brand">Bug Tracker</Link>
+                        <div className="list-group list-group-flush">
+                                <Link to="/buglist" className="list-group-item list-group-item-action bg-dark">Show Bugs</Link>
+                                <Link to="/create" className="list-group-item list-group-item-action bg-dark">Create Bugs</Link>             
+                                <Link to="/projects" className="list-group-item list-group-item-action bg-dark">Show Projects</Link>
+                                <Link to="/createProj" className="list-group-item list-group-item-action bg-dark">Create projects</Link>
+                                <Link to="/usersList" className="list-group-item list-group-item-action bg-dark">Show users</Link>
+                                <button onClick={this.onLogoutClick}>Logout</button>
+                                
+                        </div>
+                    </div>
             );
         }
         }

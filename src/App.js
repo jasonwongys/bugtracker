@@ -13,6 +13,7 @@ import store from "./store";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
+import MainPage from "./components/layout/MainPage"
 import Dashboard from "./components/dashboard/Dashboard";
 
 if (localStorage.jwtToken) {
@@ -38,17 +39,20 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
+        
       <Router>
-      <div className="container-fluid">
-          {/* <Route exact path="/" component={Landing} /> */}
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
+        
+          {/* <Route exact path="/mainPage" component={MainPage} /> */}
+          
           <Switch>
-                <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                <Route exact path="/register" component={Register} />
+                <Route exact path="/login" component={Login} />
+                <PrivateRoute exact path="/mainPage" component={MainPage} />
+                <Route path='/dashboard' component={Dashboard} />
           </Switch>
 
         
-      </div>
+
       </Router>
       </Provider>
 
