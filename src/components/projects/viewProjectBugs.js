@@ -7,7 +7,7 @@ const Bug = props => (
     <tr>
         <td className={props.bug.completed ? 'completed' : ''}>{props.bug.description}</td>
         <td className={props.bug.completed ? 'completed' : ''}>{props.date}</td>
-        <td className={props.bug.completed ? 'completed' : ''}>{props.bug.assignee}</td>
+        <td className={props.bug.completed ? 'completed' : ''}>{props.bug.members}</td>
         <td className={props.bug.completed ? 'completed' : ''}>{props.bug.priority}</td>
         
         <td>
@@ -76,7 +76,7 @@ export default class ViewProjectBugs extends Component {
                         
                                 <th>Description</th>
                                 <th>Deadline</th>
-                                <th>Assignee</th>
+                                <th>Members</th>
                                 <th>Priority</th>
                                 <th>Actions</th>
                             </tr>

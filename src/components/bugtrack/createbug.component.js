@@ -34,16 +34,15 @@ export default class CreateBug extends Component {
                 this.setState({
                     users: response.data.map(user => user.name)});
                     console.log("Users Mount here" + JSON.stringify(response.data))
-            }).then(axios.get('http://localhost:4000/projects')
+            }).then(axios.get('http://localhost:4000/projects/'+this.props.match.params.id)
             .then(response => {
                 this.setState({
-                    projects: response.data.map(project => project.projectName)});
+                    projects: response.data});
                     console.log("Projects Mount here" + JSON.stringify(response.data));
             }))
             .catch(function(error) {
                 console.log("error " + error)
             })
-
     }
 
 
@@ -87,7 +86,7 @@ export default class CreateBug extends Component {
         console.log(`date: ${this.state.date}`);
         console.log(`completed: ${this.state.completed}`);
         console.log(`Priority: ${this.state.priority}`);
-        console.log(`assignee: ${this.state.members}`);
+        console.log(`Members: ${this.state.members}`);
         console.log(`Project Name: ${this.state.projectName}`);
 
         const newBug = {
@@ -100,9 +99,9 @@ export default class CreateBug extends Component {
             
         }
 
-        axios.post('http://localhost:4000/projects/bugs/'+this.state.projects._id, newBug)
+        axios.post('http://localhost:4000/projects/bugs/'+this.props.match.params.id, newBug)
             .then(res => console.log(res.data),
-                    this.props.history.push("/"));
+                    this.props.history.push("/projects/"+this.props.match.params.id));
 
         this.setState({
             description: '',
@@ -121,10 +120,12 @@ export default class CreateBug extends Component {
     }
 
     render() {
+        console.log("Project name",this.state.projects.projectName);
         return (
             <div className="container">
                 <h3>Create a Bug</h3>
                 <div style={{marginTop: 20}}>
+            <h4> Project Name: {this.state.projects.projectName}</h4>
                     <form onSubmit={this.onSubmitForm}>
                         <div className="form-group">
                             <label>Description: </label>
@@ -191,7 +192,7 @@ export default class CreateBug extends Component {
                             className="form-control"
                             
                             onChange={this.onChangeMembers}>
-                            <option value="" selected disabled hidden>Choose here</option>
+                            <option value={this.state.members} selected disabled hidden>Choose here</option>
                                 {this.state.users.map(function(user) {
                                     return <option key={user}
                                         value={user}>{user}</option>;
@@ -200,7 +201,7 @@ export default class CreateBug extends Component {
                             </select>
                     </div>
 
-
+{/* 
                     <div className="form-group">
                         <label>Project Name </label>
                         <select ref="userInput"
@@ -215,7 +216,7 @@ export default class CreateBug extends Component {
                                         
                                 })}
                             </select>
-                    </div>
+                    </div> */}
 
                         <div className="form-group">
                             <input type="submit" value="Create Bug" className="btn btn-primary" />

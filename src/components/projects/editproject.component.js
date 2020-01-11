@@ -88,11 +88,10 @@ export default class EditProject extends Component {
 
 
         //Update a new project
-        axios.post('http://localhost:4000/projects/editProj/'+this.props.match.params.id,updatedProject)
+        axios.patch('http://localhost:4000/projects/'+this.props.match.params.id,updatedProject)
             .then(res => console.log(res.data),
             this.props.history.push("/projects"));
-            
-    
+        
 
     }
 

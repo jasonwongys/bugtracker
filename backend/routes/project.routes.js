@@ -19,11 +19,6 @@ projectRoute.route('/bugs/:id')
     .get(ProjectsController.getProjectBugs)
     .post(ProjectsController.newProjectBugs); // Add a bug to the project
 
-
-
-
-
-
 // Display all Projects
 // projectRoute.route('/projectsList').get(function(req,res) {
 //     Project.find(function(err, projects) {

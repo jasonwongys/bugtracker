@@ -9,12 +9,21 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 import { Provider } from "react-redux";
 import store from "./store";
 
+import CreateBug from "../src/components/bugtrack/createbug.component";
+import BugList from "../src/components/bugtrack/buglist.component"
+import EditBug from "../src/components/bugtrack/editbug.component";
+import Projects from "../src/components/projects/projectlist";
+import CreateProject from "../src/components/projects/createproject";
+import EditProject from "../src/components/projects/editproject.component";
+import UsersList from "../src/components/usersProfile/userList.component";
+import EditUsers from "../src/components/usersProfile/editUsers.component";
+import ViewProjectBugs from "../src/components/projects/viewProjectBugs";
+
 
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
-import MainPage from "./components/layout/MainPage"
-import Dashboard from "./components/dashboard/Dashboard";
+import Dashboard from "./components/dashboard/Dashboard"
 
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -30,7 +39,7 @@ if (localStorage.jwtToken) {
     // Logout user
     store.dispatch(logoutUser());
     // Redirect to login
-    window.location.href = "./login";
+    window.location.href = "/login";
   }
 }
 
@@ -38,23 +47,28 @@ if (localStorage.jwtToken) {
 export default class App extends Component {
   render() {
     return (
-      <Provider store={store}>
-        
-      <Router>
-        
-          {/* <Route exact path="/mainPage" component={MainPage} /> */}
-          
-          <Switch>
-                <Route exact path="/register" component={Register} />
-                <Route exact path="/login" component={Login} />
-                <PrivateRoute exact path="/mainPage" component={MainPage} />
+      
+          <div className="container-lg">
+            
+            <PrivateRoute path="/buglist" component={BugList}/>
+                <Route exact path="/edit/:id" component={EditBug} />
+                <Route exact path="/projects/bugs/:id" component={CreateBug} />
+                
+                <Route exact path="/projects" component={Projects}/>
+                <Route exact path="/editProj/:id" component={EditProject} />
+                <Route path="/createProj" component={CreateProject} />
+                
+                <Route path="/usersList" component={UsersList} />
+                <Route path="/api/users/:id" component={EditUsers} />
+                <Route path="/bugs/:id" component={ViewProjectBugs} />
+
+                <Route path="/login" component={Login} />
+                <Route path="/register" component={Register} />     
+                {/* <PrivateRoute exact path="/" component={MainPage} /> */}
                 <Route path='/dashboard' component={Dashboard} />
-          </Switch>
-
-        
-
-      </Router>
-      </Provider>
+                
+                
+            </div>
 
     )
   }

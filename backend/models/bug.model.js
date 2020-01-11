@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 let bugSchema = new Schema({
     description: String,
-    assignee: String,
+    members: String,
     priority: String,
     completed: Boolean,
     date: Date,

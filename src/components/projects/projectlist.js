@@ -14,7 +14,7 @@ const Project = props => (
         <td>{props.bugsProject}</td>
         
         <td>
-        <Link to={"/editProj/"+props.project._id} >Edit </Link> | <Link to={"/create"}>Add bug </Link> | <Link to={"/bugs/"+props.project._id}> View Bugs</Link>
+        <Link to={"/editProj/"+props.project._id} >Edit </Link> | <Link to={"/projects/bugs/"+props.project._id}>Add bug </Link> | <Link to={"/bugs/"+props.project._id}> View Bugs</Link>
         
         </td>
         
@@ -80,7 +80,6 @@ export default class Projects extends Component {
         const sorted = this.state.projects.sort((a,b) => {
 
             const isReversed = (this.state.sortType === 'asc') ? 1 : -1;
-
             return isReversed * a.projectName.localeCompare(b.projectName)
         });
 
@@ -123,15 +122,3 @@ export default class Projects extends Component {
         )
     }
 }
-
-// Projects.propTypes = {
-//     logoutUser: PropTypes.func.isRequired,
-//     auth: PropTypes.object.isRequired
-//   };
-//   const mapStateToProps = state => ({
-//     auth: state.auth
-//   });
-// //   export default connect(
-// //     mapStateToProps,
-// //     { logoutUser }
-// //   )(Projects);

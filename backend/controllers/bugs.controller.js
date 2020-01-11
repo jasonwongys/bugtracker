@@ -54,7 +54,6 @@ module.exports = {
 
         let newBug  = new Bug(req.body);
         
-        
         console.log("Req Body", req.body);
         console.log('New bug', newBug);
 

@@ -9,14 +9,14 @@ export default class EditBug extends Component {
 
         this.state = {
             description: '',
-            assignee: '',
+            members: '',
             priority: '',
             completed: false,
             date: new Date()
         }
 
         this.onChangeDesc = this.onChangeDesc.bind(this);
-        this.onChangeAssignee = this.onChangeAssignee.bind(this);
+        this.onChangeMembers = this.onChangeMembers.bind(this);
         this.onChangePriority = this.onChangePriority.bind(this);
         this.onChangeCompleted = this.onChangeCompleted.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);        
@@ -30,7 +30,7 @@ export default class EditBug extends Component {
             .then(res => {
                 this.setState({
                     description: res.data.description,
-                    assignee: res.data.assignee,
+                    members: res.data.members,
                     priority: res.data.priority,
                     completed: res.data.completed,
                     date: new Date(res.data.date)
@@ -48,9 +48,9 @@ export default class EditBug extends Component {
         });
     }
 
-    onChangeAssignee(e) {
+    onChangeMembers(e) {
         this.setState({
-            assignee: e.target.value
+            members: e.target.value
         })
     }
 
@@ -83,19 +83,17 @@ export default class EditBug extends Component {
             date: this.state.date
         };
 
-        axios.post('http://localhost:4000/bugs/edit/'+this.props.match.params.id, updatedBug)
+        axios.patch('http://localhost:4000/bugs/'+this.props.match.params.id, updatedBug)
             .then(res => console.log(res.data),
-            this.props.history.push("/buglist"));
+            this.props.history.push("/bugs"));
             
     
     }
 
-
-
     render() {
         return (
             <div className="container">
-                <h1>Update a bug </h1>
+                <h1>Update a bug</h1>
                 <form onSubmit={this.onSubmit}> 
                     <div className="form-group">
                         <label>Description</label>
@@ -153,11 +151,11 @@ export default class EditBug extends Component {
                         </div>
                         <br />
                         <div className="form-group">
-                            <label>Assignee: </label>
+                            <label>Member: </label>
                             <input type="text"
                                     className="form-control"
-                                    value={this.state.assignee}
-                                    onChange={this.onChangeAssignee}
+                                    value={this.state.members}
+                                    onChange={this.onChangeMembers}
                                 />
                         </div>
                         <br />
@@ -173,20 +171,23 @@ export default class EditBug extends Component {
                                     /> 
                             <span>Completed</span></label>
                         </div>
-
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Dropdown button
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li> <a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li> 
-                            </div>
-                        </div>
-
                         <br />
+
+                        <div className="form-group">
+                        <label>Assign Member: </label>
+                        <select ref="userInput"
+                            required
+                            className="form-control"
+                            
+                            onChange={this.onChangeMembers}>
+                            <option value={this.state.members} selected disabled hidden>Choose here</option>
+                                {this.state.users.map(function(user) {
+                                    return <option key={user}
+                                        value={user}>{user}</option>;
+                                        
+                                })}
+                            </select>
+                    </div>
 
                         <div className="form-group">
                             <input type="submit" value="Save" className="btn btn-primary" />
