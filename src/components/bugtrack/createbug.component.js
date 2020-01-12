@@ -72,7 +72,6 @@ export default class CreateBug extends Component {
     }
 
     onChangeDate(date) {
-
         this.setState({
             date: date
         });
@@ -89,9 +88,18 @@ export default class CreateBug extends Component {
         console.log(`Members: ${this.state.members}`);
         console.log(`Project Name: ${this.state.projectName}`);
 
+        
+        // this.state.date = new Intl.DateTimeFormat("en-GB", {
+        //     year: "numeric",
+        //     month: "long",
+        //     day: "2-digit"
+        // }).format(this.state.date)
+
+        console.log("New Date", this.state.date)
+
         const newBug = {
             description: this.state.description,
-            date: this.state.date.toString(),
+            date: this.state.date,
             completed: this.state.completed,
             priority: this.state.priority,
             projectName: this.state.projects,
@@ -101,7 +109,7 @@ export default class CreateBug extends Component {
 
         axios.post('http://localhost:4000/projects/bugs/'+this.props.match.params.id, newBug)
             .then(res => console.log(res.data),
-                    this.props.history.push("/projects/"+this.props.match.params.id));
+                    this.props.history.push("/projects"));
 
         this.setState({
             description: '',
@@ -120,7 +128,7 @@ export default class CreateBug extends Component {
     }
 
     render() {
-        console.log("Project name",this.state.projects.projectName);
+        //console.log("Project name",this.state.projects.projectName);
         return (
             <div className="container">
                 <h3>Create a Bug</h3>
@@ -141,7 +149,7 @@ export default class CreateBug extends Component {
                                 <div>
                                     <DatePicker
                                         selected={this.state.date}
-                                        
+                                        //dateFormat="dd-mm-yyyy"
                                         onChange={this.onChangeDate}
                                     />
                                 </div>

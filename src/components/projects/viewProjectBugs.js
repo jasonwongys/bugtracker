@@ -6,7 +6,7 @@ import axios from 'axios'
 const Bug = props => (
     <tr>
         <td className={props.bug.completed ? 'completed' : ''}>{props.bug.description}</td>
-        <td className={props.bug.completed ? 'completed' : ''}>{props.date}</td>
+        <td className={props.bug.completed ? 'completed' : ''}>{(props.date).substring(0,10)}</td>
         <td className={props.bug.completed ? 'completed' : ''}>{props.bug.members}</td>
         <td className={props.bug.completed ? 'completed' : ''}>{props.bug.priority}</td>
         
@@ -58,13 +58,15 @@ export default class ViewProjectBugs extends Component {
         let bugDescription = filtered.map((currentBug) => {
             return <Bug key={currentBug.id} 
                         bug={currentBug}
+                        date={currentBug.date}
             />});
     
         console.log("result ",this.state.data);
         
         
 
-        console.log("Bugs array here",this.state.bugsList);
+        console.log("Bugs date here",this.state.bugsList);
+        
         return (
             <div className="container">
                 <h3>Project Name: {this.state.bugsList.projectName}</h3>

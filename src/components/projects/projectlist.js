@@ -75,7 +75,7 @@ export default class Projects extends Component {
         // let toastMsg = document.createElement('toastMsg');
         // toastMsg.className()
 
-        
+        console.log("Data here", this.state.projects);
 
         const sorted = this.state.projects.sort((a,b) => {
 
@@ -112,7 +112,7 @@ export default class Projects extends Component {
                                 return <Project project={currentProject}
                                             bugsProject={currentProject.bugs_id}
                                             key={currentProject._id}
-                                            //date={currentProject.dateCreated.substring(0,10)}
+                                            date={currentProject.dateCreated}
                             />
                 })}
                         </tbody>

@@ -12,7 +12,8 @@ export default class EditBug extends Component {
             members: '',
             priority: '',
             completed: false,
-            date: new Date()
+            date: '',
+            users: []
         }
 
         this.onChangeDesc = this.onChangeDesc.bind(this);
@@ -32,15 +33,20 @@ export default class EditBug extends Component {
                     description: res.data.description,
                     members: res.data.members,
                     priority: res.data.priority,
-                    completed: res.data.completed,
-                    date: new Date(res.data.date)
+                    completed: res.data.completed
+                    //date: res.data.date
+                });
+                console.log("State Bugs",res.data);
+            }).then(axios.get('http://localhost:4000/api/users/usersList'))
+            .then(response => {
+                this.setState({
+                    users: response.data});
+                    console.log("Users" + JSON.stringify(response.data))
                 })
-
-            })
             .catch(function(error) {
                 console.log(error)
             })
-    }
+}
 
     onChangeDesc(e) {
         this.setState({
@@ -67,6 +73,7 @@ export default class EditBug extends Component {
     }
 
     onChangeDate(date) {
+        console.log("Picker date here",date)
         this.setState({
             date: date
         });
@@ -77,17 +84,16 @@ export default class EditBug extends Component {
 
         const updatedBug = {
             description: this.state.description,
-            assignee: this.state.assignee,
+            members: this.state.members,
             priority: this.state.priority,
             completed: this.state.completed,
-            date: this.state.date
+            date: this.state.date.toString()
         };
 
         axios.patch('http://localhost:4000/bugs/'+this.props.match.params.id, updatedBug)
             .then(res => console.log(res.data),
             this.props.history.push("/bugs"));
             
-    
     }
 
     render() {
@@ -108,12 +114,13 @@ export default class EditBug extends Component {
                                 <div>
                                     <DatePicker
                                         selected={this.state.date}
+                                        //dateFormat="dd-mm-yyyy"
                                         onChange={this.onChangeDate}
+                                        
                                     />
                                 </div>
                         </div>
 
-                        <br />
                     <div className="form-group">
                         <div class="form-check form-check-inline">
                         <label class="form-check-label" for="High">
@@ -149,18 +156,19 @@ export default class EditBug extends Component {
                         </div>
 
                         </div>
-                        <br />
-                        <div className="form-group">
+                      
+                        {/* <div className="form-group">
                             <label>Member: </label>
                             <input type="text"
                                     className="form-control"
                                     value={this.state.members}
                                     onChange={this.onChangeMembers}
                                 />
-                        </div>
-                        <br />
+                        </div> */}
+                        
                         <div className="form-group">
                         <label className="form-check-label" htmlFor="completedCheckbox">
+                        <span>Completed</span></label>
                             <input type="checkbox"
                                     className="form-check-input"
                                     id="completedCheckbox"
@@ -168,8 +176,8 @@ export default class EditBug extends Component {
                                     onChange={this.onChangeCompleted}
                                     checked={this.state.completed}
                                     value={this.state.completed}
-                                    /> 
-                            <span>Completed</span></label>
+                                    />
+                            
                         </div>
                         <br />
 

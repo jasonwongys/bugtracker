@@ -32,7 +32,7 @@ export default class EditProject extends Component {
                     projectName: res.data.projectName,
                     description: res.data.description,
                     members: res.data.members,
-                    dateCreated: new Date(res.data.dateCreated)
+                    dateCreated: res.data.dateCreated
                 })
                 console.log("retrieved info: " +res.data)
             })
@@ -61,7 +61,7 @@ export default class EditProject extends Component {
     }
 
     onChangeDateCreated(date) {
-
+        console.log("Date passed from picker here", date);
         this.setState({
             dateCreated: date
         });
@@ -74,15 +74,13 @@ export default class EditProject extends Component {
         console.log(`description: ${this.state.projectName}`);
         console.log(`date: ${this.state.dateCreated}`);
         console.log(`Priority: ${this.state.description}`);
-        console.log(`assignee: ${this.state.members}`);
+        console.log(`members: ${this.state.members}`);
 
         const updatedProject = {
             projectName: this.state.projectName,
             description: this.state.description,
             members: this.state.members,
-            dateCreated: this.state.dateCreated
-            
-            
+            dateCreated: this.state.dateCreated.toString()
             
         }
 
