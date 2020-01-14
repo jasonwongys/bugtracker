@@ -86,7 +86,7 @@ export default class EditUsers extends Component {
 
 
         //Update a new project
-        axios.post('http://localhost:4000/api/users/editUsers/'+this.props.match.params.id,updatedUser)
+        axios.patch('http://localhost:4000/api/users/editUsers/'+this.props.match.params.id,updatedUser)
             .then(res => console.log(res.data),
             this.props.history.push("/usersList"));
             

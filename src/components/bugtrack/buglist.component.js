@@ -5,9 +5,10 @@ import "../bugtrack/bugs.css"
 
 const Bug = props => (
     <tr>
+        <td className={props.bug.completed ? 'completed' : ''}>{props.projectName}</td>
         <td className={props.bug.completed ? 'completed' : ''}>{props.bug.description}</td>
         <td className={props.bug.completed ? 'completed' : ''}>{props.date}</td>
-        <td className={props.bug.completed ? 'completed' : ''}>{props.bug.assignee}</td>
+        <td className={props.bug.completed ? 'completed' : ''}>{props.bug.members}</td>
         <td className={props.bug.completed ? 'completed' : ''}>{props.bug.priority}</td>
         
         <td>
@@ -21,20 +22,28 @@ export default class BugList extends Component {
 
         this.state = {
             bugs: [],
-            query: ''
+            query: '',
+            projects: []
         };
         this.searchQuery = this.searchQuery.bind(this);
         this.deleteBug = this.deleteBug.bind(this);
         
 
     }
+
+    
     componentDidMount() {
         axios.get('http://localhost:4000/bugs/')
             .then(response => {
                 this.setState({
                     bugs: response.data});
             
-            })
+            }).then(axios.get('http://localhost:4000/projects')
+                .then(response => {
+                    this.setState({
+                        projects: response.data});
+                    console.log("Projects", this.state.projects);
+                }))
             .catch(function(error) {
                 console.log(error)
             })
@@ -68,7 +77,7 @@ export default class BugList extends Component {
     // }
     
     render() {
-
+        console.log("Bugs projects ",this.state.bugs.projects);
         console.log("Bugs component " + JSON.stringify(this.state.bugs));
 
         let findQuery = this.state.bugs.filter(
@@ -76,6 +85,12 @@ export default class BugList extends Component {
         
         
 
+
+        let getProjectName = this.state.projects.filter((i) => {
+            if(i.projectsName === this.state.bugs.projects) {
+                return i;
+            }            
+        });
         console.log("Query: " + this.state.query);
         
         //console.log("Found query " + JSON.stringify(findQuery));
@@ -91,7 +106,7 @@ export default class BugList extends Component {
                 <table className="table">
                         <thead>buglist
                             <tr>
-                        
+                                <th>Project Name</th>
                                 <th>Description</th>
                                 <th>Deadline</th>
                                 <th>Assignee</th>
@@ -104,7 +119,9 @@ export default class BugList extends Component {
                             return <Bug bug={currentBug}
                                 deleteBug={this.deleteBug}
                                 key={currentBug._id}
-                                /*date={currentBug.date.substring(0,10)}*/ />;
+                                date={(currentBug.date).substring(0,10)} 
+                                //projectName={getProjectName}
+                                />
             })}
                 
                         </tbody>

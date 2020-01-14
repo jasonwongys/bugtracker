@@ -11,7 +11,8 @@ export default class EditProject extends Component {
             projectName: '',
             description: '',
             members: '',
-            dateCreated: new Date()
+            dateCreated:'',
+            users: []
 
         }
         
@@ -32,10 +33,14 @@ export default class EditProject extends Component {
                     projectName: res.data.projectName,
                     description: res.data.description,
                     members: res.data.members,
-                    dateCreated: res.data.dateCreated
-                })
-                console.log("retrieved info: " +res.data)
-            })
+                    dateCreated: new Date(res.data.dateCreated) });
+                }).then(axios.get('http://localhost:4000/api/users/usersList')
+                    .then(response => {
+                        this.setState({
+                            users: response.data.map(user => user.name)   });
+                        console.log("Users" + JSON.stringify(response.data))
+                }))
+
             .catch(function(error) {
                 console.log("Error " + error)
             })
@@ -139,6 +144,22 @@ export default class EditProject extends Component {
                                     onChange={this.onChangeMembers}
                                 />
                         </div>
+
+                        <div className="form-group">
+                        <label>Assign Member: </label>
+                        <select ref="userInput"
+                            required
+                            className="form-control"
+                            
+                            onChange={this.onChangeMembers}>
+                            <option value={this.state.members} selected disabled hidden>Choose here</option>
+                                {this.state.users.map(function(user) {
+                                    return <option key={user.id}
+                                        value={user}>{user}</option>;
+                                        
+                                })}
+                            </select>
+                    </div>
 
             
                         <div className="form-group">

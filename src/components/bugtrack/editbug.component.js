@@ -33,16 +33,16 @@ export default class EditBug extends Component {
                     description: res.data.description,
                     members: res.data.members,
                     priority: res.data.priority,
-                    completed: res.data.completed
-                    //date: res.data.date
+                    completed: res.data.completed,
+                    date: new Date(res.data.date)
                 });
                 console.log("State Bugs",res.data);
-            }).then(axios.get('http://localhost:4000/api/users/usersList'))
-            .then(response => {
-                this.setState({
-                    users: response.data});
+            }).then(axios.get('http://localhost:4000/api/users/usersList')
+                .then(response => {
+                    this.setState({
+                        users: response.data.map(user => user.name)   });
                     console.log("Users" + JSON.stringify(response.data))
-                })
+                }))
             .catch(function(error) {
                 console.log(error)
             })
@@ -55,6 +55,7 @@ export default class EditBug extends Component {
     }
 
     onChangeMembers(e) {
+        console.log("Something clicked");
         this.setState({
             members: e.target.value
         })
@@ -92,11 +93,15 @@ export default class EditBug extends Component {
 
         axios.patch('http://localhost:4000/bugs/'+this.props.match.params.id, updatedBug)
             .then(res => console.log(res.data),
-            this.props.history.push("/bugs"));
+            this.props.history.push("/projects"));
             
     }
 
+    
+
     render() {
+
+        console.log("Users state ", this.state.users);
         return (
             <div className="container">
                 <h1>Update a bug</h1>
@@ -116,6 +121,7 @@ export default class EditBug extends Component {
                                         selected={this.state.date}
                                         //dateFormat="dd-mm-yyyy"
                                         onChange={this.onChangeDate}
+
                                         
                                     />
                                 </div>
@@ -156,15 +162,14 @@ export default class EditBug extends Component {
                         </div>
 
                         </div>
-                      
-                        {/* <div className="form-group">
+                        <div className="form-group">
                             <label>Member: </label>
                             <input type="text"
                                     className="form-control"
                                     value={this.state.members}
-                                    onChange={this.onChangeMembers}
+                                    // onChange={this.onChangeMembers}
                                 />
-                        </div> */}
+                        </div>
                         
                         <div className="form-group">
                         <label className="form-check-label" htmlFor="completedCheckbox">
@@ -190,7 +195,7 @@ export default class EditBug extends Component {
                             onChange={this.onChangeMembers}>
                             <option value={this.state.members} selected disabled hidden>Choose here</option>
                                 {this.state.users.map(function(user) {
-                                    return <option key={user}
+                                    return <option key={user.id}
                                         value={user}>{user}</option>;
                                         
                                 })}

@@ -7,12 +7,11 @@ import PropTypes from "prop-types";
 
 const Project = props => (
     <tr>
-    <td>{props.project.projectName}</td>
+        <td>{props.project.projectName}</td>
         <td >{props.project.description}</td>
         <td >{props.project.members}</td>
         <td >{props.date}</td>
-        <td>{props.bugsProject}</td>
-        
+    
         <td>
         <Link to={"/editProj/"+props.project._id} >Edit </Link> | <Link to={"/projects/bugs/"+props.project._id}>Add bug </Link> | <Link to={"/bugs/"+props.project._id}> View Bugs</Link>
         
@@ -112,7 +111,7 @@ export default class Projects extends Component {
                                 return <Project project={currentProject}
                                             bugsProject={currentProject.bugs_id}
                                             key={currentProject._id}
-                                            date={currentProject.dateCreated}
+                                            date={(currentProject.dateCreated).substring(0,10)}
                             />
                 })}
                         </tbody>

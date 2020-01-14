@@ -11,7 +11,7 @@ export default class CreateProject extends Component {
             projectName: '',
             description: '',
             members: '',
-            dateCreated: new Date(),
+            dateCreated:'',
             users: []
 
         }
@@ -60,7 +60,7 @@ export default class CreateProject extends Component {
     }
 
     onChangeDateCreated(date) {
-
+        
         this.setState({
             dateCreated: date
         });
@@ -75,9 +75,13 @@ export default class CreateProject extends Component {
         console.log(`Priority: ${this.state.description}`);
         console.log(`Users: ${this.state.members}`);
 
+        // let newDate = this.state.dateCreated.toString();
+        // newDate = newDate.substring(0,10);
+        // console.log("date ", newDate);
+
         const newProject = {
             description: this.state.description,
-            dateCreated: this.state.dateCreated.toString(),
+            dateCreated: this.state.dateCreated,
             members: this.state.members,
             projectName: this.state.projectName
             

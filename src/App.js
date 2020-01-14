@@ -55,7 +55,7 @@ export default class App extends Component {
                 <Route exact path="/projects/bugs/:id" component={CreateBug} />
                 
                 <Route exact path="/projects" component={Projects}/>
-                <Route exact path="/projects/:id" component={EditProject} />
+                <Route exact path="/editProj/:id" component={EditProject} />
                 <Route path="/createProj" component={CreateProject} />
                 
                 <Route path="/usersList" component={UsersList} />
