@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
 
@@ -86,7 +85,7 @@ export default class EditUsers extends Component {
 
 
         //Update a new project
-        axios.patch('http://localhost:4000/api/users/editUsers/'+this.props.match.params.id,updatedUser)
+        axios.post('http://localhost:4000/api/users/editUsers/'+this.props.match.params.id,updatedUser)
             .then(res => console.log(res.data),
             this.props.history.push("/usersList"));
             

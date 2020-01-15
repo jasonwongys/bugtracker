@@ -41,7 +41,7 @@ class Dashboard extends Component {
 
       // const { user } = this.props.auth;
       // console.log("Auth here" + JSON.stringify(user));
-      let backgroundColor = ['rgba(255,99,132,0.6)','rgba(54,162,235,0.6)','rgba(255,206,86,0.6)','rgba(213,226,86,0.6)'];
+      let backgroundColor = ['rgba(255,99,132,0.6)','rgba(54,162,235,0.6)','rgba(255,206,86,0.6)','rgba(213,226,86,0.6)','rgba(189,126,86,0.6)'];
       let labels = this.state.data.map(i => i.projectName);
       let data = this.state.data.map(j => j.bugs.length);
       let label = "Number of bugs";

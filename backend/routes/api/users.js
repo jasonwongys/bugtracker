@@ -118,7 +118,7 @@ router.route('/editUsers/:id').post(function(req,res) {
                 //project.completed = Date.parse(req.body.completed);
     
                 users.save().then(users => {
-                    res.json('User updated');
+                    res.json('User updated', users);
                 })
                 .catch(err=> {
                     res.status(400).send("Update not possible");

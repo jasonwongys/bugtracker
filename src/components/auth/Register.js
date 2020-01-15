@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
+import axios from "axios";
 class Register extends Component {
     constructor() {
         super();
@@ -46,8 +47,19 @@ class Register extends Component {
         password: this.state.password,
         password2: this.state.password2
         };
-    console.log(newUser);
-    this.props.registerUser(newUser, this.props.history); 
+
+    
+        axios.post('http://localhost:4000/api/users/register',newUser)
+            .then(response => console.log(response.data),
+            this.props.registerUser(newUser, this.props.history));
+
+        this.setState({
+            name: '',
+            email: '',
+            password: ''
+        })
+
+    
     };
 
     render() {
@@ -70,20 +82,22 @@ class Register extends Component {
                         </div>
                         <form noValidate onSubmit={this.onSubmit}>
                         <div className="input-field col s12">
+                        <label htmlFor="name">Name</label>
                             <input
-                            onChange={this.onChange}
-                            value={this.state.name}
-                            error={errors.name}
-                            id="name"
-                            type="text"
+                                onChange={this.onChange}
+                                value={this.state.name}
+                                error={errors.name}
+                                id="name"
+                                type="text"
                             className={classnames("", {
                                 invalid: errors.name
                             })}
                             />
-                            <label htmlFor="name">Name</label>
+                            
                             <span className="red-text">{errors.name}</span>
                         </div>
                         <div className="input-field col s12">
+                        <label htmlFor="email">Email</label>
                             <input
                             onChange={this.onChange}
                             value={this.state.email}
@@ -94,10 +108,11 @@ class Register extends Component {
                                 invalid: errors.email
                             })}
                             />
-                            <label htmlFor="email">Email</label>
+                            
                             <span className="red-text">{errors.email}</span>
                         </div>
                         <div className="input-field col s12">
+                        <label htmlFor="password">Password</label>
                             <input
                             onChange={this.onChange}
                             value={this.state.password}
@@ -108,10 +123,11 @@ class Register extends Component {
                                 invalid: errors.password
                             })}
                             />
-                            <label htmlFor="password">Password</label>
+                            
                             <span className="red-text">{errors.password}</span>
                         </div>
                         <div className="input-field col s12">
+                        <label htmlFor="password2">Confirm Password</label>
                             <input
                             onChange={this.onChange}
                             value={this.state.password2}
@@ -122,22 +138,21 @@ class Register extends Component {
                                 invalid: errors.password2
                             })}
                             />
-                            <label htmlFor="password2">Confirm Password</label>
+                            
                             <span className="red-text">{errors.password2}</span>
                         </div>
                         <div className="col s12" style={{ paddingLeft: "11.250px" }}>
                             <button
-                            style={{
-                                width: "150px",
-                                borderRadius: "3px",
-                                letterSpacing: "1.5px",
-                                marginTop: "1rem"
-                            }}
+                                style={{
+                                    width: "150px",
+                                    borderRadius: "3px",
+                                    letterSpacing: "1.5px",
+                                    marginTop: "1rem"
+                                }}
                             type="submit"
-                            className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                            >
-                            Sign up
-                            </button>
+                            className="btn btn-primary"
+                            >Sign up </button>
+                            
                         </div>
                         </form>
                     </div>
