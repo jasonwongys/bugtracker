@@ -4,10 +4,17 @@ import axios from 'axios';
 import "../bugtrack/bugs.css"
 
 const Bug = props => (
+        
     <tr>
         {/* <td className={props.bug.completed ? 'completed' : ''}>{props.projectName}</td> */}
         <td className={props.bug.completed ? 'completed' : ''}>{props.bug.description}</td>
-        <td className={props.bug.completed ? 'completed' : ''}>{props.date}</td>
+        <td className={props.bug.completed ? 'completed' : ''}>
+            {new Intl.DateTimeFormat("en-GB", {
+                year: "numeric",
+                month: "long",
+                day: "2-digit"
+            }).format(new Date(props.date))}
+        </td>
         <td className={props.bug.completed ? 'completed' : ''}>{props.bug.members}</td>
         <td className={props.bug.completed ? 'completed' : ''}>{props.bug.priority}</td>
         
@@ -48,6 +55,7 @@ export default class BugList extends Component {
             })
     }
 
+   
     searchQuery(e) {
         this.setState({
             query: e.target.value
@@ -97,6 +105,7 @@ export default class BugList extends Component {
 
         console.log("GetProject Name", getProjectName);
         console.log("Query: " + this.state.query);
+        console.log("Date: ",this.state.projects.dateCreated);
         
         //console.log("Found query " + JSON.stringify(findQuery));
         
@@ -122,9 +131,9 @@ export default class BugList extends Component {
                         <tbody>
                     {findQuery.map((currentBug) =>{
                             return <Bug bug={currentBug}
-                                deleteBug={this.deleteBug}
-                                key={currentBug._id}
-                                date={(currentBug.date).substring(0,10)} 
+                                        deleteBug={this.deleteBug}
+                                        key={currentBug._id}
+                                        date={currentBug.date} 
                                 //projectName={newArr}
                                 />
             })}

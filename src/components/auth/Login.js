@@ -1,23 +1,26 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import classnames from "classnames";
+import Navbar from "../layout/Navbar";
+import App from "../../App";
 import './login.css';
 class Login extends Component {
     constructor() {
         super();
         this.state = {
-        email: "",
-        password: "",
-        errors: {}
+            email: "",
+            password: "",
+            errors: {}
         };
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.auth.isAuthenticated) {
-          this.props.history.push("/"); // push user to dashboard when they login
+        
+          this.props.history.push("/dashboard"); // push user to dashboard when they login
         }
     if (nextProps.errors) {
         this.setState({
@@ -29,7 +32,7 @@ class Login extends Component {
     componentDidMount() {
         // If logged in and user navigates to Login page, should redirect them to dashboard
         if (this.props.auth.isAuthenticated) {
-            this.props.history.push("/");
+            this.props.history.push("/dashboard");
         }
     }
 
@@ -42,7 +45,7 @@ class Login extends Component {
         email: this.state.email,
         password: this.state.password
         };
-    console.log(userData)
+    console.log("User data: ",userData)
     this.props.loginUser(userData);
 
     };
@@ -123,7 +126,7 @@ class Login extends Component {
             </div>
             </div>
         </div>
-
+            
             </div>
         );
     }

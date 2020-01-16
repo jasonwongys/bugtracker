@@ -8,7 +8,7 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 
 import { Provider } from "react-redux";
 import store from "./store";
-
+import Navbar from "../src/components/layout/Navbar";
 import CreateBug from "../src/components/bugtrack/createbug.component";
 import BugList from "../src/components/bugtrack/buglist.component"
 import EditBug from "../src/components/bugtrack/editbug.component";
@@ -18,7 +18,7 @@ import EditProject from "../src/components/projects/editproject.component";
 import UsersList from "../src/components/usersProfile/userList.component";
 import EditUsers from "../src/components/usersProfile/editUsers.component";
 import ViewProjectBugs from "../src/components/projects/viewProjectBugs";
-
+import Notfound from "./components/Notfound";
 
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
@@ -49,7 +49,9 @@ export default class App extends Component {
     return (
       
           <div className="container-lg">
+          
             
+            <Switch>
             <PrivateRoute path="/buglist" component={BugList}/>
                 <Route exact path="/edit/:id" component={EditBug} />
                 <Route exact path="/projects/bugs/:id" component={CreateBug} />
@@ -66,7 +68,8 @@ export default class App extends Component {
                 <Route path="/register" component={Register} />     
                 
                 <Route path='/dashboard' component={Dashboard} />
-                
+                <Route component={Notfound} />
+                </Switch>
                 
             </div>
 

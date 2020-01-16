@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Bar, Line, Pie} from 'react-chartjs-2';
-import axios from "axios";
+import './chart.css';
 
 class Chart extends Component {
 
@@ -37,11 +37,11 @@ class Chart extends Component {
         console.log("Props", this.props);
         // console.log("Prop labels", this.state.chartData.labels)
 
-
-
         return (
-            <div className="chart">
+            <div className="container">
             <h4>Chart here</h4>
+
+            <div className="chartArea">
                 <Bar
                     data={this.props.chartData}
                     options={{
@@ -56,7 +56,9 @@ class Chart extends Component {
                         }
                     }}
                     />
+            </div>
 
+            <div className="chartArea">
                 <Pie
                     data={this.props.chartData}
                     options={{
@@ -71,8 +73,8 @@ class Chart extends Component {
                         }
                     }}
                     />
-
-                <Line
+            </div>
+                {/* <Line
                     data={this.props.chartData}
                     options={{
                         title: {
@@ -85,7 +87,7 @@ class Chart extends Component {
                             position: this.props.legendPosition
                         }
                     }}
-                    />
+                    /> */}
             </div>
         )
     }

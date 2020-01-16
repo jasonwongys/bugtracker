@@ -43,8 +43,7 @@ module.exports = {
     getBugAndProjects: async (req,res,next) => {
         const { id } = req.params;
         const bug = await Bug.findById(id).populate('project');
-        
-        
+    
         console.log("Bug: " + bug.bugs);
         res.status(200).json(bug);
     },

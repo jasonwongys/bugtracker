@@ -1,0 +1,13 @@
+.container {
+    display: inline-block;
+}
+
+.chartArea {
+    display: block;
+    
+    border: 2px solid lightslategray;
+    background-color: lightcyan;
+    border-radius: 5px;
+    padding: 15px;
+}
+

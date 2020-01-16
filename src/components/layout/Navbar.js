@@ -13,6 +13,7 @@ class Navbar extends Component {
         onLogoutClick = e => {
             e.preventDefault();
             this.props.logoutUser();
+            //this.props.history.push('/login');
         };
         render() {
             return (
@@ -35,7 +36,7 @@ class Navbar extends Component {
                     </div>
 
                     <div id="page-content-wrapper">
-            <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom static-top">
                         <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
                     
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,10 +48,10 @@ class Navbar extends Component {
 
                     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                             <li class="nav-item active">
-                              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link" href="#">Link</a>
+                                <a class="nav-link" href="#">Link</a>
                             </li>
                             <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -64,11 +65,11 @@ class Navbar extends Component {
                             </div>
                             </li>
                     </ul>
-                  </div>
+                    </div>
                 </nav>
-                  <App />
-              </div>
-              </div>
+                <App />
+                </div>
+            </div>
             );
         }
         }
@@ -76,13 +77,14 @@ class Navbar extends Component {
 Navbar.propTypes = {
     logoutUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired
-    };
-    const mapStateToProps = state => ({
-            auth: state.auth
-    });
-    export default connect(
-    mapStateToProps,
-    { logoutUser }
+};
+
+const mapStateToProps = state => ({
+    auth: state.auth
+});
+
+export default connect(
+    mapStateToProps,{ logoutUser }
 )(Navbar);
 
 

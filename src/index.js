@@ -12,11 +12,12 @@ import store from "./store";
 
 const routing = (
     <Provider store={store}>
-        
+    
         <Router>
-            <Navbar />
-            
+        
+            <Navbar/>
         </Router>
+        
     
         
     </Provider>

@@ -10,7 +10,11 @@ const Project = props => (
         <td>{props.project.projectName}</td>
         <td >{props.project.description}</td>
         <td >{props.project.members}</td>
-        <td >{props.date}</td>
+        <td >{new Intl.DateTimeFormat("en-GB", {
+                year: "numeric",
+                month: "long",
+                day: "2-digit"
+            }).format(new Date(props.date))}</td>
     
         <td>
         <Link to={"/editProj/"+props.project._id} >Edit </Link> | <Link to={"/projects/bugs/"+props.project._id}>Add bug </Link> | <Link to={"/bugs/"+props.project._id}> View Bugs</Link>

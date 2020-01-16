@@ -1,6 +1,7 @@
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
+
 import {
     GET_ERRORS,
     SET_CURRENT_USER,
@@ -63,4 +64,5 @@ export const loginUser = userData => dispatch => {
     setAuthToken(false);
     // Set current user to empty object {} which will set isAuthenticated to false
     dispatch(setCurrentUser({}));
+    
     };

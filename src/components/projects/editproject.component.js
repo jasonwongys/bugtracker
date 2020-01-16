@@ -118,7 +118,7 @@ export default class EditProject extends Component {
                                 <div>
                                     <DatePicker
                                         selected={this.state.dateCreated}
-                                        
+                                        dateFormat="dd/MM/yyyy"
                                         onChange={this.onChangeDateCreated}
                                     />
                                 </div>

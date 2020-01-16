@@ -119,7 +119,7 @@ export default class EditBug extends Component {
                                 <div>
                                     <DatePicker
                                         selected={this.state.date}
-                                        //dateFormat="dd-mm-yyyy"
+                                        dateFormat="dd/MM/yyyy"
                                         onChange={this.onChangeDate}
 
                                         
