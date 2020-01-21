@@ -1,5 +1,5 @@
-div .row {
-    margin-left: 250px;
-    padding: 10px;
-    position: fixed;
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }

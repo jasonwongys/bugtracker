@@ -55,7 +55,11 @@ class Dashboard extends Component {
       console.log("New Chart Data ", newChartData);
 
   return (
-      <div>
+      <div className="container-fluid">
+        <ol className="breadcrumb mb-3">
+          <li className="breadcrumb-item active"><strong>Dashboard</strong></li>
+        </ol>
+        <br/>
         <Chart chartData={newChartData} legendPosition="bottom"/>
       </div>
     );

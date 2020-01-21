@@ -38,9 +38,8 @@ class Chart extends Component {
         // console.log("Prop labels", this.state.chartData.labels)
 
         return (
-            <div className="container">
-            <h4>Chart here</h4>
-
+            <div className="container-wrapper">
+            
             <div className="chartArea">
                 <Bar
                     data={this.props.chartData}

@@ -18,7 +18,7 @@ const Project = props => (
     
         <td>
         <Link to={"/editProj/"+props.project._id} >Edit </Link> | <Link to={"/projects/bugs/"+props.project._id}>Add bug </Link> | <Link to={"/bugs/"+props.project._id}> View Bugs</Link>
-        
+        | <button class="btn btn-danger" onClick={() => { props.deleteProject(props.project._id) }}> Delete</button>
         </td>
         
     </tr>
@@ -34,7 +34,7 @@ export default class Projects extends Component {
         };
 
         this.searchQuery = this.searchQuery.bind(this);
-        
+        this.deleteProject = this.deleteProject.bind(this);
         this.onSort = this.onSort.bind(this);
     }
     componentDidMount() {
@@ -63,6 +63,16 @@ export default class Projects extends Component {
         })
     }
 
+    deleteProject(id) {
+        axios.delete('http://localhost:4000/projects/'+id) 
+            .then(response => {console.log(response.data)});
+
+        this.setState({
+            projects: this.state.projects.filter(el => el._id !== id)
+        })
+    }
+
+
     // onSort = (sortType) => {
     //     this.state.projects.sort((a,b) => {
     //         const isRev = (this.state.sortType === 'asc') ? 1 : -1;
@@ -83,13 +93,13 @@ export default class Projects extends Component {
         const sorted = this.state.projects.sort((a,b) => {
 
             const isReversed = (this.state.sortType === 'asc') ? 1 : -1;
-            return isReversed * a.projectName.localeCompare(b.projectName)
+            return isReversed * a.projectName.localeCompare(b.projectName);
         });
 
 
         //Search query for project list items
         let findQuery = sorted.filter(
-                i => i.description.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1);
+                i => i.projectName.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1);
                 
         return (
             <div className="container">
@@ -115,6 +125,7 @@ export default class Projects extends Component {
                                 return <Project project={currentProject}
                                             bugsProject={currentProject.bugs_id}
                                             key={currentProject._id}
+                                            deleteProject={this.deleteProject}
                                             date={(currentProject.dateCreated).substring(0,10)}
                             />
                 })}

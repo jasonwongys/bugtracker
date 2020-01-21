@@ -24,6 +24,8 @@ export default class ViewProjectBugs extends Component {
             bugsList: [],
             data: []
         }
+
+        this.deleteBug = this.deleteBug.bind(this);
     }
 
     componentDidMount() {
@@ -45,6 +47,15 @@ export default class ViewProjectBugs extends Component {
                     })
     }
 
+    deleteBug(id) {
+        axios.delete('http://localhost:4000/bugs/'+id) 
+            .then(response => {console.log(response.data)});
+
+        this.setState({
+            data: this.state.data.filter(el => el._id !== id)
+        })
+    }
+
     render() {
         
         //console.log("Buglist ID",this.state.bugsList._id);
@@ -58,6 +69,7 @@ export default class ViewProjectBugs extends Component {
         let bugDescription = filtered.map((currentBug) => {
             return <Bug key={currentBug.id} 
                         bug={currentBug}
+                        deleteBug={this.deleteBug}
                         date={currentBug.date}
             />});
     

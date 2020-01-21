@@ -68,6 +68,7 @@ export default class EditBug extends Component {
     }
 
     onChangeCompleted(e) {
+        console.log("Completed checked")
         this.setState({
             completed: !this.state.completed
         })
@@ -105,6 +106,7 @@ export default class EditBug extends Component {
         return (
             <div className="container">
                 <h1>Update a bug</h1>
+                <div className="row">
                 <form onSubmit={this.onSubmit}> 
                     <div className="form-group">
                         <label>Description</label>
@@ -173,9 +175,9 @@ export default class EditBug extends Component {
                         
                         <div className="form-group">
                         <label className="form-check-label" htmlFor="completedCheckbox">
-                        <span>Completed</span></label>
+                        Completed</label>
                             <input type="checkbox"
-                                    className="form-check-input"
+                                    className="col-xs-8"
                                     id="completedCheckbox"
                                     name="completedCheckbox"
                                     onChange={this.onChangeCompleted}
@@ -203,9 +205,10 @@ export default class EditBug extends Component {
                     </div>
 
                         <div className="form-group">
-                            <input type="submit" value="Save" className="btn btn-primary" />
+                            <button type="submit" className="btn btn-primary"><i class="fa fa-paper-plane"></i>Submit</button>
                         </div>
                 </form>
+                </div>
             </div>
         )
     }

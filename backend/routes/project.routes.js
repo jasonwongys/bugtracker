@@ -19,6 +19,16 @@ projectRoute.route('/bugs/:id')
     .get(ProjectsController.getProjectBugs)
     .post(ProjectsController.newProjectBugs); // Add a bug to the project
 
+//Delete a project
+projectRoute.route('/:id').delete((req,res)=> {
+    Project.findByIdAndDelete(req.params.id)
+        .then(()=> res.json('Project deleted'))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
+module.exports = projectRoute;
+
 // Display all Projects
 // projectRoute.route('/projectsList').get(function(req,res) {
 //     Project.find(function(err, projects) {
@@ -74,13 +84,3 @@ projectRoute.route('/bugs/:id')
 // })
 
 
-
-//Delete a project
-projectRoute.route('/:id').delete((req,res)=> {
-    Project.findByIdAndDelete(req.params.id)
-        .then(()=> res.json('Project deleted'))
-        .catch(err => res.status(400).json('Error: ' + err));
-});
-
-
-module.exports = projectRoute;

@@ -24,7 +24,7 @@ export default class UserList extends Component {
             users: [],
             query: ''
         }
-
+        this.deleteUser = this.deleteUser.bind(this);
         this.searchQuery = this.searchQuery.bind(this);
     }
 
@@ -45,6 +45,15 @@ export default class UserList extends Component {
     searchQuery(e) {
         this.setState({
             query: e.target.value
+        })
+    }
+
+    deleteUser(id) {
+        axios.delete('http://localhost:4000/users/'+id) 
+            .then(response => {console.log(response.data)});
+
+        this.setState({
+            users: this.state.users.filter(el => el._id !== id)
         })
     }
 
@@ -71,13 +80,14 @@ export default class UserList extends Component {
                             <th>Email</th>
                             <th>Role</th>
                             <th>Account Created</th>
+                            <th>Assigned Bugs</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {findQuery.map((currentUser) =>{
                             return <Users user={currentUser}
-                                        //deleteProject={this.deleleProject}
+                                        deleteUser={this.deleleUser}
                                         key={currentUser._id}
                                         date={currentUser.date.substring(0,10)}
                         />

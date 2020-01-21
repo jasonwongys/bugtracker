@@ -55,7 +55,7 @@ export default class BugList extends Component {
             })
     }
 
-   
+
     searchQuery(e) {
         this.setState({
             query: e.target.value

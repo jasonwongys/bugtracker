@@ -134,6 +134,13 @@ router.route('/:id').get(function(req,res) {
             res.json(users);
         })
     })
-    
+
+
+// Delete user 
+router.route('/:id').delete((req,res)=> {
+    Project.findByIdAndDelete(req.params.id)
+        .then(()=> res.json('USer deleted'))
+            .catch(err => res.status(400).json('Error: ' + err));
+});
 
 module.exports = router;

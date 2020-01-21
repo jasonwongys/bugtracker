@@ -20,6 +20,16 @@ bugRoutes.route('/projects/:id')
     .post(bugsController.newBugProjects);
 
 
+bugRoutes.route('/:id').delete((req,res)=> {
+    Bug.findByIdAndDelete(req.params.id)
+        .then(()=> res.json('Bug deleted'))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+module.exports = bugRoutes;
+
+
+
 //Create a bug
 // bugRoutes.route('/create').post(function(req,res) {
 //     let bug = new Bug(req.body);
@@ -59,12 +69,3 @@ bugRoutes.route('/projects/:id')
 //         res.json(bug);
 //     })
 // })
-
-
-bugRoutes.route('/:id').delete((req,res)=> {
-    Bug.findByIdAndDelete(req.params.id)
-        .then(()=> res.json('Bug deleted'))
-        .catch(err => res.status(400).json('Error: ' + err));
-});
-
-module.exports = bugRoutes;
