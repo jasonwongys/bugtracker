@@ -11,7 +11,7 @@ const Bug = props => (
         <td className={props.bug.completed ? 'completed' : ''}>{props.bug.priority}</td>
         
         <td>
-            <Link to={"/edit/"+props.bug._id} >Edit </Link> | <a href="#" onClick={() => { props.deleteBug(props.bug._id) }}> delete</a> 
+            <Link to={"/edit/"+props.bug._id} className="btn btn-success" >Edit </Link> | <Link className="btn btn-danger" onClick={() => { props.deleteBug(props.bug._id) }}> delete</Link> 
         </td>
     </tr>
 )

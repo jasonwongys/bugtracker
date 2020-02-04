@@ -17,8 +17,7 @@ const Project = props => (
             }).format(new Date(props.date))}</td>
     
         <td>
-        <Link to={"/editProj/"+props.project._id} >Edit </Link> | <Link to={"/projects/bugs/"+props.project._id}>Add bug </Link> | <Link to={"/bugs/"+props.project._id}> View Bugs</Link>
-        | <button class="btn btn-danger" onClick={() => { props.deleteProject(props.project._id) }}> Delete</button>
+        <Link to={"/editProj/"+props.project._id} className="btn btn-success">Edit </Link> <Link to={"/projects/bugs/"+props.project._id} className="btn btn-primary">Add bug </Link> <Link to={"/bugs/"+props.project._id} className="btn btn-info"> View Bugs</Link> <Link className="btn btn-danger" onClick={() => { props.deleteProject(props.project._id) }}> Delete</Link>
         </td>
         
     </tr>
@@ -102,9 +101,13 @@ export default class Projects extends Component {
                 i => i.projectName.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1);
                 
         return (
-            <div className="container">
-                <h3> Projects </h3>
+            <div className="container-fluid">
+            <ol className="breadcrumb mb-3">
+            <li className="breadcrumb-item active"><strong>Projects</strong></li>
+        </ol>
+            
                 <input
+                    className="form-control mr-sm-2"
                     onChange={this.searchQuery}
                     type="text"
                     placeholder="Search projects..."

@@ -106,7 +106,7 @@ export default class EditBug extends Component {
         return (
             <div className="container">
                 <h1>Update a bug</h1>
-                <div className="row">
+                
                 <form onSubmit={this.onSubmit}> 
                     <div className="form-group">
                         <label>Description</label>
@@ -209,7 +209,7 @@ export default class EditBug extends Component {
                         </div>
                 </form>
                 </div>
-            </div>
+           
         )
     }
 }

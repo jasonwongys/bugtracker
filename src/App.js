@@ -49,20 +49,21 @@ export default class App extends Component {
     return (
       
           <div className="wrapper">
-          
             
+          
             <Switch>
+            
             <PrivateRoute path="/buglist" component={BugList}/>
-                <Route exact path="/edit/:id" component={EditBug} />
-                <Route exact path="/projects/bugs/:id" component={CreateBug} />
+                <PrivateRoute exact path="/edit/:id" component={EditBug} />
+                <PrivateRoute exact path="/projects/bugs/:id" component={CreateBug} />
                 
-                <Route exact path="/projects" component={Projects}/>
-                <Route exact path="/editProj/:id" component={EditProject} />
-                <Route path="/createProj" component={CreateProject} />
+                <PrivateRoute exact path="/projects" component={Projects}/>
+                <PrivateRoute exact path="/editProj/:id" component={EditProject} />
+                <PrivateRoute path="/createProj" component={CreateProject} />
                 
-                <Route path="/usersList" component={UsersList} />
-                <Route path="/api/users/:id" component={EditUsers} />
-                <Route path="/bugs/:id" component={ViewProjectBugs} />
+                <PrivateRoute path="/usersList" component={UsersList} />
+                <PrivateRoute path="/api/users/:id" component={EditUsers} />
+                <PrivateRoute path="/bugs/:id" component={ViewProjectBugs} />
 
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />     

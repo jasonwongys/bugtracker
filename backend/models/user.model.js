@@ -25,6 +25,10 @@ const UserSchema = new Schema({
     role: {
         type: String
     },
+    profileImg: {
+        type: String
+    },
+    
     projects: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Projects'

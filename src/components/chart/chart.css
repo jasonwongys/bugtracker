@@ -1,7 +1,7 @@
 .container-wrapper {
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
 
 }
 
@@ -16,7 +16,7 @@
     height: 18em;
     width: 30em;
     border: 5px solid lightslategray;
-    background-color: lightcyan;
+    
     border-radius: 15px;
     padding: 10px;
     margin: 10px;

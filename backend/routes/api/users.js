@@ -106,7 +106,8 @@ router.route('/usersList').get(function(req,res) {
         })
     })
 
-router.route('/editUsers/:id').post(function(req,res) {
+    //Edit a user
+router.route('/:id').patch(function(req,res) {
         User.findById(req.params.id, function(err, users) {
             if(!users) {
                 res.status(404).send('Data not found');
@@ -115,6 +116,7 @@ router.route('/editUsers/:id').post(function(req,res) {
                 users.email = req.body.email;
                 users.role = req.body.role;
                 users.date = Date.parse(req.body.date);
+                users.profileImg = req.body.profileImg
                 //project.completed = Date.parse(req.body.completed);
     
                 users.save().then(users => {

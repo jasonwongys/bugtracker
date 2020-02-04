@@ -10,7 +10,7 @@ const Users = props => (
         <td >{(props.user.date).substring(0,10)}</td>
         
         <td>
-        <Link to={"/api/users/"+props.user._id} >Edit </Link> | <a href="#" onClick={() => { props.deleteUser(props.user._id) }}> Delete</a>
+        <Link to={"/api/users/"+props.user._id} className="btn btn-success" >Edit </Link>  <button className="btn btn-danger" onClick={() => { props.deleteUser(props.user._id) }}> Delete</button>
         </td>
         
     </tr>
@@ -65,9 +65,13 @@ export default class UserList extends Component {
             i => i.name.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1);
             
         return (
-            <div className="container">
-            <h3> Users </h3>
+            <div className="container-fluid">
+            <ol className="breadcrumb mb-3">
+                <li className="breadcrumb-item active"><strong>Users</strong></li>
+            </ol>
+            
             <input
+                className="form-control mr-sm-2"
                 onChange={this.searchQuery}
                 type="text"
                 placeholder="Search users..."

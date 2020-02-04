@@ -51,6 +51,7 @@ class Login extends Component {
     };
     render() {
         const { errors } = this.state;
+        console.log("this props: ", JSON.stringify(this.props.history));
     return (
         <div className="container-fluid">
             <div className="row no-gutter">
@@ -60,7 +61,7 @@ class Login extends Component {
                     <div className="container">
                     <div className="row">
                         <div className="col-md-9 col-lg-8 mx-auto">
-                        <h3 className="login-heading mb-4">Welcome to Bug Tracker!</h3>
+                        <h3 className="login-heading mb-4 display-4 text-white" id="welcomeMsg">Welcome to Bug Tracker</h3>
                         <h4><b>Login</b> below</h4>
                         
                     
@@ -106,7 +107,7 @@ class Login extends Component {
 
                     <div className="custom-control custom-checkbox mb-3">
                         <input type="checkbox" class="custom-control-input" id="customCheck1" />
-                        <label className="custom-control-label" for="customCheck1">Remember password</label>
+                        <label className="custom-control-label text-white" for="customCheck1">Remember password</label>
                     </div>
                 <div className="col s4" style={{ paddingLeft: "11.250px" }}>
                     <button className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold"

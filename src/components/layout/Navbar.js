@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link, Route } from "react-router-dom";
-
+import "@fortawesome/fontawesome-free"
 import "../layout/navbar.css";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
@@ -13,22 +13,31 @@ class Navbar extends Component {
         onLogoutClick = e => {
             e.preventDefault();
             this.props.logoutUser();
+
             //this.props.history.push('/login');
+            window.location.replace('/login');
+            // const { user } = this.props.auth;
+            
         };
         render() {
+
+            const { user } = this.props.auth;
+                console.log("Auth here" + JSON.stringify(user));
+                console.log("Name",user.name);
+
             return (
                 <div className="d-flex" id="wrapper">
-                <div className="bg-light border-right" id="sidebar-wrapper">
-                    <Link to="/" className="navbar-brand">Bug Tracker</Link>
+                <div className="bg-dark border-right" id="sidebar-wrapper">
+                    <Link to="/projects" className="navbar-brand text-white">Bug Tracker</Link>
                         <div className="list-group list-group-flush">
-                                <Link to="/buglist" className="list-group-item list-group-item-action bg-light">Show Bugs</Link>
+                                <a href="/buglist" className="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-bug"></i>Show Bugs</a>
 
-                                <Link to="/projects" className="list-group-item list-group-item-action bg-light">Show Projects</Link>
-                                <Link to="/createProj" className="list-group-item list-group-item-action bg-light">Create projects</Link>
-                                <Link to="/usersList" className="list-group-item list-group-item-action bg-light">Show users</Link>
-                                <Link to="/dashboard" className="list-group-item list-group-item-action bg-light" >Show Dashboard</Link>
+                                <a href="/projects" className="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-tasks"></i>Show Projects</a>
+                                <a href="/createProj" className="list-group-item list-group-item-action bg-dark text-white"><i class="far fa-handshake"></i>Create projects</a>
+                                <a href="/usersList" className="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-users"></i>Show users</a>
+                                <a href="/dashboard" className="list-group-item list-group-item-action bg-dark text-white" ><i class="fas fa-chart-bar"></i>Show Dashboard</a>
                                 
-                                <button onClick={this.onLogoutClick}>Logout</button>
+                                <button className="btn btn-secondary" onClick={this.onLogoutClick}>Logout</button>
                                 
                         </div>
 
@@ -36,27 +45,30 @@ class Navbar extends Component {
                     </div>
 
                     <div id="page-content-wrapper">
-            <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom static-top">
-                        <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+                    <nav className="navbar navbar-expand-lg navbar-light bg-dark text-white border-bottom static-top fixed-left">
+                        {/* <button className="btn btn-primary" id="menu-toggle">Toggle Menu</button> */}
                     
-                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    {/* <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
-                    </button>
+                    </button> */}
                     {/* <h5><b>Hi, 👏</b> {user.name.split(" ")[0]}</h5> */}
 
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-
+                    
                     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                            <li className="nav-item active">
+                                <a className="nav-link text-white" href="#"><b>Hi, 👏</b> {user.name} <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Link</a>
+{/*                                 
+                                <button type="button" class="btn btn-primary">
+                                    Notifications <span class="badge badge-light">4</span>
+                                </button> */}
                             </li>
                             <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {/* <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Dropdown
-                            </a>
+                            </a> */}
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#">Action</a>
                                 <a class="dropdown-item" href="#">Another action</a>
@@ -67,7 +79,7 @@ class Navbar extends Component {
                     </ul>
                     </div>
                 </nav>
-                <App />
+                    <App/>
                 </div>
             </div>
             );

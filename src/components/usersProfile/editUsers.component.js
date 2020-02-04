@@ -1,6 +1,36 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
+import Avatar from 'react-avatar-edit'
+import { setUserLoading } from '../../actions/authActions';
+
+// function upload() {
+
+//     const [image, setImage] = useState('');
+//         const [loading, setLoading] = useState(false);
+
+//         const uploadImage = async e => {
+//             const files = e.target.files
+//             const data = new FormData()
+//             data.append('file',files[0])
+//             data.append('upload_preset','fahi8ukz')
+//             this.state.setLoading(true);
+//             const res = await fetch(
+//                 'https://api.cloudinary.com/v1_1/draeokkz7/image/upload',
+//                 {
+//                     method: 'POST',
+//                     body: data
+//                 }
+    
+//             )
+//             const file = await res.json()
+    
+//             setImage(file.secure_url)
+//             setLoading(false);
+//             console.log("Image uploaded")
+//         }
+
+// }
 
 export default class EditUsers extends Component {
     constructor(props) {
@@ -10,15 +40,26 @@ export default class EditUsers extends Component {
             name: '',
             email: '',
             role: '',
-            date: new Date()
+            date: new Date(),
+            profileImg: null,
+            preview: null,
+            // image: '',
+            // setImage: '',
+            // loading: false,
+            // setLoading: false
 
         }
+
+       
         
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
         this.onChangeRole = this.onChangeRole.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
         
+        this.onCrop = this.onCrop.bind(this);
+        this.onClose = this.onClose.bind(this);
+        this.onBeforeFileLoad = this.onBeforeFileLoad.bind(this);
         this.onSubmitForm = this.onSubmitForm.bind(this);
         
     }
@@ -66,6 +107,33 @@ export default class EditUsers extends Component {
         });
     }
 
+    fileSelectedHandler = event => {
+        console.log(event)
+        this.setState({
+            profileImg: event.target.files[0]
+            
+        })
+        
+    }
+    onClose() {
+        this.setState({preview: null})
+        }
+        
+        onCrop(preview) {
+            this.setState({preview})
+        }
+        
+        onBeforeFileLoad(elem) {
+            if(elem.target.files[0].size > 71680){
+            alert("File is too big!");
+            elem.target.value = "";
+            };
+        }
+
+    // fileUploadHandler = () = {
+    //     axios
+    // }
+
     onSubmitForm(e) {
         e.preventDefault();
 
@@ -79,13 +147,16 @@ export default class EditUsers extends Component {
             name: this.state.name,
             email: this.state.email,
             role: this.state.role,
-            date: this.state.date
+            date: this.state.date,
+            profileImg: this.state.preview
 
         }
 
+        
+
 
         //Update a new project
-        axios.post('http://localhost:4000/api/users/editUsers/'+this.props.match.params.id,updatedUser)
+        axios.patch('http://localhost:4000/api/users/'+this.props.match.params.id,updatedUser)
             .then(res => console.log(res.data),
             this.props.history.push("/usersList"));
             
@@ -93,7 +164,11 @@ export default class EditUsers extends Component {
 
     }
 
+
     render() {
+
+        
+        
         return (
             <div className="container">
                 <h3>Update a User</h3>
@@ -119,7 +194,7 @@ export default class EditUsers extends Component {
                                 />
                         </div>
                         
-                        <br />
+            
 
                         <div className="form-group">
                             <label>Email: </label>
@@ -130,7 +205,39 @@ export default class EditUsers extends Component {
                                 />
                         </div>
 
-            
+                        {/* <div className="form-group">
+                            <label>Upload a Profile Image:</label>
+                            <br />
+                            <input type="file" 
+                                
+                                onChange={this.fileSelectedHandler} />
+                            
+                        </div> */}
+                        <div className="form-group">
+
+                        
+                        {/* <Avatar
+                            width={250}
+                            height={250}
+                            onCrop={this.onCrop}
+                            onClose={this.onClose}
+                            onBefore={this.onBeforeFileLoad}
+                            profileImg={this.state.profileImg}
+                        />
+                            <img src={this.state.preview} alt="Preview" />
+                         */}
+                        </div>
+{/* 
+                        <input type="file"
+                                placeholder="Upload an image"
+                                name="file"
+                                onChange={uploadImage} />
+
+                        {loading ? (
+                            <h3>Loading....</h3>
+                        ): (<img src={image} style={{width: '200px'}} />
+                        )} */}
+
                         <div className="form-group">
                             <input type="submit" value="Update User" className="btn btn-primary" />
                         </div>

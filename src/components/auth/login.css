@@ -91,6 +91,11 @@
   }
 
 
+  #welcomeMsg {
+    text-shadow: 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black;
+    font-family: 'Fjalla One', sans-serif;
+  }
+
   
   /* Fallback for Edge
   -------------------------------------------------- */

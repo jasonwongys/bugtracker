@@ -2,11 +2,34 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import "../bugtrack/bugs.css"
+import jwt_decode from "jwt-decode";
+import setAuthToken from "../../utils/setAuthToken";
+import { setCurrentUser, logoutUser } from "../../actions/authActions";
+import store from "../../store";
+
+if (localStorage.jwtToken) {
+    // Set auth token header auth
+    const token = localStorage.jwtToken;
+    setAuthToken(token);
+    // Decode token and get user info and exp
+    const decoded = jwt_decode(token);
+    // Set user and isAuthenticated
+    store.dispatch(setCurrentUser(decoded));
+  // Check for expired token
+    const currentTime = Date.now() / 1000; // to get in milliseconds
+    if (decoded.exp < currentTime) {
+      // Logout user
+      store.dispatch(logoutUser());
+      // Redirect to login
+      window.location.href = "/login";
+    }
+  }
 
 const Bug = props => (
         
     <tr>
         {/* <td className={props.bug.completed ? 'completed' : ''}>{props.projectName}</td> */}
+        {props.projectName}
         <td className={props.bug.completed ? 'completed' : ''}>{props.bug.description}</td>
         <td className={props.bug.completed ? 'completed' : ''}>
             {new Intl.DateTimeFormat("en-GB", {
@@ -19,7 +42,7 @@ const Bug = props => (
         <td className={props.bug.completed ? 'completed' : ''}>{props.bug.priority}</td>
         
         <td>
-            <Link to={"/edit/"+props.bug._id} >Edit </Link> | <a href="#" onClick={() => { props.deleteBug(props.bug._id) }}> delete</a> 
+            <Link to={"/edit/"+props.bug._id} className="btn btn-success" >Edit </Link> <button className="btn btn-danger" onClick={() => { props.deleteBug(props.bug._id) }}> Delete</button> 
         </td>
     </tr>
 )
@@ -96,7 +119,7 @@ export default class BugList extends Component {
         let getProjectName = this.state.projects.filter(i => {
             this.state.bugs.filter(j => {
                 if(i._id === j.projects) {
-                    newArr.push(i.projectName);
+                    return <td>{i.projectName}</td>
                 }     
             })
         });
@@ -110,17 +133,22 @@ export default class BugList extends Component {
         //console.log("Found query " + JSON.stringify(findQuery));
         
         return (
-            <div className="container vw-100">
-                <h3> Bugs list</h3>
+            <div className="container-fluid">
+                <ol className="breadcrumb mb-3">
+                    <li className="breadcrumb-item active"><strong>Bugs list</strong></li>
+                </ol>
+                
                 <input
+                    className="form-control mr-sm-2"
                     onChange={this.searchQuery}
                     type="text"
                     placeholder="Search descriptions..."
                 />
+
                 <table className="table">
-                        <thead>buglist
+                        <thead>
                             <tr>
-                                {/* <th>Project Name</th> */}
+                                
                                 <th>Description</th>
                                 <th>Deadline</th>
                                 <th>Assignee</th>
@@ -134,7 +162,7 @@ export default class BugList extends Component {
                                         deleteBug={this.deleteBug}
                                         key={currentBug._id}
                                         date={currentBug.date} 
-                                //projectName={newArr}
+                                projectName={getProjectName}
                                 />
             })}
                 

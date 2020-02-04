@@ -13,7 +13,8 @@ class Dashboard extends Component {
       super(props);
 
       this.state = {
-        data: []
+        projects: [],
+        bugs: []
       }
   }
 
@@ -22,9 +23,16 @@ class Dashboard extends Component {
     axios.get("http://localhost:4000/projects")
     .then(response => {
         this.setState({
-        data: response.data});
+        projects: response.data});
         console.log("Projects here" + JSON.stringify(response.data));
         })
+        .then(axios.get('http://localhost:4000/bugs/')
+          .then(response => {
+                this.setState({
+                    bugs: response.data});
+                    console.log("Bugs here" + JSON.stringify(response.data));
+            
+            }))
     .catch(err => {
         console.log("Error",err);
     })
@@ -36,14 +44,25 @@ class Dashboard extends Component {
   };
 
 
+  
 
   render() {
 
-      // const { user } = this.props.auth;
-      // console.log("Auth here" + JSON.stringify(user));
+
+      const { user } = this.props.auth;
+      console.log("Auth here" + JSON.stringify(user));
+      console.log("Name",user.name);
+
+      var noOfProjects = [...new Set(this.state.projects.map(item => item.projectName))].length;
+      var noOfBugs = [...new Set(this.state.bugs.map(item => item._id))].length;
+
+      var highPriority = [...new Set(this.state.bugs.filter(item => item.priority === "High"))].length;
+      var noOfCompleted = [...new Set(this.state.bugs.filter(item => item.completed === true))].length;
+
+
       let backgroundColor = ['rgba(255,99,132,0.6)','rgba(54,162,235,0.6)','rgba(255,206,86,0.6)','rgba(213,226,86,0.6)','rgba(189,126,86,0.6)'];
-      let labels = this.state.data.map(i => i.projectName);
-      let data = this.state.data.map(j => j.bugs.length);
+      let labels = this.state.projects.map(i => i.projectName);
+      let data = this.state.projects.map(j => j.bugs.length);
       let label = "Number of bugs";
       let datasets = [];
       datasets.push({label,data,backgroundColor});
@@ -56,11 +75,57 @@ class Dashboard extends Component {
 
   return (
       <div className="container-fluid">
+      
         <ol className="breadcrumb mb-3">
           <li className="breadcrumb-item active"><strong>Dashboard</strong></li>
         </ol>
-        <br/>
-        <Chart chartData={newChartData} legendPosition="bottom"/>
+        
+  
+        <div className="row">
+        <div className="col-xl-3 col-md-6">
+                                <div className="card bg-danger text-white mb-4">
+                                    <div className="card-body">High Priority Bugs</div>
+                                    <div className="card-footer d-flex align-items-center justify-content-between">
+                                        <a className="small text-white stretched-link" href="/buglist">View Details</a>
+                                        <div className="large text-white display-4">{highPriority}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-xl-3 col-md-6">
+                                <div className="card bg-primary text-white mb-4">
+                                    <div className="card-body">Total No Of Projects</div>
+                                    <div className="card-footer d-flex align-items-center justify-content-between">
+                                        <a className="small text-white stretched-link" href="/projects">View Details</a>
+                                        <div className="large text-white align-items-center display-4">{noOfProjects}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-xl-3 col-md-6">
+                                <div className="card bg-warning text-white mb-4">
+                                    <div className="card-body">Total No. Of Bugs</div>
+                                    <div className="card-footer d-flex align-items-center justify-content-between">
+                                        <a className="small text-white stretched-link" href="/buglist">View Details</a>
+                                        <div className="large text-white display-4">{noOfBugs}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-xl-3 col-md-6">
+                                <div className="card bg-success text-white mb-4">
+                                    <div className="card-body">Resolved Bugs</div>
+                                    <div className="card-footer d-flex align-items-center justify-content-between">
+                                        <a className="small text-white stretched-link" href="/buglist">View Details</a>
+                                        <div className="large text-white display-4">{noOfCompleted}</div>
+                                    </div>
+                                </div>
+                            </div>
+
+        </div>
+        <div className="col-md-6">
+        
+            <Chart chartData={newChartData} legendPosition="bottom"/>
+          
+        </div>
+          
       </div>
     );
   }

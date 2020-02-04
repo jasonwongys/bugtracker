@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Bar, Line, Pie} from 'react-chartjs-2';
+import {Bar, Pie} from 'react-chartjs-2';
 import './chart.css';
 
 class Chart extends Component {
@@ -38,8 +38,8 @@ class Chart extends Component {
         // console.log("Prop labels", this.state.chartData.labels)
 
         return (
+            <div className="container-fluid">
             <div className="container-wrapper">
-            
             <div className="chartArea">
                 <Bar
                     data={this.props.chartData}
@@ -87,6 +87,7 @@ class Chart extends Component {
                         }
                     }}
                     /> */}
+                    </div>
             </div>
         )
     }
