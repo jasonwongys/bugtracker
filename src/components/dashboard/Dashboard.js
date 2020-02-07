@@ -16,6 +16,8 @@ class Dashboard extends Component {
         projects: [],
         bugs: []
       }
+
+      this.getAssignedBugs = this.getAssignedBugs.bind(this);
   }
 
 
@@ -43,11 +45,39 @@ class Dashboard extends Component {
       this.props.logoutUser();
   };
 
+getAssignedBugs() {
+  var counts = {}, i, value;
 
+  var result = [];
+
+for(i = 0; i < this.state.bugs.length;i++) {
+
+    value = this.state.bugs[i].members;
+    if(typeof counts[value] === "undefined") {
+        counts[value] = 1;
+    } else {
+        counts[value]++;
+    }
+  }
   
+    Object.keys(counts).forEach((key,index) => {
+      result.push(`${key} ${counts[key]}`);
+  })
+
+  return result;
+}
 
   render() {
+    let bugsArr = this.getAssignedBugs();
 
+    let getAssigned = bugsArr.map((item) => {
+      return <tr>
+          <td>{item}</td>
+        </tr>
+        
+    })
+
+    console.log("Get assigned bugs here",bugsArr);
 
       const { user } = this.props.auth;
       console.log("Auth here" + JSON.stringify(user));
@@ -60,6 +90,8 @@ class Dashboard extends Component {
       var noOfCompleted = [...new Set(this.state.bugs.filter(item => item.completed === true))].length;
 
 
+
+
       let backgroundColor = ['rgba(255,99,132,0.6)','rgba(54,162,235,0.6)','rgba(255,206,86,0.6)','rgba(213,226,86,0.6)','rgba(189,126,86,0.6)'];
       let labels = this.state.projects.map(i => i.projectName);
       let data = this.state.projects.map(j => j.bugs.length);
@@ -69,9 +101,9 @@ class Dashboard extends Component {
 
       let newChartData = {labels,datasets};
 
-      console.log("Project Name Labels", labels);
-      console.log("Project bug count", datasets);
-      console.log("New Chart Data ", newChartData);
+      // console.log("Project Name Labels", labels);
+      // console.log("Project bug count", datasets);
+      // console.log("New Chart Data ", newChartData);
 
   return (
       <div className="container-fluid">
@@ -83,7 +115,7 @@ class Dashboard extends Component {
   
         <div className="row">
         <div className="col-xl-3 col-md-6">
-                                <div className="card bg-danger text-white mb-4">
+                                <div className="card bg-danger text-white shadow mb-4">
                                     <div className="card-body">High Priority Bugs</div>
                                     <div className="card-footer d-flex align-items-center justify-content-between">
                                         <a className="small text-white stretched-link" href="/buglist">View Details</a>
@@ -92,7 +124,7 @@ class Dashboard extends Component {
                                 </div>
                             </div>
                             <div className="col-xl-3 col-md-6">
-                                <div className="card bg-primary text-white mb-4">
+                                <div className="card bg-primary text-white shadow mb-4">
                                     <div className="card-body">Total No Of Projects</div>
                                     <div className="card-footer d-flex align-items-center justify-content-between">
                                         <a className="small text-white stretched-link" href="/projects">View Details</a>
@@ -101,7 +133,7 @@ class Dashboard extends Component {
                                 </div>
                             </div>
                             <div className="col-xl-3 col-md-6">
-                                <div className="card bg-warning text-white mb-4">
+                                <div className="card bg-warning text-white shadow mb-4">
                                     <div className="card-body">Total No. Of Bugs</div>
                                     <div className="card-footer d-flex align-items-center justify-content-between">
                                         <a className="small text-white stretched-link" href="/buglist">View Details</a>
@@ -110,11 +142,21 @@ class Dashboard extends Component {
                                 </div>
                             </div>
                             <div className="col-xl-3 col-md-6">
-                                <div className="card bg-success text-white mb-4">
+                                <div className="card bg-success text-white shadow mb-4">
                                     <div className="card-body">Resolved Bugs</div>
                                     <div className="card-footer d-flex align-items-center justify-content-between">
                                         <a className="small text-white stretched-link" href="/buglist">View Details</a>
                                         <div className="large text-white display-4">{noOfCompleted}</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="col-xl-3 col-md-6">
+                                <div className="card bg-info text-white shadow mb-4">
+                                    <div className="card-body">Assigned Bugs </div>
+                                    <div className="card-footer d-flex align-items-center justify-content-between">
+                                        
+                                        <div className="medium text-white">{getAssigned}</div>
                                     </div>
                                 </div>
                             </div>
