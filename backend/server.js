@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose')
-const PORT = 4000;
+const PORT = 3000;
 const passport = require('passport');
 
 mongoose.Promise = global.Promise;
@@ -19,6 +19,7 @@ app.use(
     })
 );
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, "/public")));
 
 mongoose.connect('mongodb://127.0.0.1:27017/bugs',{ useNewUrlParser: true})
 const connection = mongoose.connection;
@@ -53,6 +54,9 @@ app.use('/bugs', bugRouter);
 
 
 //const port = process.env.PORT || 5000
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '../public/index.html'))
+});
 
 app.listen(PORT, function() {
     console.log("Server is running on PORT: " + PORT);
