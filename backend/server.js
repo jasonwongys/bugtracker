@@ -19,7 +19,7 @@ app.use(
     })
 );
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, "/public")));
+app.use(express.static(path.join(__dirname, "../src/")));
 
 mongoose.connect('mongodb://127.0.0.1:27017/bugs',{ useNewUrlParser: true})
 const connection = mongoose.connection;
@@ -55,7 +55,7 @@ app.use('/bugs', bugRouter);
 
 //const port = process.env.PORT || 5000
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '../public/index.html'))
+    res.sendFile(path.join(__dirname + '../src/index.js'))
 });
 
 app.listen(PORT, function() {
