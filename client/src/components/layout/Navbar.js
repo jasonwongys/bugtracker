@@ -28,14 +28,14 @@ class Navbar extends Component {
             return (
                 <div className="d-flex" id="wrapper">
                 <div className="bg-dark border-right" id="sidebar-wrapper">
-                    <Link to="/projects" className="navbar-brand text-white">Bug Tracker</Link>
+                    <Link to="/projects/" className="navbar-brand text-white">Bug Tracker</Link>
                         <div className="list-group list-group-flush">
                                 <a href="/buglist" className="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-bug"></i>Show Bugs</a>
 
-                                <a href="/projects" className="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-tasks"></i>Show Projects</a>
-                                <a href="/createProj" className="list-group-item list-group-item-action bg-dark text-white"><i class="far fa-handshake"></i>Create projects</a>
-                                <a href="/usersList" className="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-users"></i>Show users</a>
-                                <a href="/dashboard" className="list-group-item list-group-item-action bg-dark text-white" ><i class="fas fa-chart-bar"></i>Show Dashboard</a>
+                                <Link to="/projects/" className="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-tasks"></i>Show Projects</Link>
+                                <Link to="/createProj" className="list-group-item list-group-item-action bg-dark text-white"><i class="far fa-handshake"></i>Create projects</Link>
+                                <Link to="/usersList" className="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-users"></i>Show users</Link>
+                                <Link to="/dashboard" className="list-group-item list-group-item-action bg-dark text-white" ><i class="fas fa-chart-bar"></i>Show Dashboard</Link>
                                 
                                 <button className="btn btn-secondary" onClick={this.onLogoutClick}>Logout</button>
                                 

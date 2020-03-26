@@ -12,7 +12,7 @@ import Navbar from "../src/components/layout/Navbar";
 import CreateBug from "../src/components/bugtrack/createbug.component";
 import BugList from "../src/components/bugtrack/buglist.component"
 import EditBug from "../src/components/bugtrack/editbug.component";
-import Projects from "../src/components/projects/projectlist";
+import ProjectsList from "../src/components/projects/projectlist";
 import CreateProject from "../src/components/projects/createproject";
 import EditProject from "../src/components/projects/editproject.component";
 import UsersList from "../src/components/usersProfile/userList.component";
@@ -57,7 +57,7 @@ export default class App extends Component {
                 <PrivateRoute exact path="/edit/:id" component={EditBug} />
                 <PrivateRoute exact path="/projects/bugs/:id" component={CreateBug} />
                 
-                <PrivateRoute exact path="/projects" component={Projects}/>
+                <PrivateRoute exact path="/projects/" component={ProjectsList}/>
                 <PrivateRoute exact path="/editProj/:id" component={EditProject} />
                 <PrivateRoute path="/createProj" component={CreateProject} />
                 
@@ -68,7 +68,7 @@ export default class App extends Component {
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />     
                 
-                <Route path='/dashboard' component={Dashboard} />
+                <Route path='/' component={Dashboard} />
                 <Route component={Notfound} />
                 </Switch>
                 

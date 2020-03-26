@@ -22,7 +22,7 @@ const Project = props => (
         
     </tr>
 )
-export default class Projects extends Component {
+export default class ProjectsList extends Component {
     constructor(props) {
         super(props);
 
