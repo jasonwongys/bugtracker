@@ -27,9 +27,9 @@ app.use(
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "client", "build")))
 
-const MONGO_URI = process.env.MONGO_URI;
+// const MONGO_URI = process.env.MONGO_URI;
 
-mongoose.connect(MONGO_URI || 'mongodb://127.0.0.1:27017/bugs',{ useNewUrlParser: true})
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/bugs',{ useNewUrlParser: true})
 const connection = mongoose.connection;
 
 //const db = require("./config/keys").mongoURI;
