@@ -156,7 +156,7 @@ export default class EditUsers extends Component {
 
 
         //Update a new project
-        axios.patch('http://localhost:4000/api/users/'+this.props.match.params.id,updatedUser)
+        axios.patch('https://my-bugtracker-app.herokuapp.com/api/users/'+this.props.match.params.id,updatedUser)
             .then(res => console.log(res.data),
             this.props.history.push("/usersList"));
             

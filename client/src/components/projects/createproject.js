@@ -27,7 +27,7 @@ export default class CreateProject extends Component {
 
 
     componentDidMount() {
-        axios.get('http://localhost:4000/api/users/usersList')
+        axios.get('https://my-bugtracker-app.herokuapp.com/api/users/usersList')
             .then(response => {
                 this.setState({
                     users: response.data.map(user => user.name)});
@@ -89,7 +89,7 @@ export default class CreateProject extends Component {
 
 
         //Create a new project
-        axios.post('http://localhost:4000/projects/', newProject)
+        axios.post('https://my-bugtracker-app.herokuapp.com/projects/', newProject)
             .then(res => console.log(res.data),
             this.props.history.push("/projects"));
 

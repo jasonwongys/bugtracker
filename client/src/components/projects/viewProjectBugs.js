@@ -29,13 +29,13 @@ export default class ViewProjectBugs extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/projects/bugs/'+this.props.match.params.id)
+        axios.get('https://my-bugtracker-app.herokuapp.com/projects/bugs/'+this.props.match.params.id)
             .then(response => {
                 this.setState({
                     bugsList: response.data});
                     console.log("Did Mount here" + JSON.stringify(response.data));
             
-            }).then(axios.get('http://localhost:4000/bugs/')
+            }).then(axios.get('https://my-bugtracker-app.herokuapp.com/bugs/')
                 .then(response => {
                         this.setState({
                             data: response.data});
@@ -48,7 +48,7 @@ export default class ViewProjectBugs extends Component {
     }
 
     deleteBug(id) {
-        axios.delete('http://localhost:4000/bugs/'+id) 
+        axios.delete('https://my-bugtracker-app.herokuapp.com/bugs/'+id) 
             .then(response => {console.log(response.data)});
 
         this.setState({

@@ -27,7 +27,7 @@ export default class EditBug extends Component {
 
     //GEt a single bug record
     componentDidMount() {
-        axios.get('http://localhost:4000/bugs/'+this.props.match.params.id)
+        axios.get('https://my-bugtracker-app.herokuapp.com/bugs/'+this.props.match.params.id)
             .then(res => {
                 this.setState({
                     description: res.data.description,
@@ -37,7 +37,7 @@ export default class EditBug extends Component {
                     date: new Date(res.data.date)
                 });
                 console.log("State Bugs",res.data);
-            }).then(axios.get('http://localhost:4000/api/users/usersList')
+            }).then(axios.get('https://my-bugtracker-app.herokuapp.com/api/users/usersList')
                 .then(response => {
                     this.setState({
                         users: response.data.map(user => user.name)   });
@@ -92,7 +92,7 @@ export default class EditBug extends Component {
             date: this.state.date.toString()
         };
 
-        axios.patch('http://localhost:4000/bugs/'+this.props.match.params.id, updatedBug)
+        axios.patch('https://my-bugtracker-app.herokuapp.com/bugs/'+this.props.match.params.id, updatedBug)
             .then(res => console.log(res.data),
             this.props.history.push("/projects"));
             

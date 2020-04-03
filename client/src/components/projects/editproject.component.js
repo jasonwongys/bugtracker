@@ -27,14 +27,14 @@ export default class EditProject extends Component {
 // Get a single project record
     componentDidMount() {
 
-        axios.get('http://localhost:4000/projects/'+this.props.match.params.id)
+        axios.get('https://my-bugtracker-app.herokuapp.com/projects/'+this.props.match.params.id)
             .then(res => {
                 this.setState({
                     projectName: res.data.projectName,
                     description: res.data.description,
                     members: res.data.members,
                     dateCreated: new Date(res.data.dateCreated) });
-                }).then(axios.get('http://localhost:4000/api/users/usersList')
+                }).then(axios.get('https://my-bugtracker-app.herokuapp.com/api/users/usersList')
                     .then(response => {
                         this.setState({
                             users: response.data.map(user => user.name)   });
@@ -91,7 +91,7 @@ export default class EditProject extends Component {
 
 
         //Update a new project
-        axios.patch('http://localhost:4000/projects/'+this.props.match.params.id,updatedProject)
+        axios.patch('https://my-bugtracker-app.herokuapp.com/projects/'+this.props.match.params.id,updatedProject)
             .then(res => console.log(res.data),
             this.props.history.push("/projects"));
         
