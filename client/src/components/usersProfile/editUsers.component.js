@@ -66,7 +66,7 @@ export default class EditUsers extends Component {
 // Get a single project record
     componentDidMount() {
 
-        axios.get('http://localhost:4000/api/users/'+this.props.match.params.id)
+        axios.get('https://my-bugtracker-app.herokuapp.com/api/users/'+this.props.match.params.id)
             .then(res => {
                 this.setState({
                     name: res.data.name,

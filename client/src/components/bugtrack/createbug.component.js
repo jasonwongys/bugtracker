@@ -29,12 +29,12 @@ export default class CreateBug extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/api/users/usersList')
+        axios.get('https://my-bugtracker-app.herokuapp.com/api/users/usersList')
             .then(response => {
                 this.setState({
                     users: response.data.map(user => user.name)});
                     console.log("Users Mount here" + JSON.stringify(response.data))
-            }).then(axios.get('http://localhost:4000/projects/'+this.props.match.params.id)
+            }).then(axios.get('https://my-bugtracker-app.herokuapp.com/projects/'+this.props.match.params.id)
             .then(response => {
                 this.setState({
                     projects: response.data});
@@ -107,7 +107,7 @@ export default class CreateBug extends Component {
             
         }
 
-        axios.post('http://localhost:4000/projects/bugs/'+this.props.match.params.id, newBug)
+        axios.post('https://my-bugtracker-app.herokuapp.com/projects/bugs/'+this.props.match.params.id, newBug)
             .then(res => console.log(res.data),
                     this.props.history.push("/projects"));
 

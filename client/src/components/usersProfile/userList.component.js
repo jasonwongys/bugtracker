@@ -29,7 +29,7 @@ export default class UserList extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/api/users/usersList')
+        axios.get('https://my-bugtracker-app.herokuapp.com/api/users/usersList')
             .then(response => {
                 this.setState({
                     users: response.data});
@@ -49,7 +49,7 @@ export default class UserList extends Component {
     }
 
     deleteUser(id) {
-        axios.delete('http://localhost:4000/users/'+id) 
+        axios.delete('https://my-bugtracker-app.herokuapp.com/users/'+id) 
             .then(response => {console.log(response.data)});
 
         this.setState({

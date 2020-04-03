@@ -62,12 +62,12 @@ export default class BugList extends Component {
 
     
     componentDidMount() {
-        axios.get('http://localhost:4000/bugs/')
+        axios.get('https://my-bugtracker-app.herokuapp.com/bugs/')
             .then(response => {
                 this.setState({
                     bugs: response.data});
             
-            }).then(axios.get('http://localhost:4000/projects')
+            }).then(axios.get('https://my-bugtracker-app.herokuapp.com/projects')
                 .then(response => {
                     this.setState({
                         projects: response.data});
@@ -88,7 +88,7 @@ export default class BugList extends Component {
 
 
     deleteBug(id) {
-        axios.delete('http://localhost:4000/bugs/'+id) 
+        axios.delete('https://my-bugtracker-app.herokuapp.com/bugs/'+id) 
             .then(response => {console.log(response.data)});
 
         this.setState({

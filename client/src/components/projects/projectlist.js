@@ -37,7 +37,7 @@ export default class ProjectsList extends Component {
         this.onSort = this.onSort.bind(this);
     }
     componentDidMount() {
-        axios.get('http://localhost:4000/projects')
+        axios.get('https://my-bugtracker-app.herokuapp.com/projects')
             .then(response => {
                 this.setState({
                     projects: response.data});
@@ -63,7 +63,7 @@ export default class ProjectsList extends Component {
     }
 
     deleteProject(id) {
-        axios.delete('http://localhost:4000/projects/'+id) 
+        axios.delete('https://my-bugtracker-app.herokuapp.com/projects/'+id) 
             .then(response => {console.log(response.data)});
 
         this.setState({
