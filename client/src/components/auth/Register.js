@@ -51,7 +51,7 @@ class Register extends Component {
         };
 
     
-        axios.post('http://localhost:4000/api/users/register',newUser)
+        axios.post('https://my-bugtracker-app.herokuapp.com/api/users/register',newUser)
             .then(response => console.log(response.data),
             this.props.registerUser(newUser, this.props.history));
 

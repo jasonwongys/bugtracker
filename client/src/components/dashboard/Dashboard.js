@@ -22,13 +22,13 @@ class Dashboard extends Component {
 
 
   componentDidMount() {
-    axios.get("http://localhost:4000/projects")
+    axios.get("https://my-bugtracker-app.herokuapp.com/projects")
     .then(response => {
         this.setState({
         projects: response.data});
         console.log("Projects here" + JSON.stringify(response.data));
         })
-        .then(axios.get('http://localhost:4000/bugs/')
+        .then(axios.get('https://my-bugtracker-app.herokuapp.com/bugs/')
           .then(response => {
                 this.setState({
                     bugs: response.data});
